@@ -27,7 +27,7 @@ services:
     ports:
       - 4000:4000
     volumes:
-      - $HOME/.cache/yarn-offline-mirror:/home/node/.cache/yarn-offline-mirror
+#      - $HOME/.cache/yarn-offline-mirror:/home/node/.cache/yarn-offline-mirror
       - web-yarn:/home/node/.cache/yarn
       - .:/usr/local/src/reaction-app
       - empty_node_modules:/usr/local/src/reaction-app/node_modules # do not link node_modules in, and persist it between dc up runs
