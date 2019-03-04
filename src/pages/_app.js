@@ -13,14 +13,14 @@ import dispatch from "lib/tracking/dispatch";
 import withApolloClient from "lib/apollo/withApolloClient";
 import withShop from "containers/shop/withShop";
 import withViewer from "containers/account/withViewer";
-import Layout from "components/Layout";
 import withMobX from "lib/stores/withMobX";
 import rootMobXStores from "lib/stores";
-import getPageContext from "../lib/theme/getPageContext";
-import components from "../custom/componentsContext";
-import componentTheme from "../custom/componentTheme";
-import buildNavFromTags from "../lib/data/buildNavFromTags";
-import getAllTags from "../lib/data/getAllTags";
+import Layout from "custom/iclick/components/Layout";
+import getPageContext from "lib/theme/getPageContext";
+import components from "custom/componentsContext";
+import componentTheme from "custom/componentTheme";
+import buildNavFromTags from "lib/data/buildNavFromTags";
+import getAllTags from "lib/data/getAllTags";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -49,7 +49,7 @@ export default class App extends NextApp {
     this.state = { stripe: null };
   }
 
-  pageContext = null;
+  pageContext = null
 
   componentDidMount() {
     // Fetch and update auth token in auth store

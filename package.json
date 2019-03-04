@@ -1,13 +1,20 @@
 {
-  "name": "reaction-next-starterkit",
-  "version": "2.0.0-rc.9",
-  "description": "",
+  "name": "iclick",
+  "version": "1.0.0",
+  "description": "iClick electronic - An Amazing Store",
   "main": "index.js",
-  "keywords": [],
+  "keywords": [
+    "Electronics",
+    "Mobile",
+    "Accessories",
+    "Mac",
+    "PC",
+    "Latptop"
+  ],
   "author": {
-    "name": "Reaction Commerce",
-    "email": "engineering@reactioncommerce.com",
-    "url": "https://reactioncommerce.com"
+    "name": "Muhammad Adil",
+    "email": "adilsaeed31@gmail.com",
+    "url": "http://www.adil.world"
   },
   "license": "GPL-3.0",
   "scripts": {
