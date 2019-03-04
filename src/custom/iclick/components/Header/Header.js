@@ -7,7 +7,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { NavigationDesktop } from "custom/iclick/components/NavigationDesktop";
-import { NavigationMobile, NavigationToggleMobile } from "components/NavigationMobile";
+import { NavigationMobile, NavigationToggleMobile } from "custom/iclick/components/NavigationMobile";
 import AccountDropdown from "components/AccountDropdown";
 import ShopLogo from "@reactioncommerce/components/ShopLogo/v1";
 import Link from "components/Link";
