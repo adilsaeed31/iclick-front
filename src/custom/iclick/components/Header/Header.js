@@ -74,10 +74,7 @@ class Header extends Component {
           <div className={controls}>
             <Typography className={title} color="inherit" variant="title">
               <Link route="/">
-                <ShopLogo
-                  shopName={shop.name}
-                  shopLogoUrl={"https://www.iclick.ae/wp-content/uploads/2017/08/iclick_logo.png"}
-                />
+                <ShopLogo shopName={shop.name} shopLogoUrl="/static/images/iclicklogo.png" />
               </Link>
             </Typography>
 
