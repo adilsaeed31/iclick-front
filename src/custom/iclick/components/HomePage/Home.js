@@ -15,7 +15,7 @@ const styles = (theme) => ({
 const HomePage = () => (
   <Typography variant="caption">
     <div className="homepage">
-      <p>iClick HomePage</p>
+      <p>HomePage</p>
     </div>
   </Typography>
 );
