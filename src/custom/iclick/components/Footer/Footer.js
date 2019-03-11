@@ -3,40 +3,40 @@ import React from 'react';
 const date = new Date();
 
 const Footer = ({ ...props }) => (
-	<footer class="footer">
-		<div class="footer-middle">
-			<div class="container">
-				<div class="footer-ribbon">Get in touch</div>
-				<div class="row">
-					<div class="col-lg-8">
-						<div class="row">
-							<div class="col-md-5">
-								<div class="widget">
-									<ul class="contact-info">
+	<footer className="footer">
+		<div className="footer-middle">
+			<div className="container">
+				<div className="footer-ribbon">Get in touch</div>
+				<div className="row">
+					<div className="col-lg-8">
+						<div className="row">
+							<div className="col-md-5">
+								<div className="widget">
+									<ul className="contact-info">
 										<li>
-											<span class="contact-info-label">Address:</span>123 Street Name, City,
-											England
+											<span className="contact-info-label">Address:</span>Al Seef, Dubai,
+											UAE
 										</li>
 										<li>
-											<span class="contact-info-label">Phone:</span>Toll Free{' '}
-											<a href="tel:">(123) 456-7890</a>
+											<span className="contact-info-label">Phone:</span>Toll Free 
+											<a href="tel:">+971 55 343 5365</a>
 										</li>
 										<li>
-											<span class="contact-info-label">Email:</span>{' '}
-											<a href="mailto:mail@example.com">mail@example.com</a>
+											<span className="contact-info-label">Email:</span>
+											<a href="mailto:mail@example.com">mooncell@msn.com</a>
 										</li>
 										<li>
-											<span class="contact-info-label">Working Days/Hours:</span>
-											Mon - Sun / 9:00AM - 8:00PM
+											<span className="contact-info-label">Working Days/Hours:</span>
+											24/7 - 9:00AM to 10:00PM
 										</li>
 									</ul>
 								</div>
 							</div>
-							<div class="col-md-3">
-								<div class="widget">
-									<h4 class="widget-title">My Account</h4>
+							<div className="col-md-3">
+								<div className="widget">
+									<h4 className="widget-title">My Account</h4>
 
-									<ul class="links">
+									<ul className="links">
 										<li>
 											<a href="about.html">About Us</a>
 										</li>
@@ -53,7 +53,7 @@ const Footer = ({ ...props }) => (
 											<a href="#">Advanced Search</a>
 										</li>
 										<li>
-											<a href="#" class="login-link">
+											<a href="#" className="login-link">
 												Login
 											</a>
 										</li>
@@ -61,11 +61,11 @@ const Footer = ({ ...props }) => (
 								</div>
 							</div>
 
-							<div class="col-md-5">
-								<div class="widget">
-									<h4 class="widget-title">Main Features</h4>
+							<div className="col-md-5">
+								<div className="widget">
+									<h4 className="widget-title">Main Features</h4>
 
-									<ul class="links">
+									<ul className="links">
 										<li>
 											<a href="#">Super Fast Magento Theme</a>
 										</li>
@@ -87,16 +87,16 @@ const Footer = ({ ...props }) => (
 						</div>
 					</div>
 
-					<div class="col-lg-4">
-						<div class="widget widget-newsletter">
-							<h4 class="widget-title">Subscribe newsletter</h4>
+					<div className="col-lg-4">
+						<div className="widget widget-newsletter">
+							<h4 className="widget-title">Subscribe newsletter</h4>
 							<p>
 								Get all the latest information on Events,Sales and Offers. Sign up for newsletter today
 							</p>
 							<form action="#">
-								<input type="email" class="form-control" placeholder="Email address" required />
+								<input type="email" className="form-control" placeholder="Email address" required />
 
-								<input type="submit" class="btn" value="Subscribe" />
+								<input type="submit" className="btn" value="Subscribe" />
 							</form>
 						</div>
 					</div>
@@ -104,20 +104,20 @@ const Footer = ({ ...props }) => (
 			</div>
 		</div>
 
-		<div class="container">
-			<div class="footer-bottom">
-				<p class="footer-copyright">iClick Electronics. &copy; {date.getFullYear()} All Rights Reserved</p>
-				<img src="/static/images/payments.png" alt="payment methods" class="footer-payments" />
+		<div className="container">
+			<div className="footer-bottom">
+				<p className="footer-copyright">iClick Electronics. &copy; {date.getFullYear()} All Rights Reserved</p>
+				<img src="/static/images/payments.png" alt="payment methods" className="footer-payments" />
 
-				<div class="social-icons">
-					<a href="#" class="social-icon" target="_blank">
-						<i class="icon-facebook" />
+				<div className="social-icons">
+					<a href="#" className="social-icon" target="_blank">
+						<i className="icon-facebook" />
 					</a>
-					<a href="#" class="social-icon" target="_blank">
-						<i class="icon-twitter" />
+					<a href="#" className="social-icon" target="_blank">
+						<i className="icon-twitter" />
 					</a>
-					<a href="#" class="social-icon" target="_blank">
-						<i class="icon-linkedin" />
+					<a href="#" className="social-icon" target="_blank">
+						<i className="icon-linkedin" />
 					</a>
 				</div>
 			</div>
