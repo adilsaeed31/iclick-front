@@ -3,8 +3,6 @@ import React from "react";
 import { ThemeProvider as RuiThemeProvider } from "styled-components";
 import { StripeProvider } from "react-stripe-elements";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import JssProvider from "react-jss/lib/JssProvider";
 import { Provider as MobxProvider } from "mobx-react";
 import { ComponentsProvider } from "@reactioncommerce/components-context";
 import getConfig from "next/config";
@@ -21,6 +19,7 @@ import components from "custom/componentsContext";
 import componentTheme from "custom/componentTheme";
 import buildNavFromTags from "lib/data/buildNavFromTags";
 import getAllTags from "lib/data/getAllTags";
+import Loader from "custom/iclick/components/Loader";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -49,7 +48,7 @@ export default class App extends NextApp {
     this.state = { stripe: null };
   }
 
-  pageContext = null
+  pageContext = null;
 
   componentDidMount() {
     // Fetch and update auth token in auth store
@@ -69,35 +68,31 @@ export default class App extends NextApp {
   }
 
   render() {
-    const { Component, navItems, pageProps, shop, tags, viewer, ...rest } = this.props;
+    const { Component, navItems, pageProps, shop, tags, viewer, isLoading, ...rest } = this.props;
     const { route } = this.props.router;
     const { stripe } = this.state;
 
     return (
       <Container>
-        <ComponentsProvider value={components}>
-          <MobxProvider suppressChangedStoreWarning navItems={navItems} tags={tags}>
-            <JssProvider
-              registry={this.pageContext.sheetsRegistry}
-              generateClassName={this.pageContext.generateClassName}
-            >
-              <RuiThemeProvider theme={componentTheme}>
-                <MuiThemeProvider theme={this.pageContext.theme} sheetsManager={this.pageContext.sheetsManager}>
-                  <CssBaseline />
-                  {route === "/checkout" || route === "/login" ? (
-                    <StripeProvider stripe={stripe}>
-                      <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
-                    </StripeProvider>
-                  ) : (
-                    <Layout shop={shop} viewer={viewer}>
-                      <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
-                    </Layout>
-                  )}
-                </MuiThemeProvider>
-              </RuiThemeProvider>
-            </JssProvider>
-          </MobxProvider>
-        </ComponentsProvider>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <ComponentsProvider value={components}>
+            <MobxProvider suppressChangedStoreWarning navItems={navItems} tags={tags}>
+              <MuiThemeProvider theme={this.pageContext.theme} sheetsManager={this.pageContext.sheetsManager}>
+                {route === "/checkout" || route === "/login" ? (
+                  <StripeProvider stripe={stripe}>
+                    <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
+                  </StripeProvider>
+                ) : (
+                  <Layout shop={shop} viewer={viewer}>
+                    <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
+                  </Layout>
+                )}
+              </MuiThemeProvider>
+            </MobxProvider>
+          </ComponentsProvider>
+        )}
       </Container>
     );
   }

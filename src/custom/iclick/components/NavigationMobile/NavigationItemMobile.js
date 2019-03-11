@@ -11,32 +11,32 @@ import ListItem from "@material-ui/core/ListItem";
 import ChevronRightIcon from "mdi-material-ui/ChevronRight";
 import ChevronDownIcon from "mdi-material-ui/ChevronDown";
 import ChevronUpIcon from "mdi-material-ui/ChevronUp";
-import { withStyles } from "@material-ui/core/styles";
+// import { withStyles } from "@material-ui/core/styles";
 
-const styles = (theme) => ({
-  subNav: {
-    marginBottom: theme.spacing.unit * 2
-  },
-  listItemRoot: {
-    paddingTop: 16,
-    paddingBottom: 16
-  },
-  listItemDense: {
-    paddingTop: 4,
-    paddingBottom: 4
-  },
-  listItemTextDense: {
-    fontWeight: 400
-  },
-  listItemGutters: {
-    paddingRight: 0
-  },
-  subMenuList: {
-    paddingBottom: theme.spacing.unit * 2
-  }
-});
+// const styles = (theme) => ({
+//   subNav: {
+//     marginBottom: theme.spacing.unit * 2
+//   },
+//   listItemRoot: {
+//     paddingTop: 16,
+//     paddingBottom: 16
+//   },
+//   listItemDense: {
+//     paddingTop: 4,
+//     paddingBottom: 4
+//   },
+//   listItemTextDense: {
+//     fontWeight: 400
+//   },
+//   listItemGutters: {
+//     paddingRight: 0
+//   },
+//   subMenuList: {
+//     paddingBottom: theme.spacing.unit * 2
+//   }
+// });
 
-@withStyles(styles, { name: "SkNavigationItemMobile" })
+// @withStyles(styles, { name: "SkNavigationItemMobile" })
 @inject("routingStore", "uiStore")
 @observer
 class NavigationItemMobile extends Component {

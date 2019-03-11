@@ -41,6 +41,7 @@
     "@reactioncommerce/components": "0.60.1",
     "@reactioncommerce/components-context": "^1.1.0",
     "@segment/snippet": "^4.3.1",
+    "@zeit/next-css": "^1.0.1",
     "apollo-cache-inmemory": "^1.1.11",
     "apollo-client": "^2.2.7",
     "apollo-link": "^1.2.2",

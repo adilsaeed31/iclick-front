@@ -11,38 +11,38 @@ import Popover from "@material-ui/core/Popover";
 import ChevronDownIcon from "mdi-material-ui/ChevronDown";
 import ChevronRight from "mdi-material-ui/ChevronRight";
 import ChevronUpIcon from "mdi-material-ui/ChevronUp";
-import { withStyles } from "@material-ui/core/styles";
+// import { withStyles } from "@material-ui/core/styles";
 import { Router } from "routes";
 import Link from "components/Link";
 
-const styles = (theme) => ({
-  popover: {
-    left: "0!important",
-    maxWidth: "100vw",
-    padding: theme.spacing.unit * 2,
-    width: "100vw"
-  },
-  grid: {
-    width: "100vw"
-  },
-  navigationShopAllLink: {
-    display: "flex",
-    textDecoration: "underline",
-    fontSize: "14px",
-    marginTop: theme.spacing.unit * 6,
-    marginBottom: theme.spacing.unit * 2,
-    fontFamily: theme.typography.fontFamily
-  },
-  navigationShopAllLinkIcon: {
-    fontSize: "12px"
-  },
-  primaryNavItem: {
-    textTransform: "capitalize"
-  }
-});
+// const styles = (theme) => ({
+//   popover: {
+//     left: "0!important",
+//     maxWidth: "100vw",
+//     padding: theme.spacing.unit * 2,
+//     width: "100vw"
+//   },
+//   grid: {
+//     width: "100vw"
+//   },
+//   navigationShopAllLink: {
+//     display: "flex",
+//     textDecoration: "underline",
+//     fontSize: "14px",
+//     marginTop: theme.spacing.unit * 6,
+//     marginBottom: theme.spacing.unit * 2,
+//     fontFamily: theme.typography.fontFamily
+//   },
+//   navigationShopAllLinkIcon: {
+//     fontSize: "12px"
+//   },
+//   primaryNavItem: {
+//     textTransform: "capitalize"
+//   }
+// });
 
 @inject("routingStore")
-@withStyles(styles, { name: "SkNavigationItemDesktop" })
+// @withStyles(styles, { name: "SkNavigationItemDesktop" })
 class NavigationItemDesktop extends Component {
   static propTypes = {
     classes: PropTypes.object,

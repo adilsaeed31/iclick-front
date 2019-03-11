@@ -6,30 +6,30 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import MenuList from "@material-ui/core/MenuList";
 import ChevronLeftIcon from "mdi-material-ui/ChevronLeft";
-import { withStyles } from "@material-ui/core/styles";
+// import { withStyles } from "@material-ui/core/styles";
 import NavigationItemMobile from "./NavigationItemMobile";
 
-const styles = () => ({
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    height: "100vh"
-  },
-  header: {
-    flex: "0 0 auto"
-  },
-  toolbarTitle: {
-    position: "absolute",
-    width: "100%",
-    textAlign: "center"
-  },
-  menu: {
-    flex: "1 1 auto",
-    overflowY: "auto"
-  }
-});
+// const styles = () => ({
+//   root: {
+//     display: "flex",
+//     flexDirection: "column",
+//     height: "100vh"
+//   },
+//   header: {
+//     flex: "0 0 auto"
+//   },
+//   toolbarTitle: {
+//     position: "absolute",
+//     width: "100%",
+//     textAlign: "center"
+//   },
+//   menu: {
+//     flex: "1 1 auto",
+//     overflowY: "auto"
+//   }
+// });
 
-@withStyles(styles, { name: "SkNavigationItemMobile" })
+// @withStyles(styles, { name: "SkNavigationItemMobile" })
 class NavigationSubMenuMobile extends Component {
   static propTypes = {
     classes: PropTypes.object,

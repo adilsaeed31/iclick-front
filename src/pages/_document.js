@@ -64,6 +64,8 @@ class HTMLDocument extends Document {
     const links = [
       { rel: "canonical", href: publicRuntimeConfig.canonicalUrl },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" },
+      { rel: "stylesheet", href: "/static/css/bootstrap.min.css" },
+      { rel: "stylesheet", href: "/static/css/style.min.css" },
       ...favicons
     ];
     const meta = [

@@ -1,5 +1,5 @@
 const appConfig = require("./config");
-
+ 
 module.exports = {
   /**
    * `serverRuntimeConfig` is available in browser code, ONLY when run on the server
@@ -34,8 +34,10 @@ module.exports = {
       loader: "graphql-tag/loader",
       exclude: ["/node_modules/", "/.next/"],
       enforce: "pre"
-    });
+    })
 
     return webpackConfig;
-  }
-};
+  },
+ };
+
+ 
