@@ -15,6 +15,10 @@ class NavigationItemDesktop extends Component {
 		routingStore: {}
 	};
 
+	state = {
+		show: ''
+	};
+
 	linkPath = (providedNavItem) => {
 		const { navItem, routingStore } = this.props;
 
@@ -32,7 +36,9 @@ class NavigationItemDesktop extends Component {
 
 	renderSubNav(navItemGroup) {
 		const menuItems = navItemGroup.subTags.map(({ node: navItem }, index) => (
-			<Link route={`${this.linkPath(navItem)}`}>{navItem.name}</Link>
+			<Link key={index} route={`${this.linkPath(navItem)}`}>
+				{navItem.name}
+			</Link>
 		));
 
 		return menuItems;
@@ -40,15 +46,14 @@ class NavigationItemDesktop extends Component {
 
 	renderPopover() {
 		const { navItem: { subTags } } = this.props;
-
 		if (subTags) {
 			return (
-				<ul style={{ display: 'none' }}>
+				<ul>
 					{subTags.map(({ node: navItemGroup }, index) => (
-						<Fragment>
+						<li key={index}>
 							<Link route={`${this.linkPath(navItemGroup)}`}>{navItemGroup.name}</Link>
 							{Array.isArray(navItemGroup.subTags) && this.renderSubNav(navItemGroup)}
-						</Fragment>
+						</li>
 					))}
 				</ul>
 			);
@@ -57,11 +62,21 @@ class NavigationItemDesktop extends Component {
 		return null;
 	}
 
+	handleMouseOver = () => {
+		this.setState({ show: 'show' });
+	};
+
+
+	handleMouseOut = () => {
+		this.setState({ show: '' });
+	};
+
 	render() {
 		const { navItem } = this.props;
+		const { show } = this.state;
 		return (
-			<li>
-				<Link className={this.hasSubNavItems && 'sf-with-ul'} route={this.linkPath(navItem)}>
+			<li onMouseOver={this.handleMouseOver} className={show} onMouseOut={this.handleMouseOut}>
+				<Link className={this.hasSubNavItems ? 'sf-with-ul' : ''} route={this.linkPath(navItem)}>
 					{navItem.name}
 				</Link>
 				{this.hasSubNavItems && this.renderPopover()}
