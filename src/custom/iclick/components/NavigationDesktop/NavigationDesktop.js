@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { inject } from 'mobx-react';
-import Link from 'next/link';
-
 import { NavigationItemDesktop } from 'custom/iclick/components/NavigationDesktop';
 
 @inject('navItems')

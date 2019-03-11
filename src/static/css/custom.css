@@ -1,0 +1,14 @@
+.logo {
+	width: 100px;
+}
+.header-top {
+	padding: 0px !important;
+}
+.header-middle {
+	padding-top: 1rem !important;
+	padding-bottom: 0px !important;
+}
+.menu > li > a {
+	padding-top: 1rem !important;
+	padding-bottom: 1rem !important;
+}

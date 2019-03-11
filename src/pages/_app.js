@@ -1,8 +1,6 @@
 import NextApp, { Container } from "next/app";
 import React from "react";
-import { ThemeProvider as RuiThemeProvider } from "styled-components";
 import { StripeProvider } from "react-stripe-elements";
-import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Provider as MobxProvider } from "mobx-react";
 import { ComponentsProvider } from "@reactioncommerce/components-context";
 import getConfig from "next/config";
@@ -16,7 +14,6 @@ import rootMobXStores from "lib/stores";
 import Layout from "custom/iclick/components/Layout";
 import getPageContext from "lib/theme/getPageContext";
 import components from "custom/componentsContext";
-import componentTheme from "custom/componentTheme";
 import buildNavFromTags from "lib/data/buildNavFromTags";
 import getAllTags from "lib/data/getAllTags";
 import Loader from "custom/iclick/components/Loader";
@@ -79,7 +76,6 @@ export default class App extends NextApp {
         ) : (
           <ComponentsProvider value={components}>
             <MobxProvider suppressChangedStoreWarning navItems={navItems} tags={tags}>
-              <MuiThemeProvider theme={this.pageContext.theme} sheetsManager={this.pageContext.sheetsManager}>
                 {route === "/checkout" || route === "/login" ? (
                   <StripeProvider stripe={stripe}>
                     <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
@@ -89,7 +85,6 @@ export default class App extends NextApp {
                     <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
                   </Layout>
                 )}
-              </MuiThemeProvider>
             </MobxProvider>
           </ComponentsProvider>
         )}

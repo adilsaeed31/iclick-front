@@ -6,32 +6,23 @@ import Footer from 'custom/iclick/components/Footer';
 class Layout extends Component {
 	static propTypes = {
 		children: PropTypes.node,
-		classes: PropTypes.object,
 		shop: PropTypes.shape({
 			name: PropTypes.string
 		}).isRequired,
 		viewer: PropTypes.object
 	};
 
-	static defaultProps = {
-		classes: {
-			main: 'main'
-		}
-	};
-
 	render() {
-		const { classes, children, shop, viewer } = this.props;
+		const { children, shop, viewer } = this.props;
 
 		return (
 			<React.Fragment>
 				<div className="page-wrapper">
 					<Header shop={shop} viewer={viewer} />
-					<main className={classes.main}>
-						<article className={classes.article}>{children}</article>
-					</main>
+					<main className="main">{children}</main>
 					<Footer />
 				</div>
-				<div className="mobile-menu-overlay"/>
+				<div className="mobile-menu-overlay" />
 				<a id="scroll-top" href="#top" title="Top" role="button">
 					<i className="icon-angle-up" />
 				</a>

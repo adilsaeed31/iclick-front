@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import routes, { Link as NextLink } from 'routes';
-import classNames from 'classnames';
 import track from 'lib/tracking/track';
 import getConfig from 'next/config';
 

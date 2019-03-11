@@ -16,7 +16,7 @@ class NavigationItemDesktop extends Component {
 	};
 
 	state = {
-		show: ''
+		show: 'megamenu-container'
 	};
 
 	linkPath = (providedNavItem) => {
@@ -36,9 +36,9 @@ class NavigationItemDesktop extends Component {
 
 	renderSubNav(navItemGroup) {
 		const menuItems = navItemGroup.subTags.map(({ node: navItem }, index) => (
-			<Link key={index} route={`${this.linkPath(navItem)}`}>
-				{navItem.name}
-			</Link>
+			<li key={index}>
+				<Link route={`${this.linkPath(navItem)}`}>{navItem.name}</Link>
+			</li>
 		));
 
 		return menuItems;
@@ -48,14 +48,36 @@ class NavigationItemDesktop extends Component {
 		const { navItem: { subTags } } = this.props;
 		if (subTags) {
 			return (
-				<ul>
-					{subTags.map(({ node: navItemGroup }, index) => (
-						<li key={index}>
-							<Link route={`${this.linkPath(navItemGroup)}`}>{navItemGroup.name}</Link>
-							{Array.isArray(navItemGroup.subTags) && this.renderSubNav(navItemGroup)}
-						</li>
-					))}
-				</ul>
+				<div className="megamenu">
+					<div className="row">
+						<div className="col-lg-8">
+							<div className="row">
+								{subTags.map(({ node: navItemGroup }, index) => (
+									<div className="col-lg-3" key={index}>
+										<div className="menu-title">
+											<Link route={`${this.linkPath(navItemGroup)}`}>{navItemGroup.name}</Link>
+										</div>
+
+										<ul>
+											{Array.isArray(navItemGroup.subTags) && this.renderSubNav(navItemGroup)}
+										</ul>
+									</div>
+								))}
+							</div>
+						</div>
+						<div className="col-lg-4">
+							<div className="banner">
+								<a href="#">
+									<img
+										src="/static/images/menu-banner.jpg"
+										alt="Menu banner"
+										className="product-promo"
+									/>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
 			);
 		}
 
@@ -63,12 +85,11 @@ class NavigationItemDesktop extends Component {
 	}
 
 	handleMouseOver = () => {
-		this.setState({ show: 'show' });
+		this.setState({ show: 'megamenu-container show' });
 	};
 
-
 	handleMouseOut = () => {
-		this.setState({ show: '' });
+		this.setState({ show: 'megamenu-container' });
 	};
 
 	render() {

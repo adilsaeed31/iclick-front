@@ -66,6 +66,7 @@ class HTMLDocument extends Document {
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" },
       { rel: "stylesheet", href: "/static/css/bootstrap.min.css" },
       { rel: "stylesheet", href: "/static/css/style.min.css" },
+      { rel: "stylesheet", href: "/static/css/custom.css" },
       ...favicons
     ];
     const meta = [
