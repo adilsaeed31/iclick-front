@@ -5,6 +5,7 @@ import InfoBox from "custom/iclick/components/InfoBox";
 import BlackBanner from "custom/iclick/components/BlackBanner";
 import Partners from "custom/iclick/components/Partners";
 import MixGrid from "custom/iclick/components/MixGrid";
+import HomeProductTabs from "custom/iclick/components/HomeProductTabs";
 import Space from "custom/iclick/components/Space";
 
 class Home extends Component {
@@ -12,6 +13,7 @@ class Home extends Component {
     return (
       <Fragment>
         <BigBanner />
+        <HomeProductTabs />
         <AfterBanner />
         <InfoBox />
         <BlackBanner />
