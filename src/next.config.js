@@ -36,12 +36,6 @@ module.exports = {
       enforce: "pre"
     });
 
-    // webpackConfig.plugins.push({
-    //   "$": "jquery",
-    //   "jQuery": "jquery",
-    //   "window.jQuery": "jquery"
-    // });
-
     return webpackConfig;
   }
 };

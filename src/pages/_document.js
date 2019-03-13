@@ -137,7 +137,7 @@ class HTMLDocument extends Document {
             (script.innerHTML /* eslint-disable-next-line */ ? (
               <script async key={index} type={script.type} dangerouslySetInnerHTML={{ __html: script.innerHTML }} />
             ) : (
-              <script async key={index} {...script} />
+              <script key={index} {...script} />
             )))}
         </body>
       </html>
