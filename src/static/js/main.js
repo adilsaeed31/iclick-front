@@ -1,7 +1,10 @@
+/* eslint-disable semi */
+/* eslint-disable id-length */
+/* eslint-disable no-var */
 /* ================================================
 ---------------------- Main.js ----------------- */
 (function ($) {
-  "use strict";
+  "use strict"
   var Porto = {
     initialised: false,
     mobile: false,
@@ -99,10 +102,10 @@
         }
       }
 
-      //Set sticky headers in main part
+      // Set sticky headers in main part
       $("main")
         .find(".sticky-header")
-        .each(function() {
+        .each(function () {
           var sticky = new Waypoint.Sticky({
             element: $(this),
             stuckClass: "fixed-nav"
@@ -111,31 +114,31 @@
     },
     headerSearchToggle() {
       // Search Dropdown Toggle
-      $(".search-toggle").on("click", function(e) {
+      $(".search-toggle").on("click", (e) => {
         $(".header-search-wrapper").toggleClass("show")
         e.preventDefault()
       })
 
-      $("body").on("click", function(e) {
+      $("body").on("click", (e) => {
         if ($(".header-search-wrapper").hasClass("show")) {
           $(".header-search-wrapper").removeClass("show")
           $("body").removeClass("is-search-active")
         }
       })
 
-      $(".header-search").on("click", function(e) {
+      $(".header-search").on("click", (e) => {
         e.stopPropagation()
       })
     },
     mMenuToggle() {
       // Mobile Menu Show/Hide
-      $(".mobile-menu-toggler").on("click", function(e) {
+      $(".mobile-menu-toggler").on("click", function (e) {
         $("body").toggleClass("mmenu-active")
         $(this).toggleClass("active")
         e.preventDefault()
       })
 
-      $(".mobile-menu-overlay, .mobile-menu-close").on("click", function(e) {
+      $(".mobile-menu-overlay, .mobile-menu-close").on("click", (e) => {
         $("body").removeClass("mmenu-active")
         $(".menu-toggler").removeClass("active")
         e.preventDefault()
@@ -145,7 +148,7 @@
       // Add Mobile menu icon arrows or plus/minus to items with children
       $(".mobile-menu")
         .find("li")
-        .each(function() {
+        .each(function () {
           var $this = $(this)
 
           if ($this.find("ul").length) {
@@ -157,16 +160,16 @@
     },
     mobileMenu() {
       // Mobile Menu Toggle
-      $(".mmenu-btn").on("click", function(e) {
+      $(".mmenu-btn").on("click", function (e) {
         var $parent = $(this).closest("li"),
           $targetUl = $parent.find("ul").eq(0)
 
         if (!$parent.hasClass("open")) {
-          $targetUl.slideDown(300, function() {
+          $targetUl.slideDown(300, () => {
             $parent.addClass("open")
           })
         } else {
-          $targetUl.slideUp(300, function() {
+          $targetUl.slideUp(300, () => {
             $parent.removeClass("open")
           })
         }
@@ -191,25 +194,22 @@
       /* Hom Slider */
       var homeSlider = $(".home-slider")
 
-      homeSlider.owlCarousel(
-        $.extend(true, {}, sliderDefaultOptions, {
+      homeSlider.owlCarousel($.extend(true, {}, sliderDefaultOptions, {
           lazyLoad: true,
           nav: true,
           dots: false,
           autoplayTimeout: 20000,
           animateOut: "fadeOut"
-        })
-      )
-      homeSlider.on("loaded.owl.lazy", function(event) {
+        }))
+      homeSlider.on("loaded.owl.lazy", (event) => {
         $(event.element)
           .closest(".home-slide")
           .addClass("loaded")
       })
 
       // Home - Tab / Products Carousel
-      $(".tab-products-carousel").each(function() {
-        $(this).owlCarousel(
-          $.extend(true, {}, sliderDefaultOptions, {
+      $(".tab-products-carousel").each(function () {
+        $(this).owlCarousel($.extend(true, {}, sliderDefaultOptions, {
             loop: false,
             margin: 16,
             lazyLoad: true,
@@ -230,13 +230,11 @@
                 items: 5
               }
             }
-          })
-        )
+          }))
       })
 
       // Home - Partners/Logos carousel
-      $(".partners-carousel").owlCarousel(
-        $.extend(true, {}, sliderDefaultOptions, {
+      $(".partners-carousel").owlCarousel($.extend(true, {}, sliderDefaultOptions, {
           margin: 20,
           nav: true,
           dots: false,
@@ -260,12 +258,10 @@
               items: 5
             }
           }
-        })
-      )
+        }))
 
       // About - Team carousel
-      $(".team-carousel").owlCarousel(
-        $.extend(true, {}, sliderDefaultOptions, {
+      $(".team-carousel").owlCarousel($.extend(true, {}, sliderDefaultOptions, {
           loop: false,
           margin: 30,
           autoHeight: true,
@@ -284,12 +280,10 @@
               items: 4
             }
           }
-        })
-      )
+        }))
 
       /* Featured Products */
-      $(".featured-products").owlCarousel(
-        $.extend(true, {}, sliderDefaultOptions, {
+      $(".featured-products").owlCarousel($.extend(true, {}, sliderDefaultOptions, {
           loop: false,
           margin: 30,
           autoplay: false,
@@ -305,33 +299,27 @@
               items: 4
             }
           }
-        })
-      )
+        }))
 
       /* Widget Featurd Products*/
-      $(".widget-featured-products").owlCarousel(
-        $.extend(true, {}, sliderDefaultOptions, {
+      $(".widget-featured-products").owlCarousel($.extend(true, {}, sliderDefaultOptions, {
           lazyLoad: true,
           nav: true,
           navText: ['<i class="icon-angle-left">', '<i class="icon-angle-right">'],
           dots: false,
           autoHeight: true
-        })
-      )
+        }))
 
       // Entry Slider - Blog page
-      $(".entry-slider").each(function() {
-        $(this).owlCarousel(
-          $.extend(true, {}, sliderDefaultOptions, {
+      $(".entry-slider").each(function () {
+        $(this).owlCarousel($.extend(true, {}, sliderDefaultOptions, {
             margin: 2,
             lazyLoad: true
-          })
-        )
+          }))
       })
 
       // Related posts
-      $(".related-posts-carousel").owlCarousel(
-        $.extend(true, {}, sliderDefaultOptions, {
+      $(".related-posts-carousel").owlCarousel($.extend(true, {}, sliderDefaultOptions, {
           loop: false,
           margin: 30,
           autoplay: false,
@@ -346,31 +334,27 @@
               items: 3
             }
           }
-        })
-      )
+        }))
 
-      //Category boxed slider
-      $(".boxed-slider").owlCarousel(
-        $.extend(true, {}, sliderDefaultOptions, {
+      // Category boxed slider
+      $(".boxed-slider").owlCarousel($.extend(true, {}, sliderDefaultOptions, {
           lazyLoad: true,
           autoplayTimeout: 20000,
           animateOut: "fadeOut"
-        })
-      )
-      $(".boxed-slider").on("loaded.owl.lazy", function(event) {
+        }))
+      $(".boxed-slider").on("loaded.owl.lazy", (event) => {
         $(event.element)
           .closest(".category-slide")
           .addClass("loaded")
       })
 
       /* Product single carousel - extenden product */
-      $(".product-single-default .product-single-carousel").owlCarousel(
-        $.extend(true, {}, sliderDefaultOptions, {
+      $(".product-single-default .product-single-carousel").owlCarousel($.extend(true, {}, sliderDefaultOptions, {
           nav: true,
           navText: ['<i class="icon-angle-left">', '<i class="icon-angle-right">'],
           dotsContainer: "#carousel-custom-dots",
           autoplay: false,
-          onInitialized: function() {
+          onInitialized() {
             var $source = this.$element
 
             if ($.fn.elevateZoom) {
@@ -389,11 +373,9 @@
               })
             }
           }
-        })
-      )
+        }))
 
-      $(".product-single-extended .product-single-carousel").owlCarousel(
-        $.extend(true, {}, sliderDefaultOptions, {
+      $(".product-single-extended .product-single-carousel").owlCarousel($.extend(true, {}, sliderDefaultOptions, {
           dots: false,
           autoplay: false,
           responsive: {
@@ -407,10 +389,9 @@
               items: 3
             }
           }
-        })
-      )
+        }))
 
-      $("#carousel-custom-dots .owl-dot").click(function() {
+      $("#carousel-custom-dots .owl-dot").click(function () {
         $(".product-single-carousel").trigger("to.owl.carousel", [$(this).index(), 300])
       })
     },
@@ -435,7 +416,7 @@
       })
 
       // Update Price Range
-      priceSlider.noUiSlider.on("update", function(values, handle) {
+      priceSlider.noUiSlider.on("update", (values, handle) => {
         var values = values.map(function(value) {
           return currencyVar + value
         })
@@ -470,13 +451,13 @@
     },
     changePassToggle() {
       // Toggle new/change password section via checkbox
-      $("#change-pass-checkbox").on("change", function() {
+      $("#change-pass-checkbox").on("change", () => {
         $("#account-chage-pass").toggleClass("show")
       })
     },
     changeBillToggle() {
       // Checkbox review - billing address checkbox
-      $("#change-bill-address").on("change", function() {
+      $("#change-bill-address").on("change", () => {
         $("#checkout-shipping-address").toggleClass("show")
         $("#new-checkout-address").toggleClass("show")
       })
@@ -489,7 +470,7 @@
       }
     },
     scrollToTop() {
-      $("#scroll-top").on("click", function(e) {
+      $("#scroll-top").on("click", (e) => {
         $("html, body").animate(
           {
             scrollTop: 0
@@ -512,7 +493,7 @@
     lightBox() {
       // Newsletter popup
       if (document.getElementById("newsletter-popup-form")) {
-        setTimeout(function() {
+        setTimeout(() => {
           var mpInstance = $.magnificPopup.instance
           if (mpInstance.isOpen) {
             mpInstance.close()
@@ -531,11 +512,11 @@
         $(".product-single-carousel .owl-item:not(.cloned) img").length === 0
           ? $(".product-single-gallery img")
           : $(".product-single-carousel .owl-item:not(.cloned) img")
-      $productSliderImages.each(function() {
+      $productSliderImages.each(function () {
         links.push({ src: $(this).attr("data-zoom-image") })
       })
 
-      $(".prod-full-screen").click(function(e) {
+      $(".prod-full-screen").click((e) => {
         var currentIndex
         if (e.currentTarget.closest(".product-slider-container")) {
           currentIndex =
@@ -564,12 +545,12 @@
         )
       })
 
-      //QuickView Popup
-      $("a.btn-quickview").on("click", function(e) {
+      // QuickView Popup
+      $("a.btn-quickview").on("click", function (e) {
         e.preventDefault()
         Porto.ajaxLoading()
         var ajaxUrl = $(this).attr("href")
-        setTimeout(function() {
+        setTimeout(() => {
           $.magnificPopup.open({
             type: "ajax",
             mainClass: "mfp-ajax-product",
@@ -602,7 +583,7 @@
     },
     productTabSroll() {
       // Scroll to product details tab and show review tab - product pages
-      $(".rating-link").on("click", function(e) {
+      $(".rating-link").on("click", (e) => {
         if ($(".product-single-tabs").length) {
           $("#product-tab-reviews").tab("show")
         } else if ($(".product-single-collapse").length) {
@@ -661,12 +642,12 @@
     },
     ajaxLoadProduct() {
       var loadCount = 0
-      $loadButton.click(function(e) {
+      $loadButton.click(function (e) {
         e.preventDefault()
         $(this).text("Loading ...")
         $.ajax({
           url: "ajax/category-ajax-products.html",
-          success: function(result) {
+          success(result) {
             var $newItems = $(result)
             setTimeout(function() {
               $newItems.appendTo(".product-ajax-grid")
@@ -677,7 +658,7 @@
               }
             }, 350)
           },
-          failure: function() {
+          failure() {
             $loadButton.text("Sorry something went wrong.")
           }
         })
@@ -685,20 +666,20 @@
     },
     toggleFilter() {
       // toggle sidebar filter
-      $(".filter-toggle a").click(function(e) {
+      $(".filter-toggle a").click((e) => {
         e.preventDefault()
         $(".filter-toggle").toggleClass("opened")
         $("main").toggleClass("sidebar-opened")
       })
 
       // hide sidebar filter and sidebar overlay
-      $(".sidebar-overlay").click(function(e) {
+      $(".sidebar-overlay").click((e) => {
         $(".filter-toggle").removeClass("opened")
         $("main").removeClass("sidebar-opened")
       })
 
       // show/hide sort menu
-      $(".sort-menu-trigger").click(function(e) {
+      $(".sort-menu-trigger").click((e) => {
         e.preventDefault()
         $(".select-custom").removeClass("opened")
         $(e.target)
@@ -707,12 +688,12 @@
       })
     },
     toggleSidebar() {
-      $(".sidebar-toggle").click(function() {
+      $(".sidebar-toggle").click(() => {
         $("main").toggleClass("sidebar-opened")
       })
     },
     scrollToElement() {
-      $('.scrolling-box a[href^="#"]').on("click", function(event) {
+      $('.scrolling-box a[href^="#"]').on("click", function (event) {
         var target = $(this.getAttribute("href"))
 
         if (target.length) {
@@ -729,7 +710,7 @@
       })
     },
     loginPopup() {
-      $(".login-link").click(function(e) {
+      $(".login-link").click((e) => {
         e.preventDefault()
         Porto.ajaxLoading()
         var ajaxUrl = "ajax/login-popup.html"
@@ -756,34 +737,34 @@
       })
     },
     windowClick() {
-      $(document).click(function(e) {
+      $(document).click((e) => {
         // if click is happend outside of filter menu, hide it.
         if (!$(e.target).closest(".toolbox-item.select-custom").length) {
           $(".select-custom").removeClass("opened")
         }
       })
     }
-  };
+  }
 
-  $("body").prepend('<div class="loading-overlay"><div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>');
+  $("body").prepend('<div class="loading-overlay"><div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>')
 
   // Variables
-  var $loadButton = $(".loadmore .btn");
+  var $loadButton = $(".loadmore .btn")
 
   // Ready Event
   jQuery(document).ready(() => {
     // Init our app
     Porto.init()
-  });
+  })
 
   // Load Event
   $(window).on("load", () => {
     $("body").addClass("loaded")
     Porto.scrollBtnAppear()
-  });
+  })
 
   // Scroll Event
   $(window).on("scroll", () => {
     Porto.scrollBtnAppear()
-  });
-}(jQuery));
+  })
+}(jQuery))

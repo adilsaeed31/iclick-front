@@ -89,22 +89,6 @@ class HTMLDocument extends Document {
       {
         type: "text/javascript",
         src: "https://js.stripe.com/v3/"
-      },
-      {
-        type: "text/javascript",
-        src: "/static/js/jquery.min.js"
-      },
-      {
-        type: "text/javascript",
-        src: "/static/js/bootstrap.bundle.min.js"
-      },
-      {
-        type: "text/javascript",
-        src: "/static/js/plugins.js"
-      },
-      {
-        type: "text/javascript",
-        src: "/static/js/main.js"
       }
     ];
 

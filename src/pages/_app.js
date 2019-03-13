@@ -20,7 +20,6 @@ import Loader from "custom/iclick/components/Loader";
 import "static/css/bootstrap.min.css";
 import "static/css/style.min.css";
 import "static/css/custom.css";
-import $ from "jquery";
 
 const { publicRuntimeConfig } = getConfig();
 
