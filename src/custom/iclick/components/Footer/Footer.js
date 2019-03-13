@@ -2,7 +2,7 @@ import React from "react";
 
 const date = new Date();
 
-const Footer = ({ ...props }) => (
+const Footer = (props) => (
   <footer className="footer">
     <div className="footer-middle">
       <div className="container">
@@ -46,13 +46,13 @@ const Footer = ({ ...props }) => (
                       <a href="my-account.html">My Account</a>
                     </li>
                     <li>
-                      <a href="#">Orders History</a>
+                      <a href="/">Orders History</a>
                     </li>
                     <li>
-                      <a href="#">Advanced Search</a>
+                      <a href="/">Advanced Search</a>
                     </li>
                     <li>
-                      <a href="#" className="login-link">
+                      <a href="/" className="login-link">
                         Login
                       </a>
                     </li>
@@ -66,19 +66,19 @@ const Footer = ({ ...props }) => (
 
                   <ul className="links">
                     <li>
-                      <a href="#">Super Fast Magento Theme</a>
+                      <a href="/">Super Fast Magento Theme</a>
                     </li>
                     <li>
-                      <a href="#">1st Fully working Ajax Theme</a>
+                      <a href="/">1st Fully working Ajax Theme</a>
                     </li>
                     <li>
-                      <a href="#">20 Unique Homepage Layouts</a>
+                      <a href="/">20 Unique Homepage Layouts</a>
                     </li>
                     <li>
-                      <a href="#">Powerful Admin Panel</a>
+                      <a href="/">Powerful Admin Panel</a>
                     </li>
                     <li>
-                      <a href="#">Mobile &amp; Retina Optimized</a>
+                      <a href="/">Mobile &amp; Retina Optimized</a>
                     </li>
                   </ul>
                 </div>
@@ -107,13 +107,13 @@ const Footer = ({ ...props }) => (
         <img src="/static/images/payments.png" alt="payment methods" className="footer-payments" />
 
         <div className="social-icons">
-          <a href="#" className="social-icon" target="_blank">
+          <a href="/" className="social-icon" target="_blank">
             <i className="icon-facebook" />
           </a>
-          <a href="#" className="social-icon" target="_blank">
+          <a href="/" className="social-icon" target="_blank">
             <i className="icon-twitter" />
           </a>
-          <a href="#" className="social-icon" target="_blank">
+          <a href="/" className="social-icon" target="_blank">
             <i className="icon-linkedin" />
           </a>
         </div>
