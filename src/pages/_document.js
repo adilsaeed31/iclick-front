@@ -64,9 +64,6 @@ class HTMLDocument extends Document {
     const links = [
       { rel: "canonical", href: publicRuntimeConfig.canonicalUrl },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" },
-      { rel: "stylesheet", href: "/static/css/bootstrap.min.css" },
-      { rel: "stylesheet", href: "/static/css/style.min.css" },
-      { rel: "stylesheet", href: "/static/css/custom.css" },
       ...favicons
     ];
     const meta = [
@@ -137,7 +134,7 @@ class HTMLDocument extends Document {
             (script.innerHTML /* eslint-disable-next-line */ ? (
               <script async key={index} type={script.type} dangerouslySetInnerHTML={{ __html: script.innerHTML }} />
             ) : (
-              <script key={index} {...script} />
+              <script async key={index} {...script} />
             )))}
         </body>
       </html>

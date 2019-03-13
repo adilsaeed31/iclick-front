@@ -17,6 +17,10 @@ import components from "custom/componentsContext";
 import buildNavFromTags from "lib/data/buildNavFromTags";
 import getAllTags from "lib/data/getAllTags";
 import Loader from "custom/iclick/components/Loader";
+import "static/css/bootstrap.min.css";
+import "static/css/style.min.css";
+import "static/css/custom.css";
+import $ from "jquery";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -45,7 +49,7 @@ export default class App extends NextApp {
     this.state = { stripe: null };
   }
 
-  pageContext = null;
+  pageContext = null
 
   componentDidMount() {
     // Fetch and update auth token in auth store
@@ -76,15 +80,15 @@ export default class App extends NextApp {
         ) : (
           <ComponentsProvider value={components}>
             <MobxProvider suppressChangedStoreWarning navItems={navItems} tags={tags}>
-                {route === "/checkout" || route === "/login" ? (
-                  <StripeProvider stripe={stripe}>
-                    <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
-                  </StripeProvider>
-                ) : (
-                  <Layout shop={shop} viewer={viewer}>
-                    <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
-                  </Layout>
-                )}
+              {route === "/checkout" || route === "/login" ? (
+                <StripeProvider stripe={stripe}>
+                  <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
+                </StripeProvider>
+              ) : (
+                <Layout shop={shop} viewer={viewer}>
+                  <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
+                </Layout>
+              )}
             </MobxProvider>
           </ComponentsProvider>
         )}
