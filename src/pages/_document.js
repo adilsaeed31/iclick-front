@@ -100,11 +100,11 @@ class HTMLDocument extends Document {
       },
       {
         type: "text/javascript",
-        src: "/static/js/plugins.min.js"
+        src: "/static/js/plugins.js"
       },
       {
         type: "text/javascript",
-        src: "/static/js/main.min.js"
+        src: "/static/js/main.js"
       }
     ];
 

@@ -13,8 +13,8 @@ class Home extends Component {
     return (
       <Fragment>
         <BigBanner />
-        <HomeProductTabs />
         <AfterBanner />
+        <HomeProductTabs />
         <InfoBox />
         <BlackBanner />
         <Partners />
