@@ -4,7 +4,7 @@ const Contact = (props) => (
   <div className="header-contact">
     <span>Call us now</span>
     <a href="tel:#">
-      <strong>043 (CLICK) 1</strong>
+      <strong>04 3254251</strong>
     </a>
   </div>
 );

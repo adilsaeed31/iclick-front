@@ -18,7 +18,7 @@ const Footer = (props) => (
                     </li>
                     <li>
                       <span className="contact-info-label">Phone:</span>
-                      <a href="tel:">043 (CLICK) 1</a>
+                      <a href="tel:">04 3254251</a>
                     </li>
                     <li>
                       <span className="contact-info-label">Email:</span>
