@@ -8,34 +8,32 @@ class Header extends Component {
   static propTypes = {
     shop: PropTypes.shape({
       name: PropTypes.string
-    }).isRequired,
-    viewer: PropTypes.object
+    }).isRequired
   }
 
   state = {
     headerCls: "header-bottom sticky-header"
   }
 
+  _mounted = false
+
   componentDidMount() {
+    this._mounted = true;
     window.addEventListener("scroll", this.handleScroll, { passive: true });
   }
 
-  handleScroll = () => {
-    if (this.scrollCalc() >= 1) {
-      this.setState({ headerCls: "header-bottom sticky-header fixed" });
-      console.log(document.querySelector(".header-bottom").find(".logo"));
-      if (!document.querySelector(".header-bottom").find(".logo, .cart-dropdown").length) {
-        const targetArea = document.querySelector(".header-bottom").find(".container")[0];
+  componentWillUnmount() {
+    this._mounted = false;
+    window.removeEventListener("scroll", this.handleScroll, { passive: true });
+  }
 
-        // Clone and put in the header bottom for sticky header
-        document
-          .querySelector(".header")
-          .find(".logo, .cart-dropdown")
-          .clone(true)
-          .prependTo(targetArea);
+  handleScroll = () => {
+    if (this._mounted) {
+      if (this.scrollCalc() >= 8) {
+        this.setState({ headerCls: "header-bottom sticky-header fixed" });
+        return;
       }
-    }
-    if (this.scrollCalc() === 0) {
+
       this.setState({ headerCls: "header-bottom sticky-header" });
     }
   }
@@ -77,7 +75,7 @@ class Header extends Component {
         <div className="sticky-wrapper">
           <div className={headerCls}>
             <div className="container">
-              <NavigationDesktop />
+              <NavigationDesktop shop={shop} />
             </div>
           </div>
         </div>
