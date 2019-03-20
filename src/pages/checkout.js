@@ -3,135 +3,26 @@ import PropTypes from "prop-types";
 import { Router } from "routes";
 import { observer } from "mobx-react";
 import Helmet from "react-helmet";
-import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
-import CheckoutActions from "components/CheckoutActions";
+import CheckoutActions from "custom/iclick/components/CheckoutActions";
 import CheckoutEmailAddress from "@reactioncommerce/components/CheckoutEmailAddress/v1";
 import CheckoutTopHat from "@reactioncommerce/components/CheckoutTopHat/v1";
-import Entry from "components/Entry";
+import Entry from "custom/iclick/components/Entry";
 import ShopLogo from "@reactioncommerce/components/ShopLogo/v1";
 import CartIcon from "mdi-material-ui/Cart";
 import ChevronLeftIcon from "mdi-material-ui/ChevronLeft";
 import LockIcon from "mdi-material-ui/Lock";
 import withCart from "containers/cart/withCart";
-import Link from "components/Link";
-import CheckoutSummary from "components/CheckoutSummary";
-import PageLoading from "components/PageLoading";
-
-const styles = (theme) => ({
-  checkoutActions: {
-    width: "100%",
-    maxWidth: "600px",
-    alignSelf: "flex-end",
-    [theme.breakpoints.up("md")]: {
-      paddingRight: "2rem"
-    }
-  },
-  cartSummary: {
-    maxWidth: "400px",
-    alignSelf: "flex-start",
-    [theme.breakpoints.up("md")]: {
-      paddingRight: "2rem"
-    }
-  },
-  checkoutContent: {
-    flex: "1",
-    maxWidth: theme.layout.mainContentMaxWidth,
-    padding: "1rem"
-  },
-  checkoutContentContainer: {
-    display: "flex",
-    justifyContent: "center"
-  },
-  checkoutTitleContainer: {
-    alignSelf: "flex-end",
-    width: "8rem",
-    [theme.breakpoints.up("md")]: {
-      width: "10rem"
-    }
-  },
-  checkoutTitle: {
-    fontSize: "1.125rem",
-    color: theme.palette.reaction.black35,
-    display: "inline",
-    marginLeft: "0.3rem"
-  },
-  flexContainer: {
-    display: "flex",
-    flexDirection: "column"
-  },
-  headerContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    margin: "0 auto",
-    maxWidth: theme.layout.mainContentMaxWidth,
-    padding: "1rem"
-  },
-  emptyCartContainer: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  emptyCart: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 320,
-    height: 320
-  },
-  logo: {
-    color: theme.palette.reaction.reactionBlue,
-    marginRight: theme.spacing.unit,
-    borderBottom: `solid 5px ${theme.palette.reaction.reactionBlue200}`
-  },
-  // login view styles
-  backLink: {
-    "color": theme.palette.reaction.black80,
-    "cursor": "pointer",
-    "fontFamily": theme.typography.fontFamily,
-    "fontSize": 14,
-    "&:hover": {
-      color: theme.palette.reaction.reactionBlue400
-    }
-  },
-  backLinkText: {
-    letterSpacing: "0.3px",
-    lineHeight: 1.71,
-    marginLeft: theme.spacing.unit,
-    textDecoration: "underline"
-  },
-  headerFlex: {
-    alignSelf: "center",
-    flex: "1 1 1%"
-  },
-  header: {
-    alignContent: "center",
-    borderBottom: `solid 1px ${theme.palette.reaction.black10}`,
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: theme.spacing.unit * 3,
-    padding: theme.spacing.unit * 3
-  },
-  main: {
-    flex: "1 1 auto",
-    maxWidth: theme.layout.mainLoginMaxWidth,
-    minHeight: "calc(100vh - 135px)",
-    margin: "0 auto",
-    padding: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px 0`,
-    [theme.breakpoints.up("md")]: {
-      padding: `${theme.spacing.unit * 10}px ${theme.spacing.unit * 3}px 0`
-    }
-  },
-  root: {}
-});
+import Link from "custom/iclick/components/Link";
+import CheckoutSummary from "custom/iclick/components/CheckoutSummary";
+import PageLoading from "custom/iclick/components/PageLoading";
 
 const hasIdentityCheck = (cart) => !!((cart && cart.account !== null) || (cart && cart.email));
 
 @withCart
 @observer
-@withStyles(styles, { withTheme: true })
 class Checkout extends Component {
   static propTypes = {
     cart: PropTypes.shape({
@@ -140,7 +31,6 @@ class Checkout extends Component {
       email: PropTypes.string,
       items: PropTypes.array
     }),
-    classes: PropTypes.object,
     hasMoreCartItems: PropTypes.bool,
     isLoadingCart: PropTypes.bool,
     loadMoreCartItems: PropTypes.func,
@@ -151,11 +41,10 @@ class Checkout extends Component {
     shop: PropTypes.shape({
       name: PropTypes.string.isRequired,
       description: PropTypes.string
-    }),
-    theme: PropTypes.object.isRequired
-  };
+    })
+  }
 
-  state = {};
+  state = {}
 
   componentDidMount() {
     this.handleRouteChange();
@@ -180,9 +69,9 @@ class Checkout extends Component {
     } else if (!hasIdentityCheck(cart) && this.asPath === "/cart/checkout") {
       Router.replaceRoute("/cart/login", {}, { shallow: true });
     }
-  };
+  }
 
-  handleCartEmptyClick = () => Router.pushRoute("/");
+  handleCartEmptyClick = () => Router.pushRoute("/")
 
   get pagePath() {
     return this.props.router.asPath;
@@ -217,45 +106,40 @@ class Checkout extends Component {
   }
 
   renderLoginHeader() {
-    const { classes, shop } = this.props;
+    const { shop } = this.props;
 
     return (
-      <div className={classes.header}>
-        <div className={classes.headerFlex}>
-          <Link route="/" className={classes.backLink}>
+      <div>
+        <div>
+          <Link route="/">
             <ChevronLeftIcon style={{ fontSize: 18, color: "inherit", verticalAlign: "sub", transition: "none" }} />
-            <span className={classes.backLinkText}>Back</span>
+            <span>Back</span>
           </Link>
         </div>
 
         <Link route="home">
-          <div className={classes.logo}>
+          <div>
             <ShopLogo shopName={shop.name} />
           </div>
         </Link>
 
-        <div className={classes.headerFlex} />
+        <div />
       </div>
     );
   }
 
   renderCheckoutActionsHeader() {
-    const { classes, shop, theme } = this.props;
+    const { shop } = this.props;
     return (
-      <div className={classes.headerContainer}>
+      <div>
         <Link route="home">
-          <div className={classes.logo}>
+          <div>
             <ShopLogo shopName={shop.name} />
           </div>
         </Link>
-        <div className={classes.checkoutTitleContainer}>
-          <LockIcon
-            style={{
-              fontSize: 14,
-              color: theme.palette.reaction.black35
-            }}
-          />
-          <Typography className={classes.checkoutTitle}>Checkout</Typography>
+        <div>
+          <LockIcon />
+          <Typography>Checkout</Typography>
         </div>
         <Link route="cart">
           <CartIcon />
@@ -265,7 +149,10 @@ class Checkout extends Component {
   }
 
   renderCheckoutContent() {
-    const { cart, router: { asPath } } = this.props;
+    const {
+      cart,
+      router: { asPath }
+    } = this.props;
     // sanity check that "tries" to render the correct /cart view if SSR doesn't provide the `cart`
     if (!cart) return asPath === "/cart/checkout" ? this.renderCheckoutActions() : this.renderCheckoutLogin();
     return this.hasIdentity ? this.renderCheckoutActions() : this.renderCheckoutLogin();
@@ -273,10 +160,10 @@ class Checkout extends Component {
 
   // render page content: login || checkout
   renderCheckoutLogin() {
-    const { classes, setEmailOnAnonymousCart } = this.props;
+    const { setEmailOnAnonymousCart } = this.props;
 
     return (
-      <main className={classes.main}>
+      <main>
         <Entry setEmailOnAnonymousCart={setEmailOnAnonymousCart} />
       </main>
     );
@@ -284,7 +171,6 @@ class Checkout extends Component {
 
   renderCheckoutActions() {
     const {
-      classes,
       cart,
       hasMoreCartItems,
       isLoadingCart,
@@ -297,8 +183,8 @@ class Checkout extends Component {
 
     if (!cart || (cart && Array.isArray(cart.items) && cart.items.length === 0)) {
       return (
-        <div className={classes.emptyCartContainer}>
-          <div className={classes.emptyCart}>
+        <div>
+          <div>
             <div>
               <CartEmptyMessage onClick={this.handleCartEmptyClick} />
             </div>
@@ -308,16 +194,16 @@ class Checkout extends Component {
     }
 
     const hasAccount = !!cart.account;
-    const displayEmail = (hasAccount && Array.isArray(cart.account.emailRecords) && cart.account.emailRecords[0].address) || cart.email;
-
+    const displayEmail =
+      (hasAccount && Array.isArray(cart.account.emailRecords) && cart.account.emailRecords[0].address) || cart.email;
 
     return (
-      <div className={classes.checkoutContentContainer}>
-        <div className={classes.checkoutContent}>
+      <div>
+        <div>
           <Grid container spacing={24}>
             <Grid item xs={12} md={7}>
-              <div className={classes.flexContainer}>
-                <div className={classes.checkoutActions}>
+              <div>
+                <div>
                   {displayEmail ? (
                     <CheckoutEmailAddress emailAddress={displayEmail} isAccountEmail={hasAccount} />
                   ) : null}
@@ -326,8 +212,8 @@ class Checkout extends Component {
               </div>
             </Grid>
             <Grid item xs={12} md={5}>
-              <div className={classes.flexContainer}>
-                <div className={classes.cartSummary}>
+              <div>
+                <div>
                   <CheckoutSummary
                     cart={cart}
                     hasMoreCartItems={hasMoreCartItems}

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
 import Helmet from "react-helmet";
 import withCatalogItems from "containers/catalog/withCatalogItems";
-import ProductGrid from "components/ProductGrid";
+import ProductGrid from "custom/iclick/components/ProductGrid";
 import trackProductListViewed from "lib/tracking/trackProductListViewed";
 import { inPageSizes } from "lib/utils/pageSizes";
 
@@ -29,7 +29,7 @@ class ProductGridPage extends Component {
       setSortBy: PropTypes.func.isRequired,
       sortBy: PropTypes.string.isRequired
     })
-  };
+  }
 
   static async getInitialProps({ req }) {
     // It is not perfect, but the only way we can guess at the screen width of the
@@ -58,12 +58,12 @@ class ProductGridPage extends Component {
   setPageSize = (pageSize) => {
     this.props.routingStore.setSearch({ limit: pageSize });
     this.props.uiStore.setPageSize(pageSize);
-  };
+  }
 
   setSortBy = (sortBy) => {
     this.props.routingStore.setSearch({ sortby: sortBy });
     this.props.uiStore.setSortBy(sortBy);
-  };
+  }
 
   render() {
     const {
@@ -81,10 +81,7 @@ class ProductGridPage extends Component {
 
     return (
       <Fragment>
-        <Helmet
-          title={pageTitle}
-          meta={[{ name: "description", content: shop && shop.description }]}
-        />
+        <Helmet title={pageTitle} meta={[{ name: "description", content: shop && shop.description }]} />
         <ProductGrid
           catalogItems={catalogItems}
           currencyCode={shop.currency.code}
