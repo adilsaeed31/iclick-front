@@ -12,7 +12,6 @@ import withViewer from "containers/account/withViewer";
 import withMobX from "lib/stores/withMobX";
 import rootMobXStores from "lib/stores";
 import Layout from "custom/iclick/components/Layout";
-import getPageContext from "lib/theme/getPageContext";
 import components from "custom/componentsContext";
 import buildNavFromTags from "lib/data/buildNavFromTags";
 import getAllTags from "lib/data/getAllTags";
@@ -44,7 +43,6 @@ export default class App extends NextApp {
 
   constructor(props) {
     super(props);
-    this.pageContext = getPageContext();
     this.state = { stripe: null };
   }
 

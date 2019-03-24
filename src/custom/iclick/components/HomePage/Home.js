@@ -8,13 +8,11 @@ import MixGrid from "custom/iclick/components/MixGrid";
 import HomeProductTabs from "custom/iclick/components/HomeProductTabs";
 import Space from "custom/iclick/components/Space";
 import TwoCol from "custom/iclick/components/TwoCol";
-import Carousel from "custom/iclick/components/Carousel";
 
 class Home extends Component {
   render() {
     return (
       <Fragment>
-        <Carousel />
         <BigBanner />
         <AfterBanner />
         <TwoCol />
