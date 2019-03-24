@@ -1,5 +1,6 @@
 import React from "react";
 import FooterMaps from "custom/iclick/components/FooterMaps";
+import Link from "custom/iclick/components/Link";
 
 const date = new Date();
 
@@ -19,11 +20,11 @@ const Footer = () => (
                     </li>
                     <li>
                       <span className="contact-info-label">Phone:</span>
-                      <a href="tel:">04 3254251</a>
+                      <Link route="tel:">04 3254251</Link>
                     </li>
                     <li>
                       <span className="contact-info-label">Email:</span>
-                      <a href="mailto:mail@example.com">info@iclick.ae</a>
+                      <Link route="mailto:mail@example.com">info@iclick.ae</Link>
                     </li>
                     <li>
                       <span className="contact-info-label">Working Days/Hours:</span>
@@ -38,31 +39,31 @@ const Footer = () => (
 
                   <ul className="links">
                     <li>
-                      <a href="/">Company Portfolio</a>
+                      <Link route="/">Company Portfolio</Link>
                     </li>
                     <li>
-                      <a href="/">Privacy Policy</a>
+                      <Link route="/">Privacy Policy</Link>
                     </li>
                     <li>
-                      <a href="/">Shipping &amp; Retruns</a>
+                      <Link route="/">Shipping &amp; Retruns</Link>
                     </li>
                     <li>
-                      <a href="/">Delivery Information</a>
+                      <Link route="/">Delivery Information</Link>
                     </li>
                     <li>
-                      <a href="/">Order &amp; Collect FAQs</a>
+                      <Link route="/">Order &amp; Collect FAQs</Link>
                     </li>
                     <li>
-                      <a href="/">Terms of Use</a>
+                      <Link route="/">Terms of Use</Link>
                     </li>
                     <li>
-                      <a href="/">Terms of Service</a>
+                      <Link route="/">Terms of Service</Link>
                     </li>
                     <li>
-                      <a href="/">About Us</a>
+                      <Link route="/">About Us</Link>
                     </li>
                     <li>
-                      <a href="/">Contact Us</a>
+                      <Link route="/">Contact Us</Link>
                     </li>
                   </ul>
                 </div>
@@ -74,18 +75,18 @@ const Footer = () => (
 
                   <ul className="links">
                     <li>
-                      <a href="my-account.html">My Account</a>
+                      <Link route="my-account.html">My Account</Link>
                     </li>
                     <li>
-                      <a href="/">Orders History</a>
+                      <Link route="/">Orders History</Link>
                     </li>
                     <li>
-                      <a href="/">Advanced Search</a>
+                      <Link route="/">Advanced Search</Link>
                     </li>
                     <li>
-                      <a href="/" className="login-link">
+                      <Link route="/" className="login-link">
                         Login
-                      </a>
+                      </Link>
                     </li>
                   </ul>
                 </div>
@@ -97,10 +98,10 @@ const Footer = () => (
 
                   <ul className="links">
                     <li>
-                      <a href="/">#WeFixIt</a>
+                      <Link route="/">#WeFixIt</Link>
                     </li>
                     <li>
-                      <a href="/">Business</a>
+                      <Link route="/">Business</Link>
                     </li>
                   </ul>
                 </div>
@@ -111,7 +112,23 @@ const Footer = () => (
           <div className="col-lg-4">
             <div className="widget widget-newsletter">
               <h4 className="widget-title">Follow Us</h4>
-              <p>SIGN UP FOR NEWSLETTER!</p>
+              <div className="social-icons">
+                <a href="https://www.facebook.com" className="social-icon" target="_blank">
+                  <i className="icon-facebook" />
+                </a>
+                <a href="https://www.twitter.com" className="social-icon" target="_blank">
+                  <i className="icon-twitter" />
+                </a>
+                <a href="https://www.instagram.com" className="social-icon" target="_blank">
+                  <i className="icon-instagram" />
+                </a>
+                <a href="https://plus.google.com" className="social-icon" target="_blank">
+                  <i className="icon-gplus" />
+                </a>
+              </div>
+
+              <p className="news-signup">SIGN UP FOR NEWSLETTER!</p>
+
               <form action="#">
                 <input type="email" className="form-control" placeholder="Email address" required />
 
@@ -129,18 +146,6 @@ const Footer = () => (
       <div className="footer-bottom">
         <p className="footer-copyright">iClick Electronics. &copy; {date.getFullYear()} All Rights Reserved</p>
         <img src="/static/images/payments.png" alt="payment methods" className="footer-payments" />
-
-        <div className="social-icons">
-          <a href="/" className="social-icon" target="_blank">
-            <i className="icon-facebook" />
-          </a>
-          <a href="/" className="social-icon" target="_blank">
-            <i className="icon-twitter" />
-          </a>
-          <a href="/" className="social-icon" target="_blank">
-            <i className="icon-linkedin" />
-          </a>
-        </div>
       </div>
     </div>
   </footer>

@@ -41,6 +41,14 @@
 .header .container-fluid {
   justify-content: space-between;
 }
+
+.news-signup {
+  font: 400 1.6rem/1.1 "Oswald", sans-serif;
+  color: #fff;
+}
+.social-icons {
+  margin-bottom: 20px;
+}
 @media screen and (max-width: 991px) {
   .header-bottom {
     display: block;

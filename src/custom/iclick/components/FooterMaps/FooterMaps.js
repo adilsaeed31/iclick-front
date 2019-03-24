@@ -24,7 +24,7 @@ FooterMaps.defaultProps = {
   isMarkerShown: true
 };
 
-FooterMaps.PropTypes = {
+FooterMaps.propTypes = {
   isMarkerShown: PropTypes.bool.isRequired
 };
 export default FooterMaps;
