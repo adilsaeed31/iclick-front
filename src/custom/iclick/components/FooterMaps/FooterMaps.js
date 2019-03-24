@@ -14,9 +14,9 @@ const FooterMaps = compose(
   withScriptjs,
   withGoogleMap
 )((props) => (
-  // 25.2640948,55.3034995 iClick Lat/Lng
-  <GoogleMap defaultZoom={17} defaultCenter={{ lat: 25.2640948, lng: 55.3034995 }}>
-    {props.isMarkerShown && <Marker position={{ lat: 25.2640948, lng: 55.3034995 }} />}
+  // 25.2640948,55.3056882 iClick Lat/Lng
+  <GoogleMap defaultZoom={18} defaultCenter={{ lat: 25.2640948, lng: 55.3056882 }}>
+    {props.isMarkerShown && <Marker position={{ lat: 25.2640948, lng: 55.3056882 }} />}
   </GoogleMap>
 ));
 
