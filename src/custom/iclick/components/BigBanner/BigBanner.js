@@ -1,9 +1,9 @@
-import React from "react"
-import Carousel from "custom/iclick/components/Carousel"
+import React from "react";
+import MyCarousel from "custom/iclick/components/MyCarousel";
 
 const BigBanner = () => (
   <div className="home-slider-container">
-    <Carousel />
+    <MyCarousel />
   </div>
-)
-export default BigBanner
+);
+export default BigBanner;

@@ -59,7 +59,6 @@
     "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
     "isomorphic-fetch": "^2.2.1",
-    "jquery": "^3.3.1",
     "js-cookie": "^2.2.0",
     "keymirror": "^0.1.1",
     "lodash.isequal": "^4.5.0",
@@ -69,7 +68,6 @@
     "next": "^7.0.2",
     "next-fonts": "^0.17.0",
     "next-routes": "^1.4.2",
-    "owl.carousel": "^2.3.4",
     "passport": "^0.4.0",
     "passport-oauth2": "^1.4.0",
     "prop-types": "^15.6.2",
@@ -79,14 +77,13 @@
     "react-dom": "16.4.2",
     "react-google-maps": "^9.4.5",
     "react-helmet": "^5.2.0",
-    "react-owl-carousel": "^2.3.1",
+    "react-responsive-carousel": "^3.1.47",
     "react-stripe-elements": "^2.0.1",
     "react-tracking": "^5.4.1",
     "react-waypoint": "^9.0.1",
     "reacto-form": "^0.0.2",
     "recompose": "^0.30.0",
-    "styled-components": "^3.4.9",
-    "webpack": "^4.29.6"
+    "styled-components": "^3.4.9"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
