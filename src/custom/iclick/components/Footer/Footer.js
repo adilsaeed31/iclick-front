@@ -1,8 +1,9 @@
 import React from "react";
+import FooterMaps from "custom/iclick/components/FooterMaps";
 
 const date = new Date();
 
-const Footer = (props) => (
+const Footer = () => (
   <footer className="footer">
     <div className="footer-middle">
       <div className="container">
@@ -10,7 +11,7 @@ const Footer = (props) => (
         <div className="row">
           <div className="col-lg-8">
             <div className="row">
-              <div className="col-md-5">
+              <div className="col-md-3">
                 <div className="widget">
                   <ul className="contact-info">
                     <li>
@@ -33,15 +34,45 @@ const Footer = (props) => (
               </div>
               <div className="col-md-3">
                 <div className="widget">
-                  <h4 className="widget-title">My Account</h4>
+                  <h4 className="widget-title">Information</h4>
 
                   <ul className="links">
                     <li>
-                      <a href="about.html">About Us</a>
+                      <a href="/">Company Portfolio</a>
                     </li>
                     <li>
-                      <a href="contact.html">Contact Us</a>
+                      <a href="/">Privacy Policy</a>
                     </li>
+                    <li>
+                      <a href="/">Shipping &amp; Retruns</a>
+                    </li>
+                    <li>
+                      <a href="/">Delivery Information</a>
+                    </li>
+                    <li>
+                      <a href="/">Order &amp; Collect FAQs</a>
+                    </li>
+                    <li>
+                      <a href="/">Terms of Use</a>
+                    </li>
+                    <li>
+                      <a href="/">Terms of Service</a>
+                    </li>
+                    <li>
+                      <a href="/">About Us</a>
+                    </li>
+                    <li>
+                      <a href="/">Contact Us</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div className="widget">
+                  <h4 className="widget-title">My Account</h4>
+
+                  <ul className="links">
                     <li>
                       <a href="my-account.html">My Account</a>
                     </li>
@@ -60,25 +91,16 @@ const Footer = (props) => (
                 </div>
               </div>
 
-              <div className="col-md-5">
+              <div className="col-md-3">
                 <div className="widget">
-                  <h4 className="widget-title">Main Features</h4>
+                  <h4 className="widget-title">Services</h4>
 
                   <ul className="links">
                     <li>
-                      <a href="/">Super Fast Magento Theme</a>
+                      <a href="/">#WeFixIt</a>
                     </li>
                     <li>
-                      <a href="/">1st Fully working Ajax Theme</a>
-                    </li>
-                    <li>
-                      <a href="/">20 Unique Homepage Layouts</a>
-                    </li>
-                    <li>
-                      <a href="/">Powerful Admin Panel</a>
-                    </li>
-                    <li>
-                      <a href="/">Mobile &amp; Retina Optimized</a>
+                      <a href="/">Business</a>
                     </li>
                   </ul>
                 </div>
@@ -88,8 +110,8 @@ const Footer = (props) => (
 
           <div className="col-lg-4">
             <div className="widget widget-newsletter">
-              <h4 className="widget-title">Subscribe newsletter</h4>
-              <p>Get all the latest information on Events,Sales and Offers. Sign up for newsletter today</p>
+              <h4 className="widget-title">Follow Us</h4>
+              <p>SIGN UP FOR NEWSLETTER!</p>
               <form action="#">
                 <input type="email" className="form-control" placeholder="Email address" required />
 
@@ -100,6 +122,8 @@ const Footer = (props) => (
         </div>
       </div>
     </div>
+
+    <FooterMaps isMarkerShown={true} />
 
     <div className="container">
       <div className="footer-bottom">

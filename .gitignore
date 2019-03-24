@@ -24,7 +24,7 @@ pids
 results
 allure-results
 package-lock.json
-
+yarn.lock
 .reaction/config.json
 
 .next/*

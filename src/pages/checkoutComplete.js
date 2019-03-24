@@ -4,8 +4,8 @@ import { Router } from "routes";
 import { observer } from "mobx-react";
 import Helmet from "react-helmet";
 import Typography from "@material-ui/core/Typography";
-import OrderFulfillmentGroups from "components/OrderFulfillmentGroups";
-import PageLoading from "components/PageLoading";
+import OrderFulfillmentGroups from "custom/iclick/components/OrderFulfillmentGroups";
+import PageLoading from "custom/iclick/components/PageLoading";
 import withCart from "containers/cart/withCart";
 import withOrder from "containers/order/withOrder";
 

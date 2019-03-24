@@ -12,7 +12,7 @@ class Select extends Component {
   renderOptions() {
     const { options } = this.props;
 
-    return options.map((option) => <div>{option.name}</div>);
+    return options.map((option, key) => <div key={key}>{option.name}</div>);
   }
 
   handleChange = (event) => {

@@ -2,33 +2,11 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from "@material-ui/core/styles";
 import CartItems from "components/CartItems";
 import OrderSummary from "components/OrderSummary";
 
-const styles = (theme) => ({
-  fulfillmentGroup: {
-    border: theme.palette.borders.default
-  },
-  fulfillmentDetails: {
-    padding: theme.spacing.unit * 2
-  },
-  header: {
-    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`
-  },
-  headerRightColumn: {
-    textAlign: "right"
-  },
-  summary: {
-    paddingTop: theme.spacing.unit * 2
-  },
-  subtitle2: theme.typography.subtitle2
-});
-
-@withStyles(styles, { name: "SkOrderFulfillmentGroup" })
 class OrderFulfillmentGroup extends Component {
   static propTypes = {
-    classes: PropTypes.object,
     fulfillmentGroup: PropTypes.shape({
       items: PropTypes.shape({
         nodes: PropTypes.arrayOf(PropTypes.object)
@@ -67,11 +45,11 @@ class OrderFulfillmentGroup extends Component {
   }
 
   renderItems() {
-    const { classes, fulfillmentGroup, hasMoreCartItems, loadMoreCartItems } = this.props;
+    const { fulfillmentGroup, hasMoreCartItems, loadMoreCartItems } = this.props;
 
     if (fulfillmentGroup && Array.isArray(fulfillmentGroup.items.nodes)) {
       return (
-        <div className={classes.fulfillmentDetails}>
+        <div>
           <Grid item xs={12}>
             <CartItems
               isMiniCart
@@ -91,13 +69,15 @@ class OrderFulfillmentGroup extends Component {
   }
 
   renderFulfillmentInfo() {
-    const { classes, fulfillmentGroup } = this.props;
+    const { fulfillmentGroup } = this.props;
 
     if (fulfillmentGroup.data && fulfillmentGroup.data.shippingAddress) {
-      const { data: { shippingAddress } } = fulfillmentGroup;
+      const {
+        data: { shippingAddress }
+      } = fulfillmentGroup;
       const address = (
         <Typography variant="body2">
-          {(shippingAddress.fullName) && (
+          {shippingAddress.fullName && (
             <span>
               {shippingAddress.fullName}
               <br />
@@ -105,7 +85,7 @@ class OrderFulfillmentGroup extends Component {
           )}
           {shippingAddress.address1}
           <br />
-          {(shippingAddress.address2 && shippingAddress.address2 !== "") && (
+          {shippingAddress.address2 && shippingAddress.address2 !== "" && (
             <span>
               {shippingAddress.address2} <br />
             </span>
@@ -116,10 +96,10 @@ class OrderFulfillmentGroup extends Component {
       );
 
       return (
-        <div className={classes.fulfillmentDetails}>
+        <div>
           <Grid container spacing={24}>
             <Grid item xs={3}>
-              <Typography className={classes.subtitle2} variant="subheading">{"Shipping Address"}</Typography>
+              <Typography variant="subheading">{"Shipping Address"}</Typography>
             </Grid>
             <Grid item xs={9}>
               {address}
@@ -133,17 +113,17 @@ class OrderFulfillmentGroup extends Component {
   }
 
   render() {
-    const { classes, fulfillmentGroup } = this.props;
+    const { fulfillmentGroup } = this.props;
     const { fulfillmentMethod } = fulfillmentGroup.selectedFulfillmentOption;
     return (
       <Fragment>
-        <section className={classes.fulfillmentGroup}>
-          <header className={classes.header}>
+        <section>
+          <header>
             <Grid container spacing={24}>
               <Grid item xs={6}>
-                <Typography className={classes.subtitle2} variant="subheading">{fulfillmentMethod.displayName}</Typography>
+                <Typography variant="subheading">{fulfillmentMethod.displayName}</Typography>
               </Grid>
-              <Grid item xs={6} className={classes.headerRightColumn}>
+              <Grid item xs={6}>
                 <Typography variant="body2">{fulfillmentMethod.group}</Typography>
               </Grid>
             </Grid>
@@ -151,7 +131,7 @@ class OrderFulfillmentGroup extends Component {
           {this.renderItems()}
           {this.renderFulfillmentInfo()}
         </section>
-        <section className={classes.summary}>
+        <section>
           <OrderSummary fulfillmentGroup={fulfillmentGroup} />
         </section>
       </Fragment>
