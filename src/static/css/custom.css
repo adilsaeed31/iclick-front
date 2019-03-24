@@ -49,6 +49,25 @@
 .social-icons {
   margin-bottom: 20px;
 }
+.is-border-bottom {
+  border-bottom: 1px solid #353a3e;
+  margin-bottom: 20px;
+}
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+  border-top: none;
+  padding: 10px;
+}
+
+.footer-bottom .payment-images {
+  height: 20px;
+  margin-bottom: 10px;
+}
+
 @media screen and (max-width: 991px) {
   .header-bottom {
     display: block;

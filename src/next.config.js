@@ -30,7 +30,7 @@ module.exports = withCSS(withFonts({
     },
     // NextJS builds to `/src/.next` by default. Change that to `/build/app`
     distDir: "../build/app",
-    webpack: (webpackConfig) => {
+    webpack: (webpackConfig, options) => {
       webpackConfig.module.rules.push({
         test: /\.(gql|graphql)$/,
         loader: "graphql-tag/loader",
