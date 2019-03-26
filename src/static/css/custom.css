@@ -68,6 +68,10 @@
   margin-bottom: 10px;
 }
 
+.home-slide::before, .home-slide::after {
+  display:none;
+}
+
 @media screen and (max-width: 991px) {
   .header-bottom {
     display: block;

@@ -7,8 +7,8 @@ const BigBanner = () => (
       <div className="home-slide">
         <div
           className="slide-bg"
-          data-src={"/static/images/slider/slider-1.jpg"}
-          style={{ backgroundImage: "url('/static/images/slider/slider-1.jpg')" }}
+          data-src={"/static/images/slider/slide-1.jpg"}
+          style={{ backgroundImage: "url('/static/images/slider/slide-1.jpg')" }}
         />
         <div className="home-slide-content container">
           <div className="row">
@@ -29,7 +29,7 @@ const BigBanner = () => (
         <div
           className="slide-bg"
           data-src="/static/images/slider/slide-2.jpg"
-          style={{ backgroundImage: "url('/static/images/slider/slider-2.jpg')" }}
+          style={{ backgroundImage: "url('/static/images/slider/slide-2.jpg')" }}
         />
         <div className="home-slide-content container">
           <h4>Amazing</h4>
