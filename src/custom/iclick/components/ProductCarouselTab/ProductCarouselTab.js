@@ -1,6 +1,6 @@
-import React from "react"
-import PropTypes from "prop-types"
-import MyCarousel from "custom/iclick/components/MyCarousel"
+import React from "react";
+import PropTypes from "prop-types";
+import MyCarousel from "custom/iclick/components/MyCarousel";
 
 const ProductCarouselTab = ({ title, style }) => (
   <div className="home-product-tabs">
@@ -260,11 +260,11 @@ const ProductCarouselTab = ({ title, style }) => (
       </div>
     </div>
   </div>
-)
+);
 
 ProductCarouselTab.propTypes = {
-  title: PropTypes.string.isRequired,
-  style: PropTypes.string
-}
+  style: PropTypes.object,
+  title: PropTypes.string.isRequired
+};
 
-export default ProductCarouselTab
+export default ProductCarouselTab;
