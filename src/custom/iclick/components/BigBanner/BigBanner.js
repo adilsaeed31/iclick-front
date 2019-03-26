@@ -3,9 +3,9 @@ import MyCarousel from "custom/iclick/components/MyCarousel";
 
 const BigBanner = () => (
   <div className="home-slider-container">
-    <MyCarousel className="home-slider" items={1}>
+    <MyCarousel className="home-slider" items={1} lazyLoad={true}>
       <div className="home-slide">
-        <div className="slide-bg" data-src="/static/images/slider/slide-1.jpg" />
+        <div className="slide-bg" style={{ backgroundImage: "url('/static/images/slider/slider-1')" }} />
         <div className="home-slide-content container">
           <div className="row">
             <div className="col-md-6 offset-md-6 col-lg-5 offset-lg-7">
@@ -22,7 +22,11 @@ const BigBanner = () => (
         </div>
       </div>
       <div className="home-slide">
-        <div className="slide-bg" data-src="/static/images/slider/slide-2.jpg" />
+        <div
+          className="slide-bg"
+          data-src="/static/images/slider/slide-2.jpg"
+          style={{ backgroundImage: "url('/static/images/slider/slider-2')" }}
+        />
         <div className="home-slide-content container">
           <h4>Amazing</h4>
           <h1>Micro Drones</h1>
