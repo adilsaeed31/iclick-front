@@ -5,7 +5,7 @@ import InfoBox from "custom/iclick/components/InfoBox";
 import BlackBanner from "custom/iclick/components/BlackBanner";
 import Partners from "custom/iclick/components/Partners";
 import MixGrid from "custom/iclick/components/MixGrid";
-import HomeProductTabs from "custom/iclick/components/HomeProductTabs";
+import ProductCarouselTab from "custom/iclick/components/ProductCarouselTab";
 import Space from "custom/iclick/components/Space";
 import TwoCol from "custom/iclick/components/TwoCol";
 
@@ -16,11 +16,17 @@ class Home extends Component {
         <BigBanner />
         <AfterBanner />
         <TwoCol />
-        <HomeProductTabs />
+        <ProductCarouselTab title="Featured Products" style={{ borderBottom: "none" }} />
+        <ProductCarouselTab title="Latest Products" style={{ borderBottom: "none" }} />
+        <ProductCarouselTab title="Hot Deals" />
         <InfoBox />
         <BlackBanner />
         <Partners />
         <MixGrid />
+        <BlackBanner />
+        <Space />
+        <ProductCarouselTab title="Best Sellers" style={{ borderBottom: "none" }} />
+        <ProductCarouselTab title="Last Chance" style={{ borderBottom: "none" }} />
         <Space />
       </Fragment>
     );
