@@ -45,4 +45,4 @@ module.exports = withCSS(withFonts({
 
     return webpackConfig;
   }
-};
+}));
