@@ -16,6 +16,9 @@ import components from "custom/componentsContext";
 import buildNavFromTags from "lib/data/buildNavFromTags";
 import getAllTags from "lib/data/getAllTags";
 import Loader from "custom/iclick/components/Loader";
+import getPageContext from "lib/theme/getPageContext";
+import componentTheme from "custom/componentTheme";
+
 import "static/css/bootstrap.min.css";
 import "static/css/style.min.css";
 import "static/css/custom.css";
@@ -35,10 +38,16 @@ export default class App extends NextApp {
       pageProps = await Component.getInitialProps(ctx);
     }
 
+    // TODO
+    // We retrieve tags here because
+    // 1) they were used for navigtion and needed to be here and
+    // 2) with multiple pages of tags, this was the only place where
+    // we could loop multiple times to get them all
+    // We no longer use tags for navigation, so if we can find a resolution
+    // to #2, we can move this to only where tags are needed, or inside their own `withTags` container
     const tags = await getAllTags(ctx.apolloClient);
-    const navItems = buildNavFromTags(tags);
 
-    return { navItems, pageProps, tags };
+    return { pageProps, tags };
   }
 
   constructor(props) {
@@ -66,7 +75,7 @@ export default class App extends NextApp {
   }
 
   render() {
-    const { Component, navItems, pageProps, shop, tags, viewer, isLoading, ...rest } = this.props;
+    const { Component, pageProps, shop, shop: { defaultNavigationTree: navItems }, tags, viewer, isLoading, ...rest } = this.props;
     const { route } = this.props.router;
     const { stripe } = this.state;
 

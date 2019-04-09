@@ -38,6 +38,11 @@ module.exports = withCSS(withFonts({
         enforce: "pre"
       });
 
-      return webpackConfig;
-    }
-  }));
+    webpackConfig.module.rules.push({
+      test: /\.mjs$/,
+      type: "javascript/auto"
+    });
+
+    return webpackConfig;
+  }
+};

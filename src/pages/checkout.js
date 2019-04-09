@@ -19,12 +19,20 @@ import Link from "custom/iclick/components/Link";
 import CheckoutSummary from "custom/iclick/components/CheckoutSummary";
 import PageLoading from "custom/iclick/components/PageLoading";
 
+import withAvailablePaymentMethods from "containers/payment/withAvailablePaymentMethods";
+import definedPaymentMethods from "../custom/paymentMethods";
+
+
 const hasIdentityCheck = (cart) => !!((cart && cart.account !== null) || (cart && cart.email));
 
 @withCart
+@withAvailablePaymentMethods
 @observer
 class Checkout extends Component {
   static propTypes = {
+    availablePaymentMethods: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired
+    })),
     cart: PropTypes.shape({
       account: PropTypes.object,
       checkout: PropTypes.object,
@@ -32,6 +40,7 @@ class Checkout extends Component {
       items: PropTypes.array
     }),
     hasMoreCartItems: PropTypes.bool,
+    isLoadingAvailablePaymentMethods: PropTypes.bool,
     isLoadingCart: PropTypes.bool,
     loadMoreCartItems: PropTypes.func,
     onChangeCartItemsQuantity: PropTypes.func,
@@ -171,15 +180,17 @@ class Checkout extends Component {
 
   renderCheckoutActions() {
     const {
+
+      availablePaymentMethods,
       cart,
+      cartStore,
+      checkoutMutations,
+      clearAuthenticatedUsersCart,
       hasMoreCartItems,
-      isLoadingCart,
       loadMoreCartItems,
       onRemoveCartItems,
       onChangeCartItemsQuantity
     } = this.props;
-
-    if (isLoadingCart) return null;
 
     if (!cart || (cart && Array.isArray(cart.items) && cart.items.length === 0)) {
       return (
@@ -196,24 +207,36 @@ class Checkout extends Component {
     const hasAccount = !!cart.account;
     const displayEmail =
       (hasAccount && Array.isArray(cart.account.emailRecords) && cart.account.emailRecords[0].address) || cart.email;
+    const orderEmailAddress = (hasAccount && Array.isArray(cart.account.emailRecords) && cart.account.emailRecords[0].address) || cart.email;
+
+    // Filter the hard-coded definedPaymentMethods list from the client to remove any
+    // payment methods that were not returned from the API as currently available.
+    const paymentMethods = definedPaymentMethods.filter((method) =>
+      !!availablePaymentMethods.find((availableMethod) => availableMethod.name === method.name));
 
     return (
-      <div>
+      
         <div>
           <Grid container spacing={24}>
             <Grid item xs={12} md={7}>
-              <div>
-                <div>
-                  {displayEmail ? (
-                    <CheckoutEmailAddress emailAddress={displayEmail} isAccountEmail={hasAccount} />
+             
+               
+                  {orderEmailAddress ? (
+                    <CheckoutEmailAddress emailAddress={orderEmailAddress} isAccountEmail={hasAccount} />
                   ) : null}
-                  <CheckoutActions />
-                </div>
-              </div>
+                  <CheckoutActions
+                    cart={cart}
+                    cartStore={cartStore}
+                    checkoutMutations={checkoutMutations}
+                    clearAuthenticatedUsersCart={clearAuthenticatedUsersCart}
+                    orderEmailAddress={orderEmailAddress}
+                    paymentMethods={paymentMethods}
+                  />
+                
+              
             </Grid>
             <Grid item xs={12} md={5}>
-              <div>
-                <div>
+            
                   <CheckoutSummary
                     cart={cart}
                     hasMoreCartItems={hasMoreCartItems}
@@ -221,18 +244,23 @@ class Checkout extends Component {
                     onChangeCartItemsQuantity={onChangeCartItemsQuantity}
                     onLoadMoreCartItems={loadMoreCartItems}
                   />
-                </div>
-              </div>
+               
             </Grid>
           </Grid>
         </div>
-      </div>
+     
     );
   }
 
   render() {
-    const { isLoadingCart, cart } = this.props;
-    if (isLoadingCart || !cart) return <PageLoading delay={0} />;
+    const {
+      isLoadingCart,
+      isLoadingAvailablePaymentMethods
+    } = this.props;
+
+    if (isLoadingCart || isLoadingAvailablePaymentMethods) {
+      return <PageLoading delay={0} />;
+    }
 
     return (
       <Fragment>
