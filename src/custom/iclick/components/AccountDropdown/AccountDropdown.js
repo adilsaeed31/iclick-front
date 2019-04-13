@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from "react";
+import React, {Component, Fragment} from "react";
 import PropTypes from "prop-types";
-import { inject, observer } from "mobx-react";
-import { withStyles } from "@material-ui/core/styles";
+import {inject, observer} from "mobx-react";
+import {withStyles} from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
@@ -19,7 +19,7 @@ const styles = (theme) => ({
   }
 });
 
-@withStyles(styles, { name: "SkAccountDropdown" })
+@withStyles(styles, {name: "SkAccountDropdown"})
 @inject("authStore")
 @observer
 class AccountDropdown extends Component {
@@ -37,27 +37,28 @@ class AccountDropdown extends Component {
   };
 
   toggleOpen = (event) => {
-    this.setState({ anchorElement: event.currentTarget });
+    this.setState({anchorElement: event.currentTarget});
   }
 
   onClose = () => {
-    this.setState({ anchorElement: null });
+    this.setState({anchorElement: null});
   }
 
   render() {
-    const { classes, authStore } = this.props;
-    const { anchorElement } = this.state;
-    const { account } = authStore;
+    const buttonStyle = {'backgroundColor': '#393939', 'fontSize': '1.2rem'};
+    const {classes, authStore} = this.props;
+    const {anchorElement} = this.state;
+    const {account} = authStore;
 
     return (
       <Fragment>
-        { authStore.isAuthenticated ?
+        {authStore.isAuthenticated ?
           <ButtonBase onClick={this.toggleOpen}>
-            <ViewerInfo viewer={account} />
+            <ViewerInfo viewer={account}/>
           </ButtonBase>
           :
           <IconButton color="inherit" onClick={this.toggleOpen}>
-            <AccountIcon />
+            <AccountIcon/>
           </IconButton>
         }
 
@@ -73,18 +74,18 @@ class AccountDropdown extends Component {
           <div className={classes.accountDropdown}>
             {authStore.isAuthenticated ?
               <Fragment>
-                <Button color="primary" fullWidth href={`/logout/${account._id}`} variant="raised">
+                <Button style={buttonStyle} color="primary" fullWidth href={`/logout/${account._id}`} variant="raised">
                   Sign Out
                 </Button>
               </Fragment>
               :
               <Fragment>
                 <div className={classes.authContent}>
-                  <Button color="primary" fullWidth href="/signin" variant="raised">
+                  <Button style={buttonStyle} color="primary" fullWidth href="/signin" variant="raised">
                     Sign In
                   </Button>
                 </div>
-                <Button color="primary" fullWidth href="/signup">
+                <Button style={buttonStyle} color="primary" fullWidth href="/signup" variant="raised">
                   Create Account
                 </Button>
               </Fragment>
