@@ -24,7 +24,7 @@ class Breadcrumbs extends Component {
     return (
       <Fragment>
         {!!parentTag && this.renderTagBreadcrumbPiece(parentTag)}
-        <li class="breadcrumb-item">
+        <li className="breadcrumb-item">
           <Link route={`/tag/${tag.slug}`}>
             <span>{tag.name}</span>
           </Link>
@@ -53,7 +53,7 @@ class Breadcrumbs extends Component {
       return (
         <Fragment>
           {this.renderTagBreadcrumbs()}
-          <li class="breadcrumb-item">
+          <li className="breadcrumb-item">
             <Link route={`/product/${product.slug}`}>
               <span>{tag.name}</span>
             </Link>
@@ -64,7 +64,7 @@ class Breadcrumbs extends Component {
 
     return (
       <Fragment>
-        <li class="breadcrumb-item">
+        <li className="breadcrumb-item">
           <Link route={`/product/${product.slug}`}>
             <span>{product.title}</span>
           </Link>
@@ -89,12 +89,12 @@ class Breadcrumbs extends Component {
 
   render() {
     return (
-      <nav aria-label="breadcrumb" class="breadcrumb-nav mb-0">
-        <div class="container">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
+      <nav aria-label="breadcrumb" className="breadcrumb-nav mb-0">
+        <div className="container">
+          <ol className="breadcrumb">
+            <li className="breadcrumb-item">
               <Link route="/">
-                <i class="icon-home" />
+                <i className="icon-home" />
               </Link>
             </li>
             {this.renderBreadcrumbs()}
