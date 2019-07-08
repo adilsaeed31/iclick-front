@@ -4,17 +4,25 @@ import { MuiThemeProvider } from "@material-ui/core/styles";
 import theme from "custom/reactionTheme";
 import { ComponentsProvider } from "@reactioncommerce/components-context";
 import components from "custom/componentsContext";
-import OrderFulfillmentGroups from "./OrderFulfillmentGroups";
+import OrderCard from "./OrderCard";
 
-const testOrder = {
+const order = {
+  createdAt: "2018-03-21T21:36:36.307Z",
   fulfillmentGroups: [
     {
-      summary: {
-        itemTotal: {
-          displayAmount: "$118"
-        },
-        total: {
-          displayAmount: "$118"
+      data: {
+        shippingAddress: {
+          address1: "2110 Main Street",
+          address2: null,
+          city: "Santa Monica",
+          company: null,
+          country: "US",
+          fullName: "Reaction Commerce",
+          isCommercial: false,
+          isShippingDefault: false,
+          phone: "3105556789",
+          postal: "90405",
+          region: "CA"
         }
       },
       items: {
@@ -58,25 +66,39 @@ const testOrder = {
           }
         ]
       },
-      payment: {
-        displayName: "Example Payment"
-      },
       selectedFulfillmentOption: {
         fulfillmentMethod: {
-          displayName: "Free Shipping",
-          group: "Ground"
+          carrier: "Carier Name",
+          displayname: "Display Name"
         }
       }
     }
-  ]
+  ],
+  payments: [
+    {
+      amount: { displayAmount: "$6,002.99" },
+      billingAddress: null,
+      displayName: "Visa 1111",
+      method: { name: "stripe_card" }
+    }
+  ],
+  referenceId: "abcdef",
+  status: "new",
+  summary: {
+    fulfillmentTotal: { amount: 2.99, displayAmount: "$2.99" },
+    itemTotal: { amount: 138, displayAmount: "$138.00" },
+    surchargeTotal: { amount: 0, displayAmount: "$0.00" },
+    taxTotal: { amount: 0, displayAmount: "$0.00" },
+    total: { amount: 140.99, displayAmount: "$140.99" }
+  }
 };
 
-test("basic snapshot", () => {
+test("basic snapshot of full order card", () => {
   const component = renderer.create((
     <ComponentsProvider value={components}>
       <MuiThemeProvider theme={theme}>
-        <OrderFulfillmentGroups
-          order={testOrder}
+        <OrderCard
+          order={order}
         />
       </MuiThemeProvider>
     </ComponentsProvider>
