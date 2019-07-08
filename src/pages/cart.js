@@ -1,21 +1,21 @@
-import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
-import Helmet from "react-helmet";
-import { inject, observer } from "mobx-react";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
-import CartSummary from "@reactioncommerce/components/CartSummary/v1";
-import withCart from "containers/cart/withCart";
-import CartItems from "custom/iclick/components/CartItems";
-import CheckoutButtons from "components/CheckoutButtons";
-import Link from "custom/iclick/components/Link";
-import { Router } from "routes";
-import PageLoading from "custom/iclick/components/PageLoading";
-import track from "lib/tracking/track";
-import variantById from "lib/utils/variantById";
-import trackCartItems from "lib/tracking/trackCartItems";
-import TRACKING from "lib/tracking/constants";
+import React, { Component, Fragment } from "react"
+import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import { inject, observer } from "mobx-react"
+import Grid from "@material-ui/core/Grid"
+import Typography from "@material-ui/core/Typography"
+import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1"
+import CartSummary from "@reactioncommerce/components/CartSummary/v1"
+import withCart from "containers/cart/withCart"
+import CartItems from "custom/iclick/components/CartItems"
+import CheckoutButtons from "components/CheckoutButtons"
+import Link from "custom/iclick/components/Link"
+import { Router } from "routes"
+import PageLoading from "custom/iclick/components/PageLoading"
+import track from "lib/tracking/track"
+import variantById from "lib/utils/variantById"
+import trackCartItems from "lib/tracking/trackCartItems"
+import TRACKING from "lib/tracking/constants"
 
 @withCart
 @inject("uiStore")
@@ -49,46 +49,53 @@ class CartPage extends Component {
   }
 
   componentDidMount() {
-    const { cart } = this.props;
+    const { cart } = this.props
 
     // Track a cart view event
     if (cart && Array.isArray(cart.items) && cart.items.length) {
-      this.trackAction({ cartItems: cart.items, cartId: cart._id, action: TRACKING.CART_VIEWED });
+      this.trackAction({
+        cartItems: cart.items,
+        cartId: cart._id,
+        action: TRACKING.CART_VIEWED
+      })
     }
   }
 
   handleClick = () => Router.pushRoute("/")
 
   handleItemQuantityChange = (quantity, cartItemId) => {
-    const { onChangeCartItemsQuantity } = this.props;
+    const { onChangeCartItemsQuantity } = this.props
 
-    onChangeCartItemsQuantity({ quantity, cartItemId });
+    onChangeCartItemsQuantity({ quantity, cartItemId })
   }
 
   @trackCartItems()
   trackAction() {}
 
-  handleRemoveItem = async (itemId) => {
+  handleRemoveItem = async itemId => {
     const {
       cart: { items },
       onRemoveCartItems
-    } = this.props;
+    } = this.props
 
-    const { data, error } = await onRemoveCartItems(itemId);
+    const { data, error } = await onRemoveCartItems(itemId)
 
     if (data && !error) {
       const {
         cart: { _id }
-      } = data.removeCartItems;
-      const removedItem = { cart_id: _id, ...variantById(items, itemId) }; // eslint-disable-line camelcase
+      } = data.removeCartItems
+      const removedItem = { cart_id: _id, ...variantById(items, itemId) } // eslint-disable-line camelcase
 
       // Track removed item
-      this.trackAction({ cartItems: removedItem, action: TRACKING.PRODUCT_REMOVED });
+      this.trackAction({
+        cartItems: removedItem,
+        action: TRACKING.PRODUCT_REMOVED
+      })
     }
   }
 
   renderCartItems() {
-    const { cart, hasMoreCartItems, loadMoreCartItems } = this.props;
+    const { cart, hasMoreCartItems, loadMoreCartItems } = this.props
 
     if (cart && Array.isArray(cart.items) && cart.items.length) {
       return (
@@ -103,27 +110,40 @@ class CartPage extends Component {
             />
           </div>
         </Grid>
-      );
+      )
     }
 
     return (
       <Grid item xs={12}>
         <CartEmptyMessage onClick={this.handleClick} />
       </Grid>
-    );
+    )
   }
 
   renderCartSummary() {
-    const { cart } = this.props;
+    const { cart } = this.props
 
-    if (cart && cart.checkout && cart.checkout.summary && Array.isArray(cart.items) && cart.items.length) {
-      const { fulfillmentTotal, itemTotal, taxTotal, total } = cart.checkout.summary;
+    if (
+      cart &&
+      cart.checkout &&
+      cart.checkout.summary &&
+      Array.isArray(cart.items) &&
+      cart.items.length
+    ) {
+      const {
+        fulfillmentTotal,
+        itemTotal,
+        surchargeTotal,
+        taxTotal,
+        total
+      } = cart.checkout.summary
 
       return (
         <Grid item xs={12} md={3}>
           <CartSummary
             displayShipping={fulfillmentTotal && fulfillmentTotal.displayAmount}
             displaySubtotal={itemTotal && itemTotal.displayAmount}
+            displaySurcharge={surchargeTotal && surchargeTotal.displayAmount}
             displayTax={taxTotal && taxTotal.displayAmount}
             displayTotal={total && total.displayAmount}
             itemsQuantity={cart.totalItemQuantity}
@@ -132,17 +152,17 @@ class CartPage extends Component {
             <CheckoutButtons />
           </div>
         </Grid>
-      );
+      )
     }
 
-    return null;
+    return null
   }
 
   render() {
-    const { cart, shop } = this.props;
+    const { cart, shop } = this.props
     // when a user has no item in cart in a new session, this.props.cart is null
     // when the app is still loading, this.props.cart is undefined
-    if (typeof cart === "undefined") return <PageLoading delay={0} />;
+    if (typeof cart === "undefined") return <PageLoading delay={0} />
 
     return (
       <Fragment>
@@ -151,7 +171,7 @@ class CartPage extends Component {
           meta={[{ name: "description", content: shop && shop.description }]}
         />
         <section>
-          <Typography variant="title" align="center">
+          <Typography className={classes.title} variant="h6" align="center">
             Shopping Cart
           </Typography>
           <Grid container spacing={24}>
@@ -171,8 +191,8 @@ class CartPage extends Component {
           </Grid>
         </section>
       </Fragment>
-    );
+    )
   }
 }
 
-export default CartPage;
+export default CartPage

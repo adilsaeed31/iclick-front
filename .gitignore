@@ -33,3 +33,4 @@ build
 /reports
 
 package-lock.json
+yarn.lock

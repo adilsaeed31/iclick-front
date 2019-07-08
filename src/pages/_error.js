@@ -1,47 +1,50 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import Helmet from 'react-helmet';
-import Link from 'custom/iclick/components/Link';
+import React, { Component, Fragment } from "react"
+import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import Link from "custom/iclick/components/Link"
 
 export default class Error extends Component {
-	static propTypes = {
-		shop: PropTypes.object,
-		statusCode: PropTypes.number,
-		subtitle: PropTypes.string
-	};
+  static propTypes = {
+    classes: PropTypes.object,
+    shop: PropTypes.object,
+    statusCode: PropTypes.number,
+    subtitle: PropTypes.string
+  }
 
-	static getInitialProps({ res, err }) {
-		let { statusCode } = res;
+  static getInitialProps({ res, err }) {
+    let { statusCode } = res
 
-		// Did not receive an OK response
-		if (!statusCode) {
-			statusCode = err ? err.statusCode : null;
-		}
+    // Did not receive an OK response
+    if (!statusCode) {
+      statusCode = err ? err.statusCode : null
+    }
 
-		return { statusCode };
-	}
+    return { statusCode }
+  }
 
-	static defaultProps = {
-		subtitle: 'Page Not Found'
-	};
+  static defaultProps = {
+    subtitle: "Page Not Found"
+  }
 
-	render() {
-		const { shop, statusCode, subtitle } = this.props;
+  render() {
+    const { classes, shop, statusCode, subtitle } = this.props
 
-		return (
-			<div>
-				<Helmet title={`${subtitle} | ${shop && shop.name}`} />
-				{statusCode ? (
-					<div>{statusCode}</div>
-				) : (
-					<Fragment>
-						<div>Sorry! We couldn't find what you're looking for.</div>
-						<div>
-							<Link route="/">Home</Link>
-						</div>
-					</Fragment>
-				)}
-			</div>
-		);
-	}
+    return (
+      <div className={classes.root}>
+        <Helmet title={`${subtitle} | ${shop && shop.name}`} />
+        {statusCode ? (
+          <Typography variant="h5">{statusCode}</Typography>
+        ) : (
+          <Fragment>
+            <Typography className={classes.errorMessage} paragraph>
+              Sorry! We couldn't find what you're looking for.
+            </Typography>
+            <Typography className={classes.errorLink}>
+              <Link route="/">Home</Link>
+            </Typography>
+          </Fragment>
+        )}
+      </div>
+    )
+  }
 }

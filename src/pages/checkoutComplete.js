@@ -1,27 +1,33 @@
-import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
-import { Router } from "routes";
-import { observer } from "mobx-react";
-import Helmet from "react-helmet";
-import Typography from "@material-ui/core/Typography";
-import OrderFulfillmentGroups from "custom/iclick/components/OrderFulfillmentGroups";
-import PageLoading from "custom/iclick/components/PageLoading";
-import withCart from "containers/cart/withCart";
-import withOrder from "containers/order/withOrder";
+import React, { Component, Fragment } from "react"
+import PropTypes from "prop-types"
+import Helmet from "react-helmet"
+import Grid from "@material-ui/core/Grid"
+import { withStyles } from "@material-ui/core/styles"
+import Typography from "@material-ui/core/Typography"
+import PageLoading from "components/PageLoading"
+import withOrder from "containers/order/withOrder"
 
-@withCart
+import OrderCard from "components/OrderCard"
+
+const styles = theme => ({
+  orderThankYou: {
+    marginBottom: theme.spacing.unit * 3
+  },
+  title: {
+    marginBottom: theme.spacing.unit * 3
+  }
+})
+
 @withOrder
-@observer
+@withStyles(styles, { withTheme: true })
 class CheckoutComplete extends Component {
   static propTypes = {
-    clearAuthenticatedUsersCart: PropTypes.func.isRequired,
-    client: PropTypes.object.isRequired,
-    hasMoreCartItems: PropTypes.bool,
+    classes: PropTypes.object,
     isLoadingOrder: PropTypes.bool,
-    loadMoreCartItems: PropTypes.func,
-    onChangeCartItemsQuantity: PropTypes.func,
-    onRemoveCartItems: PropTypes.func,
-    order: PropTypes.object,
+    order: PropTypes.shape({
+      email: PropTypes.string.isRequired,
+      referenceId: PropTypes.string.isRequired
+    }),
     shop: PropTypes.shape({
       name: PropTypes.string.isRequired,
       description: PropTypes.string
@@ -29,45 +35,24 @@ class CheckoutComplete extends Component {
     theme: PropTypes.object.isRequired
   }
 
-  state = {}
-
-  componentDidMount() {
-    const { clearAuthenticatedUsersCart } = this.props;
-
-    clearAuthenticatedUsersCart();
-  }
-
-  handleCartEmptyClick = () => {
-    Router.pushRoute("/");
-  }
-
-  renderFulfillmentGroups() {
-    const { order } = this.props;
-
-    return (
-      <div>
-        <div>
-          <OrderFulfillmentGroups order={order} />
-        </div>
-      </div>
-    );
-  }
-
   render() {
-    const { isLoadingOrder, order, shop } = this.props;
+    const { isLoadingOrder, order, shop } = this.props
 
-    if (isLoadingOrder) return <PageLoading message="Loading order details..." />;
+    if (isLoadingOrder)
+      return <PageLoading message="Loading order details..." />
 
     if (!order) {
       return (
-        <div>
-          <div>
-            <section>
-              <Typography variant="title">Order not found</Typography>
+        <div className={classes.checkoutContentContainer}>
+          <div className={classes.orderDetails}>
+            <section className={classes.section}>
+              <Typography className={classes.title} variant="h6">
+                Order not found
+              </Typography>
             </section>
           </div>
         </div>
-      );
+      )
     }
 
     return (
@@ -76,25 +61,32 @@ class CheckoutComplete extends Component {
           <title>{shop && shop.name} | Checkout</title>
           <meta name="description" content={shop && shop.description} />
         </Helmet>
-        <div>
-          <div>
-            <section>
-              <header>
-                <Typography variant="title">{"Thank you for your order"}</Typography>
-                <Typography variant="body1">
-                  {"Your order ID is:"} <strong>{order && order.referenceId}</strong>
-                </Typography>
-                <Typography variant="body1">
-                  {"We've sent a confirmation email to:"} <strong>{order && order.email}</strong>
-                </Typography>
-              </header>
-              <div>{this.renderFulfillmentGroups()}</div>
-            </section>
-          </div>
-        </div>
+        <Grid container>
+          <Grid item xs={false} md={3} />{" "}
+          {/* MUI grid doesn't have an offset. Use blank grid item instead. */}
+          <Grid item xs={12} md={6}>
+            <Grid item className={classes.orderThankYou} xs={12} md={12}>
+              <Typography className={classes.title} variant="title">
+                Thank you for your order
+              </Typography>
+              <Typography variant="body1">
+                {"Your order ID is:"} <strong>{order.referenceId}</strong>
+              </Typography>
+              <Typography variant="body1">
+                {"We've sent a confirmation email to:"}{" "}
+                <strong>{order.email}</strong>
+              </Typography>
+            </Grid>
+            <Grid item xs={12} md={12}>
+              <OrderCard isExpanded={true} order={order} />
+            </Grid>
+          </Grid>
+          <Grid item xs={false} md={3} />{" "}
+          {/* MUI grid doesn't have an offset. Use blank grid item instead. */}
+        </Grid>
       </Fragment>
-    );
+    )
   }
 }
 
-export default CheckoutComplete;
+export default CheckoutComplete

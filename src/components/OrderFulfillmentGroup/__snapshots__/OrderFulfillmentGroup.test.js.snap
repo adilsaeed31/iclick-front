@@ -87,14 +87,14 @@ Array [
 }
 
 .c11 {
-  position: absolute;
+  position: initial;
   bottom: 16px;
   right: 0;
   text-align: right;
 }
 
 .c14 {
-  position: initial;
+  position: absolute;
   margin-top: 10px;
   bottom: 16px;
   right: 0;
@@ -300,20 +300,20 @@ Array [
         <div
           className="MuiGrid-item-8 MuiGrid-grid-xs-6-41"
         >
-          <h3
-            className="MuiTypography-root-104 MuiTypography-subheading-111 SkOrderFulfillmentGroup-subtitle2-6"
+          <h6
+            className="MuiTypography-root-104 MuiTypography-subtitle1-122 SkOrderFulfillmentGroup-subtitle2-6"
           >
             Free Shipping
-          </h3>
+          </h6>
         </div>
         <div
           className="MuiGrid-item-8 MuiGrid-grid-xs-6-41 SkOrderFulfillmentGroup-headerRightColumn-4"
         >
-          <aside
+          <p
             className="MuiTypography-root-104 MuiTypography-body2-112"
           >
             Ground
-          </aside>
+          </p>
         </div>
       </div>
     </header>
@@ -532,14 +532,14 @@ Array [
   -webkit-font-smoothing: antialiased;
   color: #3c3c3c;
   font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-stretch: normal;
   font-weight: 400;
-  -webkit-letter-spacing: .03em;
-  -moz-letter-spacing: .03em;
-  -ms-letter-spacing: .03em;
-  letter-spacing: .03em;
+  -webkit-letter-spacing: .02em;
+  -moz-letter-spacing: .02em;
+  -ms-letter-spacing: .02em;
+  letter-spacing: .02em;
   line-height: 1;
   border-top-color: #e6e6e6;
   border-top-style: solid;
@@ -551,18 +551,18 @@ Array [
   text-align: left;
 }
 
-.c4 {
+.c8 {
   -webkit-font-smoothing: antialiased;
   color: #3c3c3c;
   font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-stretch: normal;
   font-weight: 400;
-  -webkit-letter-spacing: .03em;
-  -moz-letter-spacing: .03em;
-  -ms-letter-spacing: .03em;
-  letter-spacing: .03em;
+  -webkit-letter-spacing: .02em;
+  -moz-letter-spacing: .02em;
+  -ms-letter-spacing: .02em;
+  letter-spacing: .02em;
   line-height: 1;
   border-top-color: #e6e6e6;
   border-top-style: solid;
@@ -578,71 +578,55 @@ Array [
   -webkit-font-smoothing: antialiased;
   color: #3c3c3c;
   font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-stretch: normal;
   font-weight: 400;
-  -webkit-letter-spacing: .03em;
-  -moz-letter-spacing: .03em;
-  -ms-letter-spacing: .03em;
-  letter-spacing: .03em;
+  -webkit-letter-spacing: .02em;
+  -moz-letter-spacing: .02em;
+  -ms-letter-spacing: .02em;
+  letter-spacing: .02em;
+  line-height: 1;
+  text-align: right;
+}
+
+.c4 {
+  -webkit-font-smoothing: antialiased;
+  color: #3c3c3c;
+  font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-stretch: normal;
+  font-weight: 400;
+  -webkit-letter-spacing: .02em;
+  -moz-letter-spacing: .02em;
+  -ms-letter-spacing: .02em;
+  letter-spacing: .02em;
   line-height: 1;
   border-top-color: #e6e6e6;
   border-top-style: solid;
   border-top-width: 0;
-  padding-bottom: 8px;
+  padding-bottom: 16px;
   padding-left: 0;
   padding-right: 0;
   padding-top: 8px;
   text-align: left;
-  -webkit-font-smoothing: antialiased;
-  color: #3c3c3c;
-  font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-stretch: normal;
-  font-weight: 400;
-  -webkit-letter-spacing: .03em;
-  -moz-letter-spacing: .03em;
-  -ms-letter-spacing: .03em;
-  letter-spacing: .03em;
-  line-height: 1;
-  text-align: right;
 }
 
 .c5 {
   -webkit-font-smoothing: antialiased;
   color: #3c3c3c;
   font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
   font-stretch: normal;
   font-weight: 400;
-  -webkit-letter-spacing: .03em;
-  -moz-letter-spacing: .03em;
-  -ms-letter-spacing: .03em;
-  letter-spacing: .03em;
+  -webkit-letter-spacing: .02em;
+  -moz-letter-spacing: .02em;
+  -ms-letter-spacing: .02em;
+  letter-spacing: .02em;
   line-height: 1;
-  border-top-color: #e6e6e6;
-  border-top-style: solid;
-  border-top-width: 1px;
-  padding-bottom: 8px;
-  padding-left: 0;
-  padding-right: 0;
-  padding-top: 8px;
-  text-align: left;
-  -webkit-font-smoothing: antialiased;
-  color: #3c3c3c;
-  font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,sans-serif;
-  font-size: 16px;
-  font-style: normal;
-  font-stretch: normal;
-  font-weight: 400;
-  -webkit-letter-spacing: .03em;
-  -moz-letter-spacing: .03em;
-  -ms-letter-spacing: .03em;
-  letter-spacing: .03em;
-  line-height: 1;
+  padding-bottom: 16px;
   text-align: right;
 }
 
@@ -650,7 +634,36 @@ Array [
   -webkit-font-smoothing: antialiased;
   color: #3c3c3c;
   font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,sans-serif;
-  font-size: 16px;
+  font-size: 14px;
+  font-style: normal;
+  font-stretch: normal;
+  font-weight: 400;
+  -webkit-letter-spacing: .02em;
+  -moz-letter-spacing: .02em;
+  -ms-letter-spacing: .02em;
+  letter-spacing: .02em;
+  line-height: 1;
+  border-top-color: #e6e6e6;
+  border-top-style: solid;
+  border-top-width: 1px;
+  padding-bottom: 16px;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 16px;
+  text-align: left;
+}
+
+.c7 {
+  text-align: right;
+  padding-bottom: 16px;
+  padding-top: 16px;
+}
+
+.c9 {
+  -webkit-font-smoothing: antialiased;
+  color: #3c3c3c;
+  font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,sans-serif;
+  font-size: 18px;
   font-style: normal;
   font-stretch: normal;
   font-weight: 700;
@@ -671,10 +684,10 @@ Array [
     className="SkOrderFulfillmentGroup-summary-5"
   >
     <div
-      className="SkOrderSummary-summary-132"
+      className="SkOrderSummary-summary-142"
     >
       <div
-        className="SkOrderSummary-header-133"
+        className="SkOrderSummary-header-143"
       >
         <div
           className="MuiGrid-container-7 MuiGrid-spacing-xs-24-31"
@@ -682,25 +695,28 @@ Array [
           <div
             className="MuiGrid-item-8 MuiGrid-grid-xs-3-38"
           >
-            <h3
-              className="MuiTypography-root-104 MuiTypography-subheading-111 SkOrderSummary-subtitle2-136"
+            <h6
+              className="MuiTypography-root-104 MuiTypography-subtitle1-122 SkOrderSummary-subtitle2-146"
             >
               Payment Method
-            </h3>
+            </h6>
           </div>
           <div
-            className="MuiGrid-item-8 MuiGrid-grid-xs-3-38"
+            className="MuiGrid-item-8"
           >
-            <aside
+            <p
               className="MuiTypography-root-104 MuiTypography-body2-112"
             >
               Example Payment
-            </aside>
+               (
+              $10.00
+              )
+            </p>
           </div>
         </div>
       </div>
       <hr
-        className="MuiDivider-root-137"
+        className="MuiDivider-root-147"
       />
       <div
         className="c0"
@@ -713,10 +729,10 @@ Array [
               <td
                 className="c2"
               >
-                Item total
+                Items:
               </td>
               <td
-                className="c3"
+                className="c3 c2"
               >
                 $118
               </td>
@@ -725,20 +741,22 @@ Array [
               <td
                 className="c2"
               >
-                Shipping
+                Shipping:
               </td>
               <td
-                className="c3"
-              />
+                className="c3 c2"
+              >
+                -
+              </td>
             </tr>
             <tr>
               <td
                 className="c2"
               >
-                Tax
+                Surcharges:
               </td>
               <td
-                className="c3"
+                className="c3 c2"
               >
                 -
               </td>
@@ -747,13 +765,25 @@ Array [
               <td
                 className="c4"
               >
-                Order total
+                Tax:
               </td>
               <td
-                className="c5"
+                className="c5 c2"
+              >
+                -
+              </td>
+            </tr>
+            <tr>
+              <td
+                className="c6"
+              >
+                Order total:
+              </td>
+              <td
+                className="c7 c8"
               >
                 <span
-                  className="c6"
+                  className="c9"
                 >
                   $118
                 </span>
