@@ -1,13 +1,7 @@
 {
-<<<<<<< HEAD
   "name": "iclick",
   "version": "1.0.0",
   "description": "iClick Electronic - An Amazing Store",
-=======
-  "name": "example-storefront",
-  "version": "2.0.0",
-  "description": "The Example Storefront serves as a reference for implementing a web based storefront using the Reaction Commerce GraphQL API.",
->>>>>>> master
   "main": "index.js",
   "keywords": [
     "Electronics",
