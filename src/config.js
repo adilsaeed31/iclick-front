@@ -7,14 +7,15 @@
  *   next.config.js and add it to either `publicRuntimeConfig` or `serverRuntimeConfig`.
  *   Then use `getConfig()` to get it within React components and other browser code.
  */
-const envalid = require("envalid");
+require("dotenv").config()
+const envalid = require("envalid")
 
 // Config is loaded for the `next build` command, too, and we don't want to complain
 // about missing environment variables in that phase.
 if (process.env.IS_BUILDING_NEXTJS) {
-  module.exports = {};
+  module.exports = {}
 } else {
-  const { bool, num, port, str, url } = envalid;
+  const { bool, num, port, str, url } = envalid
 
   /**
    * See https://www.npmjs.com/package/envalid
@@ -27,28 +28,32 @@ if (process.env.IS_BUILDING_NEXTJS) {
    *
    * Be sure to add `{ default: null }` if it should be optional.
    */
-  module.exports = envalid.cleanEnv(process.env, {
-    CANONICAL_URL: url(),
-    ENABLE_SPA_ROUTING: bool({ default: true }), // must explicitly set to false to disable
-    EXTERNAL_GRAPHQL_URL: url(),
-    INTERNAL_GRAPHQL_URL: url(),
-    NODE_ENV: str({ choices: ["development", "test", "jesttest", "production"], default: "production" }),
-    OAUTH2_AUTH_URL: url(),
-    OAUTH2_CLIENT_ID: str(),
-    OAUTH2_CLIENT_SECRET: str(),
-    OAUTH2_IDP_HOST_URL: url(),
-    OAUTH2_REDIRECT_URL: url(),
-    OAUTH2_TOKEN_URL: url(),
-    PORT: port({ default: 4000 }),
-    SEGMENT_ANALYTICS_SKIP_MINIMIZE: bool({ default: false }),
-    SEGMENT_ANALYTICS_WRITE_KEY: str({ default: "" }),
-    SESSION_MAX_AGE_MS: num({ default: 86400000 }), // 24 hours
-    SESSION_SECRET: str(),
-    STRIPE_PUBLIC_API_KEY: str({ default: "" })
-  }, {
-    // disable dotenv processing
-    dotEnvPath: null,
-    // https://www.npmjs.com/package/envalid#strict-mode
-    strict: true
-  });
+  module.exports = envalid.cleanEnv(
+    process.env,
+    {
+      CANONICAL_URL: url(),
+      ENABLE_SPA_ROUTING: bool({ default: true }), // must explicitly set to false to disable
+      EXTERNAL_GRAPHQL_URL: url(),
+      INTERNAL_GRAPHQL_URL: url(),
+      NODE_ENV: str({ choices: ["development", "test", "jesttest", "production"], default: "production" }),
+      OAUTH2_AUTH_URL: url(),
+      OAUTH2_CLIENT_ID: str(),
+      OAUTH2_CLIENT_SECRET: str(),
+      OAUTH2_IDP_HOST_URL: url(),
+      OAUTH2_REDIRECT_URL: url(),
+      OAUTH2_TOKEN_URL: url(),
+      PORT: port({ default: 4000 }),
+      SEGMENT_ANALYTICS_SKIP_MINIMIZE: bool({ default: false }),
+      SEGMENT_ANALYTICS_WRITE_KEY: str({ default: "" }),
+      SESSION_MAX_AGE_MS: num({ default: 86400000 }), // 24 hours
+      SESSION_SECRET: str(),
+      STRIPE_PUBLIC_API_KEY: str({ default: "" })
+    },
+    {
+      // disable dotenv processing
+      dotEnvPath: null,
+      // https://www.npmjs.com/package/envalid#strict-mode
+      strict: true
+    }
+  )
 }
