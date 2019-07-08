@@ -79,6 +79,7 @@ export default class App extends NextApp {
       shop: { defaultNavigationTree: navItems },
       tags,
       viewer,
+      isLoadingShop,
       ...rest
     } = this.props;
     const { route } = this.props.router;
@@ -86,11 +87,11 @@ export default class App extends NextApp {
 
     return (
       <Container>
-        {isLoading ? (
+        {isLoadingShop ? (
           <Loader />
         ) : (
           <ComponentsProvider value={components}>
-            <MobxProvider suppressChangedStoreWarning navItems={navItems} tags={tags}>
+            <MobxProvider suppressChangedStoreWarning navItems={navItems.items} tags={tags}>
               {route === "/checkout" || route === "/login" ? (
                 <StripeProvider stripe={stripe}>
                   <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />

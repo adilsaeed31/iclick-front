@@ -7,14 +7,14 @@ import { NavigationItemDesktop } from "custom/iclick/components/NavigationDeskto
 export class NavigationDesktop extends Component {
   static propTypes = {
     navItems: PropTypes.array
-  }
+  };
 
   static defaultProps = {
     navItems: []
-  }
+  };
 
   renderNavItem(navItem, index) {
-    return <NavigationItemDesktop key={index} navItem={navItem.node} />;
+    return <NavigationItemDesktop key={index} navItem={navItem.data} />;
   }
 
   render() {

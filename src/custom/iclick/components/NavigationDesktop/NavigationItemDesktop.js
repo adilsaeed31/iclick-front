@@ -8,16 +8,16 @@ class NavigationItemDesktop extends Component {
   static propTypes = {
     navItem: PropTypes.object,
     routingStore: PropTypes.object
-  }
+  };
 
   static defaultProps = {
     navItem: {},
     routingStore: {}
-  }
+  };
 
   state = {
     show: "megamenu-container"
-  }
+  };
 
   linkPath = (providedNavItem) => {
     const { navItem, routingStore } = this.props;
@@ -27,7 +27,7 @@ class NavigationItemDesktop extends Component {
     return routingStore.queryString !== ""
       ? `/tag/${currentNavItem.slug}?${routingStore.queryString}`
       : `/tag/${currentNavItem.slug}`;
-  }
+  };
 
   get hasSubNavItems() {
     const {
@@ -84,15 +84,16 @@ class NavigationItemDesktop extends Component {
 
   handleMouseOver = () => {
     this.setState({ show: "megamenu-container show" });
-  }
+  };
 
   handleMouseOut = () => {
     this.setState({ show: "megamenu-container" });
-  }
+  };
 
   render() {
     const { navItem } = this.props;
     const { show } = this.state;
+
     return (
       <li onMouseOver={this.handleMouseOver} className={show} onMouseOut={this.handleMouseOut}>
         <Link className={this.hasSubNavItems ? "sf-with-ul" : ""} route={this.linkPath(navItem)}>
