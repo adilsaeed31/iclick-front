@@ -32,5 +32,3 @@ src/.next/*
 build
 /reports
 
-package-lock.json
-yarn.lock
