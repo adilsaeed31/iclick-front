@@ -1,16 +1,16 @@
-import React, { Component, Fragment } from "react";
-import PropTypes from "prop-types";
-import { observer, inject } from "mobx-react";
-import Helmet from "react-helmet";
-import withCatalogItems from "containers/catalog/withCatalogItems";
-import withTag from "containers/tags/withTag";
-import Breadcrumbs from "custom/iclick/components/Breadcrumbs";
-import ProductGrid from "custom/iclick/components/ProductGrid";
-import ProductGridEmptyMessage from "custom/iclick/components/ProductGrid/ProductGridEmptyMessage";
-import ProductGridHero from "custom/iclick/components/ProductGridHero";
-import ProductGridTitle from "custom/iclick/components/ProductGridTitle";
-import SharedPropTypes from "lib/utils/SharedPropTypes";
-import trackProductListViewed from "lib/tracking/trackProductListViewed";
+import React, { Component, Fragment } from "react"
+import PropTypes from "prop-types"
+import { observer, inject } from "mobx-react"
+import Helmet from "react-helmet"
+import withCatalogItems from "containers/catalog/withCatalogItems"
+import withTag from "containers/tags/withTag"
+import Breadcrumbs from "components/Breadcrumbs"
+import ProductGrid from "components/ProductGrid"
+import ProductGridEmptyMessage from "components/ProductGrid/ProductGridEmptyMessage"
+import ProductGridHero from "components/ProductGridHero"
+import ProductGridTitle from "components/ProductGridTitle"
+import SharedPropTypes from "lib/utils/SharedPropTypes"
+import trackProductListViewed from "lib/tracking/trackProductListViewed"
 
 @withTag
 @withCatalogItems
@@ -20,6 +20,7 @@ export default class TagGridPage extends Component {
   static propTypes = {
     catalogItems: PropTypes.array.isRequired,
     catalogItemsPageInfo: PropTypes.object,
+    classes: PropTypes.object,
     initialGridSize: PropTypes.object,
     isLoadingCatalogItems: PropTypes.bool,
     routingStore: PropTypes.shape({
@@ -46,69 +47,69 @@ export default class TagGridPage extends Component {
   }
 
   static getDerivedStateFromProps(props) {
-    const { routingStore, tag } = props;
+    const { routingStore, tag } = props
     if (tag && routingStore.tagId !== tag._id) {
-      routingStore.setTagId(tag._id);
+      routingStore.setTagId(tag._id)
       routingStore.setSearch({
         before: null,
         after: null
-      });
+      })
     }
 
-    return null;
+    return null
   }
 
   static async getInitialProps({ req }) {
     // It is not perfect, but the only way we can guess at the screen width of the
     // requesting device is to parse the `user-agent` header it sends.
-    const userAgent = req ? req.headers["user-agent"] : navigator.userAgent;
-    const width = (userAgent && userAgent.indexOf("Mobi")) > -1 ? 320 : 1024;
+    const userAgent = req ? req.headers["user-agent"] : navigator.userAgent
+    const width = (userAgent && userAgent.indexOf("Mobi")) > -1 ? 320 : 1024
 
-    return { initialGridSize: { width } };
+    return { initialGridSize: { width } }
   }
 
   state = {}
 
   componentDidUpdate(prevProps) {
     if (this.props.catalogItems !== prevProps.catalogItems) {
-      this.trackEvent(this.props);
+      this.trackEvent(this.props)
     }
   }
 
   @trackProductListViewed()
   trackEvent() {}
 
-  setPageSize = (pageSize) => {
-    this.props.routingStore.setSearch({ limit: pageSize });
-    this.props.uiStore.setPageSize(pageSize);
+  setPageSize = pageSize => {
+    this.props.routingStore.setSearch({ limit: pageSize })
+    this.props.uiStore.setPageSize(pageSize)
   }
 
-  setSortBy = (sortBy) => {
-    this.props.routingStore.setSearch({ sortby: sortBy });
-    this.props.uiStore.setSortBy(sortBy);
+  setSortBy = sortBy => {
+    this.props.routingStore.setSearch({ sortby: sortBy })
+    this.props.uiStore.setSortBy(sortBy)
   }
 
   renderHeaderMetatags(metafields) {
-    const { shop } = this.props;
+    const { shop } = this.props
 
-    const metatags = [];
-    let hasDescription = false;
-    metafields.forEach((field) => {
+    const metatags = []
+    let hasDescription = false
+    metafields.forEach(field => {
       if (field.namespace && field.namespace === "metatag") {
         const metatag = {
           content: field.value
-        };
-        metatag[field.scope] = field.key;
-        metatags.push(metatag);
+        }
+        metatag[field.scope] = field.key
+        metatags.push(metatag)
         if (field.key === "description") {
-          hasDescription = true;
+          hasDescription = true
         }
       }
-    });
+    })
     if (hasDescription === false) {
-      metatags.push({ name: "description", content: shop && shop.description });
+      metatags.push({ name: "description", content: shop && shop.description })
     }
-    return metatags;
+    return metatags
   }
 
   render() {
@@ -121,13 +122,13 @@ export default class TagGridPage extends Component {
       shop,
       tag,
       uiStore
-    } = this.props;
+    } = this.props
     const pageSize =
-      routingStore.query && routingStore.query.limit ? parseInt(routingStore.query.limit, 10) : uiStore.pageSize;
-    const sortBy = routingStore.query && routingStore.query.sortby ? routingStore.query.sortby : uiStore.sortBy;
+      routingStore.query && routingStore.query.limit ? parseInt(routingStore.query.limit, 10) : uiStore.pageSize
+    const sortBy = routingStore.query && routingStore.query.sortby ? routingStore.query.sortby : uiStore.sortBy
 
     if (!tag) {
-      return <ProductGridEmptyMessage actionMessage="Go Home" resetLink="/" />;
+      return <ProductGridEmptyMessage actionMessage="Go Home" resetLink="/" />
     }
 
     return (
@@ -155,6 +156,6 @@ export default class TagGridPage extends Component {
           sortBy={sortBy}
         />
       </Fragment>
-    );
+    )
   }
 }

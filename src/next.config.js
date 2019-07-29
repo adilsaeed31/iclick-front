@@ -1,8 +1,9 @@
-const withCSS = require("@zeit/next-css");
-const withFonts = require("next-fonts");
-const appConfig = require("./config");
+const withCSS = require("@zeit/next-css")
+const withFonts = require("next-fonts")
+const appConfig = require("./config")
 
-module.exports = withCSS(withFonts({
+module.exports = withCSS(
+  withFonts({
     /**
      * `serverRuntimeConfig` is available in browser code, ONLY when run on the server
      * @example
@@ -26,18 +27,30 @@ module.exports = withCSS(withFonts({
         writeKey: appConfig.SEGMENT_ANALYTICS_WRITE_KEY
       },
       stripePublicApiKey: appConfig.STRIPE_PUBLIC_API_KEY,
-      enableSPARouting: appConfig.ENABLE_SPA_ROUTING
+      enableSPARouting: appConfig.ENABLE_SPA_ROUTING,
+      googleMapAPIKey: appConfig.GOOGLE_MAP_API_KEY
     },
     // NextJS builds to `/src/.next` by default. Change that to `/build/app`
     distDir: "../build/app",
-    webpack: (webpackConfig) => {
+    webpack: webpackConfig => {
       webpackConfig.module.rules.push({
         test: /\.(gql|graphql)$/,
         loader: "graphql-tag/loader",
         exclude: ["/node_modules/", "/.next/"],
         enforce: "pre"
-      });
+      })
 
-      return webpackConfig;
+      webpackConfig.module.rules.push({
+        test: /\.mjs$/,
+        type: "javascript/auto"
+      })
+
+      // Duplicate versions of the styled-components package were being loaded, this config removes the duplication.
+      // It creates an alias to import the es modules version of the styled-components package.
+      // This is a workaround until the root issue is resolved: https://github.com/webpack/webpack/issues/9329
+      webpackConfig.resolve.alias["styled-components"] = "styled-components/dist/styled-components.browser.esm.js"
+
+      return webpackConfig
     }
-  }));
+  })
+)

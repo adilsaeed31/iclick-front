@@ -35,7 +35,7 @@ app
         // https://www.npmjs.com/package/cookie-session#options
         keys: [config.SESSION_SECRET],
         maxAge: config.SESSION_MAX_AGE_MS,
-        name: "storefront-session"
+        name: "iclickelectronics2019"
       })
     )
     server.use(cookieParser())
