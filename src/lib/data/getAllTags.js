@@ -1,4 +1,4 @@
-import primaryShopQuery from "containers/common-gql/primaryShop.gql"
+import primaryShopQuery from "containers/common-gql/primaryShopId.gql"
 import tagsQuery from "containers/tags/tags.gql"
 
 /**
