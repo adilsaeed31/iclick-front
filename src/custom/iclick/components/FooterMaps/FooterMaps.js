@@ -6,7 +6,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 const FooterMaps = compose(
   withProps({
     googleMapURL:
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyC6OWpBTcMtN-R5lWnsnq26axxhS0ammwo&v=3.exp&libraries=geometry,drawing,places",
+      "https://maps.googleapis.com/maps/api/js?key=AIzaSyAA6vKNqOhbc4xF7I0NI4nCVYVOXWkUFfg&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: "100%" }} />,
     containerElement: <div style={{ height: "400px" }} />,
     mapElement: <div style={{ height: "100%" }} />
