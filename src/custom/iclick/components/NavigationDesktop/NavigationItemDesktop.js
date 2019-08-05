@@ -39,7 +39,7 @@ class NavigationItemDesktop extends Component {
   renderSubNav(navItemGroup) {
     const menuItems = navItemGroup.subTags.map(({ node: navItem }, index) => (
       <li key={index}>
-        <Link route={`${this.linkPath(navItem)}`}>{navItem.name}</Link>
+        <Link route={`${this.linkPath(navItem)}`}>{navItem.navigationItem.data.contentForLanguage}</Link>
       </li>
     ));
 
@@ -95,9 +95,9 @@ class NavigationItemDesktop extends Component {
     const { show } = this.state;
     return (
       <li onMouseOver={this.handleMouseOver} className={show} onMouseOut={this.handleMouseOut}>
-        <Link className={this.hasSubNavItems ? "sf-with-ul" : ""} route={this.linkPath(navItem)}>
-          {navItem.name}
-        </Link>
+         <Link className={this.hasSubNavItems ? "sf-with-ul" : ""} route={this.linkPath(navItem)}>
+          {navItem.navigationItem.data.contentForLanguage}
+          </Link>
         {this.hasSubNavItems && this.renderPopover()}
       </li>
     );

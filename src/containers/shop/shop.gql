@@ -1,10 +1,37 @@
-query shopQuery($shopId: ID!) {
-  shop(id: $shopId) {
-    _id
-    description
-    name
-    currency {
-      code
+fragment NavigationItemFields on NavigationItemData {
+  contentForLanguage
+  classNames
+  url
+  isUrlRelative
+  shouldOpenInNewWindow
+}
+
+{
+  shop(id: "cmVhY3Rpb24vc2hvcDpKOEJocTN1VHRkZ3daeDNyeg==") {
+    defaultNavigationTree(language: "env") {
+      items {
+        navigationItem {
+          data {
+            ...NavigationItemFields
+          }
+        }
+        items {
+          navigationItem {
+            data {
+              ...NavigationItemFields
+            }
+          }
+          items {
+            navigationItem {
+              data {
+                ...NavigationItemFields
+              }
+            }
+          }
+        }
+      }
     }
+    description
+  
   }
 }

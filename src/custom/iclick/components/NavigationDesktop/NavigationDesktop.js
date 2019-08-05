@@ -14,17 +14,22 @@ export class NavigationDesktop extends Component {
   }
 
   renderNavItem(navItem, index) {
-    return <NavigationItemDesktop key={index} navItem={navItem.node} />;
+    return <NavigationItemDesktop key={index} navItem={navItem} />;
   }
 
   render() {
     const { navItems } = this.props;
 
-    return (
-      <nav className="main-nav">
-        <ul className="menu sf-arrows sf-js-enabled">{navItems.map(this.renderNavItem)}</ul>
-      </nav>
-    );
+    if (navItems && navItems.length > 0) {
+      return (
+        <nav className="main-nav">
+          <ul className="menu sf-arrows sf-js-enabled">{navItems.map(this.renderNavItem)}</ul>
+        </nav>
+      );
+    } else{
+      return null;
+    }
+    
   }
 }
 
