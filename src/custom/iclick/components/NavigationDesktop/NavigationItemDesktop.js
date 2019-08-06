@@ -30,47 +30,47 @@ class NavigationItemDesktop extends Component {
   }
 
   get hasSubNavItems() {
-    const {
-      navItem: { subTags }
-    } = this.props;
+    // const {
+    //   navItem: { subTags }
+    // } = this.props;
+    const subTags=this.props.navItem.items;
     return Array.isArray(subTags) && subTags.length > 0;
   }
-
-  renderSubNav(navItemGroup) {
-    const menuItems = navItemGroup.subTags.map(({ node: navItem }, index) => (
-      <li key={index}>
-        <Link route={`${this.linkPath(navItem)}`}>{navItem.navigationItem.data.contentForLanguage}</Link>
-      </li>
-    ));
-
-    return menuItems;
-  }
-
+  
   renderPopover() {
-    const {
-      navItem: { subTags }
-    } = this.props;
+    const subMenuImg={
+      width: "100%",
+      minHeight: "-webkit-fill-available",
+      overflow: "hidden",
+      display: "inline-block"
+    }
+    // const {
+    //   navItem: { subTags }
+    // } = this.props;
+    //const subTags = this.props.navItem.items.map(x=>x.navigationItem.data);
+    const subTags = this.props.navItem.items;
     if (subTags) {
       return (
-        <div className="megamenu">
+        <div className="megamenu" style={{height:"50vh",overflow:"hidden"}}>
           <div className="row">
             <div className="col-lg-8">
               <div className="row">
-                {subTags.map(({ node: navItemGroup }, index) => (
+                {subTags.map((navSubItems,index) => (
                   <div className="col-lg-3" key={index}>
                     <div className="menu-title">
-                      <Link route={`${this.linkPath(navItemGroup)}`}>{navItemGroup.name}</Link>
+                   
+                      <Link route={`${this.linkPath(navSubItems.navigationItem.data.url)}`}>{navSubItems.navigationItem.data.contentForLanguage}</Link>
                     </div>
 
-                    <ul>{Array.isArray(navItemGroup.subTags) && this.renderSubNav(navItemGroup)}</ul>
+                    
                   </div>
                 ))}
               </div>
             </div>
             <div className="col-lg-4">
               <div className="banner">
-                <a href="/">
-                  <img src="/static/images/menu-banner.jpg" alt="Menu banner" className="product-promo" />
+                <a href="/" style={subMenuImg}>
+                  <img style={{height:"100%",width:"auto",}} src="/static/images/menu-banner.jpg" alt="Menu banner" className="product-promo" />
                 </a>
               </div>
             </div>
