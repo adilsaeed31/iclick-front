@@ -59,7 +59,7 @@ class NavigationItemDesktop extends Component {
                   <div className="col-lg-3" key={index}>
                     <div className="menu-title">
                  
-                      <Link key={index} route={navSubItems.navigationItem.data.url} href={navSubItems.navigationItem.data.url} isUrlAbsolute={!navSubItems.navigationItem.data.isUrlRelative}>{navSubItems.navigationItem.data.contentForLanguage}</Link>
+                      <Link key={index} route={navSubItems.navigationItem.data.url} href={navSubItems.navigationItem.data.url} >{navSubItems.navigationItem.data.contentForLanguage}</Link>
                     </div>
 
                     
