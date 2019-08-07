@@ -112,6 +112,7 @@ export default class TagGridPage extends Component {
   }
 
   render() {
+    console.log("routingStore.tagId",routingStore?  routingStore.tagId : this.props);
     const {
       catalogItems,
       catalogItemsPageInfo,
