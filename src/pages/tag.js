@@ -140,6 +140,7 @@ export default class TagGridPage extends Component {
               : [{ name: "description", content: shop && shop.description }]
           }
         />
+        {console.log("routingStore.tagId",routingStore.tagId)}
         <Breadcrumbs isTagGrid tagId={routingStore.tagId} />
         {tag && tag.displayTitle && <ProductGridTitle displayTitle={tag.displayTitle} />}
         <ProductGridHero tag={tag} />
