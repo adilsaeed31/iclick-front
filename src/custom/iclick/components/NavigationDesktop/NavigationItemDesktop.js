@@ -58,7 +58,7 @@ class NavigationItemDesktop extends Component {
                 {subTags.map((navSubItems,index) => (
                   <div className="col-lg-3" key={index}>
                     <div className="menu-title">
-                 
+                        {console.log("navSubItems.navigationItem.data.url", navSubItems.navigationItem.data ? navSubItems.navigationItem.data.url : navSubItems.navigationItem.data)}
                       <Link key={index} route={navSubItems.navigationItem.data.url}>{navSubItems.navigationItem.data.contentForLanguage}</Link>
                     </div>
 
