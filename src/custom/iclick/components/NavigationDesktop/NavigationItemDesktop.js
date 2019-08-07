@@ -22,11 +22,11 @@ class NavigationItemDesktop extends Component {
   linkPath = (providedNavItem) => {
     const { navItem, routingStore } = this.props;
 
-    const currentNavItem = providedNavItem || navItem;
+    const currentNavItem = (providedNavItem && providedNavItem.navigationItem) || navItem.navigationItem;
 
     return routingStore.queryString !== ""
-      ? `/tag/${currentNavItem.slug}?${routingStore.queryString}`
-      : `/tag/${currentNavItem.slug}`;
+      ? `${currentNavItem.data.url}?${routingStore.queryString}`
+      : `${currentNavItem.data.url}`;
   }
 
   get hasSubNavItems() {
@@ -58,8 +58,8 @@ class NavigationItemDesktop extends Component {
                 {subTags.map((navSubItems,index) => (
                   <div className="col-lg-3" key={index}>
                     <div className="menu-title">
-                        {console.log("navSubItems.navigationItem.data.url", navSubItems.navigationItem.data ? navSubItems.navigationItem.data.url : navSubItems.navigationItem.data)}
-                      <Link key={index} route={navSubItems.navigationItem.data.url}>{navSubItems.navigationItem.data.contentForLanguage}</Link>
+                 
+                      <Link key={index} route={navSubItems.navigationItem.data.url} href={navSubItems.navigationItem.data.url} isUrlAbsolute={!navSubItems.navigationItem.data.isUrlRelative}>{navSubItems.navigationItem.data.contentForLanguage}</Link>
                     </div>
 
                     
