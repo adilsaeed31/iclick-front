@@ -31,7 +31,11 @@ fragment NavigationItemFields on NavigationItemData {
         }
       }
     }
+    _id
     description
-  
+    name
+    currency {
+      code
+    }
   }
 }

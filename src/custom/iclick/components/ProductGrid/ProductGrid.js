@@ -94,7 +94,7 @@ export default class ProductGrid extends Component {
       <Fragment>
         <Grid container spacing={24}>
           <Grid item sm={3}>
-              <Grid container spacing={4}>
+              <Grid container spacing={8}>
                   <Grid item sm={12}>
                           {
                             this.state.filterName.map((x,i)=>{
