@@ -1,0 +1,79 @@
+.header {
+  margin-bottom: 60px;
+  border-top: 0px;
+}
+.header-bottom .logo {
+  margin-right: 1rem;
+}
+.menu-bar {
+  flex: 1;
+}
+.menu {
+  justify-content: flex-start;
+}
+.menu > li {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.menu > li > a {
+  color: #7f7e83;
+  font-weight: normal;
+  /* text-transform: capitalize; */
+  font-size: 1.4rem;
+  letter-spacing: 0.2rem;
+}
+.header-bottom .cart-dropdown {
+  order: inherit;
+  margin-left: inherit;
+}
+.wide-header {
+  max-width: 100% !important;
+}
+
+.sticky-header.fixed .menu > li > a {
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
+}
+.menu > li + li {
+  margin-left: 1rem;
+}
+.header .container,
+.header .container-fluid {
+  justify-content: space-between;
+}
+
+.news-signup {
+  font: 400 1.6rem/1.1 "Oswald", sans-serif;
+  color: #fff;
+}
+.social-icons {
+  margin-bottom: 20px;
+}
+.is-border-bottom {
+  border-bottom: 1px solid #353a3e;
+  margin-bottom: 20px;
+}
+.footer-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+  border-top: none;
+  padding: 10px;
+}
+
+.footer-bottom .payment-images {
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.home-slide::before, .home-slide::after {
+  display:none;
+}
+
+@media screen and (max-width: 991px) {
+  .header-bottom {
+    display: block;
+  }
+}

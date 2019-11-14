@@ -8,22 +8,24 @@ import { withStyles } from "@material-ui/core/styles";
 import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
 import CartSummary from "@reactioncommerce/components/CartSummary/v1";
 import withCart from "containers/cart/withCart";
-import CartItems from "components/CartItems";
-import CheckoutButtons from "components/CheckoutButtons";
-import Link from "components/Link";
+import CartItems from "custom/iclick/components/CartItems";
+import CheckoutButtons from "custom/iclick/components/CheckoutButtons";
+import Link from "custom/iclick/components/Link";
 import { Router } from "routes";
-import PageLoading from "components/PageLoading";
+import PageLoading from "custom/iclick/components/PageLoading";
 import track from "lib/tracking/track";
 import variantById from "lib/utils/variantById";
 import trackCartItems from "lib/tracking/trackCartItems";
 import TRACKING from "lib/tracking/constants";
+
+import customTheme from "custom/reactionTheme"; //added custom theme
 
 const styles = (theme) => ({
   cartEmptyMessageContainer: {
     margin: "80px 0"
   },
   checkoutButtonsContainer: {
-    backgroundColor: theme.palette.reaction.black02,
+    backgroundColor: customTheme.palette.reaction.black02, //used custom theme 
     padding: theme.spacing.unit * 2
   },
   customerSupportCopy: {
@@ -38,8 +40,8 @@ const styles = (theme) => ({
     marginBottom: "3.1rem"
   },
   itemWrapper: {
-    borderTop: theme.palette.borders.default,
-    borderBottom: theme.palette.borders.default
+    borderTop: customTheme.palette.borders.default, //used custom theme 
+    borderBottom: customTheme.palette.borders.default //used custom theme 
   }
 });
 
@@ -140,13 +142,14 @@ class CartPage extends Component {
     const { cart, classes } = this.props;
 
     if (cart && cart.checkout && cart.checkout.summary && Array.isArray(cart.items) && cart.items.length) {
-      const { fulfillmentTotal, itemTotal, taxTotal, total } = cart.checkout.summary;
+      const { fulfillmentTotal, itemTotal, surchargeTotal, taxTotal, total } = cart.checkout.summary;
 
       return (
         <Grid item xs={12} md={3}>
           <CartSummary
             displayShipping={fulfillmentTotal && fulfillmentTotal.displayAmount}
             displaySubtotal={itemTotal && itemTotal.displayAmount}
+            displaySurcharge={surchargeTotal && surchargeTotal.displayAmount}
             displayTax={taxTotal && taxTotal.displayAmount}
             displayTotal={total && total.displayAmount}
             itemsQuantity={cart.totalItemQuantity}
@@ -174,7 +177,7 @@ class CartPage extends Component {
           meta={[{ name: "description", content: shop && shop.description }]}
         />
         <section>
-          <Typography className={classes.title} variant="title" align="center">
+          <Typography className={classes.title} variant="h6" align="center">
             Shopping Cart
           </Typography>
           <Grid container spacing={24}>

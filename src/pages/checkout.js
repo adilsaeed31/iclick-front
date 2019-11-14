@@ -10,15 +10,19 @@ import CartEmptyMessage from "@reactioncommerce/components/CartEmptyMessage/v1";
 import CheckoutActions from "components/CheckoutActions";
 import CheckoutEmailAddress from "@reactioncommerce/components/CheckoutEmailAddress/v1";
 import CheckoutTopHat from "@reactioncommerce/components/CheckoutTopHat/v1";
-import Entry from "components/Entry";
+import Entry from "custom/iclick/components/Entry"; //changed from orignal component to iclick component (fixed)
 import ShopLogo from "@reactioncommerce/components/ShopLogo/v1";
 import CartIcon from "mdi-material-ui/Cart";
 import ChevronLeftIcon from "mdi-material-ui/ChevronLeft";
 import LockIcon from "mdi-material-ui/Lock";
+import Link from "custom/iclick/components/Link";
+import CheckoutSummary from "custom/iclick/components/CheckoutSummary";
+import PageLoading from "custom/iclick/components/PageLoading"; //changed from orignal component to iclick component (fixed)
 import withCart from "containers/cart/withCart";
-import Link from "components/Link";
-import CheckoutSummary from "components/CheckoutSummary";
-import PageLoading from "components/PageLoading";
+import withAvailablePaymentMethods from "containers/payment/withAvailablePaymentMethods";
+import definedPaymentMethods from "../custom/paymentMethods";
+
+import customTheme from "custom/reactionTheme"; //added custom theme
 
 const styles = (theme) => ({
   checkoutActions: {
@@ -38,7 +42,7 @@ const styles = (theme) => ({
   },
   checkoutContent: {
     flex: "1",
-    maxWidth: theme.layout.mainContentMaxWidth,
+    maxWidth: customTheme.layout.mainContentMaxWidth, //used custom theme 
     padding: "1rem"
   },
   checkoutContentContainer: {
@@ -54,7 +58,7 @@ const styles = (theme) => ({
   },
   checkoutTitle: {
     fontSize: "1.125rem",
-    color: theme.palette.reaction.black35,
+    color: customTheme.palette.reaction.black35,  //used custom theme 
     display: "inline",
     marginLeft: "0.3rem"
   },
@@ -66,7 +70,7 @@ const styles = (theme) => ({
     display: "flex",
     justifyContent: "space-between",
     margin: "0 auto",
-    maxWidth: theme.layout.mainContentMaxWidth,
+    maxWidth: customTheme.layout.mainContentMaxWidth,  //used custom theme 
     padding: "1rem"
   },
   emptyCartContainer: {
@@ -82,18 +86,18 @@ const styles = (theme) => ({
     height: 320
   },
   logo: {
-    color: theme.palette.reaction.reactionBlue,
+    color: customTheme.palette.reaction.reactionBlue,  //used custom theme 
     marginRight: theme.spacing.unit,
-    borderBottom: `solid 5px ${theme.palette.reaction.reactionBlue200}`
+    borderBottom: `solid 5px ${customTheme.palette.reaction.reactionBlue200}`  //used custom theme 
   },
   // login view styles
   backLink: {
-    "color": theme.palette.reaction.black80,
+    "color": customTheme.palette.reaction.black80,  //used custom theme 
     "cursor": "pointer",
     "fontFamily": theme.typography.fontFamily,
     "fontSize": 14,
     "&:hover": {
-      color: theme.palette.reaction.reactionBlue400
+      color: customTheme.palette.reaction.reactionBlue400  //used custom theme 
     }
   },
   backLinkText: {
@@ -108,7 +112,7 @@ const styles = (theme) => ({
   },
   header: {
     alignContent: "center",
-    borderBottom: `solid 1px ${theme.palette.reaction.black10}`,
+    borderBottom: `solid 1px ${customTheme.palette.reaction.black10}`,  //used custom theme 
     display: "flex",
     justifyContent: "center",
     marginBottom: theme.spacing.unit * 3,
@@ -116,7 +120,7 @@ const styles = (theme) => ({
   },
   main: {
     flex: "1 1 auto",
-    maxWidth: theme.layout.mainLoginMaxWidth,
+    maxWidth: customTheme.layout.mainLoginMaxWidth,  //used custom theme 
     minHeight: "calc(100vh - 135px)",
     margin: "0 auto",
     padding: `${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px 0`,
@@ -130,18 +134,26 @@ const styles = (theme) => ({
 const hasIdentityCheck = (cart) => !!((cart && cart.account !== null) || (cart && cart.email));
 
 @withCart
+@withAvailablePaymentMethods
 @observer
 @withStyles(styles, { withTheme: true })
 class Checkout extends Component {
   static propTypes = {
+    availablePaymentMethods: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired
+    })),
     cart: PropTypes.shape({
       account: PropTypes.object,
       checkout: PropTypes.object,
       email: PropTypes.string,
       items: PropTypes.array
     }),
+    cartStore: PropTypes.object,
+    checkoutMutations: PropTypes.object,
     classes: PropTypes.object,
+    clearAuthenticatedUsersCart: PropTypes.func,
     hasMoreCartItems: PropTypes.bool,
+    isLoadingAvailablePaymentMethods: PropTypes.bool,
     isLoadingCart: PropTypes.bool,
     loadMoreCartItems: PropTypes.func,
     onChangeCartItemsQuantity: PropTypes.func,
@@ -284,16 +296,17 @@ class Checkout extends Component {
 
   renderCheckoutActions() {
     const {
+      availablePaymentMethods,
       classes,
       cart,
+      cartStore,
+      checkoutMutations,
+      clearAuthenticatedUsersCart,
       hasMoreCartItems,
-      isLoadingCart,
       loadMoreCartItems,
       onRemoveCartItems,
       onChangeCartItemsQuantity
     } = this.props;
-
-    if (isLoadingCart) return null;
 
     if (!cart || (cart && Array.isArray(cart.items) && cart.items.length === 0)) {
       return (
@@ -308,8 +321,12 @@ class Checkout extends Component {
     }
 
     const hasAccount = !!cart.account;
-    const displayEmail = (hasAccount && Array.isArray(cart.account.emailRecords) && cart.account.emailRecords[0].address) || cart.email;
+    const orderEmailAddress = (hasAccount && Array.isArray(cart.account.emailRecords) && cart.account.emailRecords[0].address) || cart.email;
 
+    // Filter the hard-coded definedPaymentMethods list from the client to remove any
+    // payment methods that were not returned from the API as currently available.
+    const paymentMethods = definedPaymentMethods.filter((method) =>
+      !!availablePaymentMethods.find((availableMethod) => availableMethod.name === method.name));
 
     return (
       <div className={classes.checkoutContentContainer}>
@@ -318,10 +335,17 @@ class Checkout extends Component {
             <Grid item xs={12} md={7}>
               <div className={classes.flexContainer}>
                 <div className={classes.checkoutActions}>
-                  {displayEmail ? (
-                    <CheckoutEmailAddress emailAddress={displayEmail} isAccountEmail={hasAccount} />
+                  {orderEmailAddress ? (
+                    <CheckoutEmailAddress emailAddress={orderEmailAddress} isAccountEmail={hasAccount} />
                   ) : null}
-                  <CheckoutActions />
+                  <CheckoutActions
+                    cart={cart}
+                    cartStore={cartStore}
+                    checkoutMutations={checkoutMutations}
+                    clearAuthenticatedUsersCart={clearAuthenticatedUsersCart}
+                    orderEmailAddress={orderEmailAddress}
+                    paymentMethods={paymentMethods}
+                  />
                 </div>
               </div>
             </Grid>
@@ -345,8 +369,14 @@ class Checkout extends Component {
   }
 
   render() {
-    const { isLoadingCart, cart } = this.props;
-    if (isLoadingCart || !cart) return <PageLoading delay={0} />;
+    const {
+      isLoadingCart,
+      isLoadingAvailablePaymentMethods
+    } = this.props;
+
+    if (isLoadingCart || isLoadingAvailablePaymentMethods) {
+      return <PageLoading delay={0} />;
+    }
 
     return (
       <Fragment>

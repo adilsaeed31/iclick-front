@@ -5,6 +5,9 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Link from "components/Link";
 
+import customTheme from "custom/reactionTheme"; //added custom theme
+
+
 const styles = (theme) => ({
   root: {
     display: "flex",
@@ -13,10 +16,10 @@ const styles = (theme) => ({
     marginTop: "4rem"
   },
   errorMessage: {
-    color: theme.palette.reaction.black65
+    color: customTheme.palette.reaction.black65
   },
   errorLink: {
-    color: theme.palette.reaction.coolGrey400
+    color: customTheme.palette.reaction.coolGrey400
   }
 });
 
@@ -51,7 +54,7 @@ export default class Error extends Component {
       <div className={classes.root}>
         <Helmet title={`${subtitle} | ${shop && shop.name}`} />
         {statusCode ? (
-          <Typography variant="headline">{statusCode}</Typography>
+          <Typography variant="h5">{statusCode}</Typography>
         ) : (
           <Fragment>
             <Typography className={classes.errorMessage} paragraph>
