@@ -29,18 +29,26 @@ class PageSizeSelector extends Component {
   }
 
   render() {
-    const { pageSize } = this.props;
+    const { pageSize,labelValue,classes,selectorName } = this.props;
 
     return (
-      <Select
-        value={pageSize}
-        options={SELECTOR_OPTIONS}
-        inputProps={{
-          name: "pageSize",
-          id: "page-size"
-        }}
-        onChange={this.handleChange}
-      />
+      
+      <div className={classes}>
+        <label>{labelValue}</label>
+        <div className="select-custom">
+          <Select 
+            selectorName = {selectorName}
+            value={pageSize}
+            options={SELECTOR_OPTIONS}
+            inputProps={{
+              name: "pageSize",
+              id: "page-size"
+            }}
+            onChange={this.handleChange}
+          />
+        </div>
+        <a href="#" className="sorter-btn" title="Set Ascending Direction"><span className="sr-only">Set Ascending Direction</span></a>
+      </div>
     );
   }
 }

@@ -11,8 +11,9 @@ class Select extends Component {
 
   renderOptions() {
     const { options } = this.props;
+  
 
-    return options.map((option, key) => <div key={key}>{option.name}</div>);
+    return options.map((option, key) => <option value={option.value} key={key}>{option.name}</option>);
   }
 
   handleChange = (event) => {
@@ -20,7 +21,14 @@ class Select extends Component {
   }
 
   render() {
-    return <div>{this.renderOptions()}</div>;
+    const { selectorName } = this.props
+    return (
+      <select 
+        name = {selectorName} 
+        className="form-control">
+          {this.renderOptions()}
+      </select>
+    );
   }
 }
 

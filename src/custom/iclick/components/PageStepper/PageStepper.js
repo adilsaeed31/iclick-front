@@ -37,10 +37,23 @@ export default class PageStepper extends Component {
     const { pageInfo } = this.props;
 
     return (
-      <div>
-        <div>{pageInfo.hasPreviousPage && <Button onClick={this.handlePreviousClick}>Previous</Button>}</div>
-        <div>{pageInfo.hasNextPage && <Button onClick={this.handleNextClick}>Next</Button>}</div>
-      </div>
+
+      <ul className="pagination">
+         <li className="page-item">
+            <a className="page-link page-link-btn" href="#"><i className="icon-angle-left" />
+              {pageInfo.hasPreviousPage && <Button onClick={this.handlePreviousClick}>Previous</Button>}
+            </a>
+          </li>
+          <li className="page-item active">
+            <a className="page-link" href="#">1 <span className="sr-only">(current)</span></a>
+          </li>
+          <li className="page-item"><span className="page-link">...</span></li>
+          <li className="page-item">
+            <a className="page-link page-link-btn" href="#"><i className="icon-angle-right" />
+              {pageInfo.hasNextPage && <Button onClick={this.handleNextClick}>Next</Button>}
+            </a>
+          </li>
+      </ul> 
     );
   }
 }
