@@ -13,13 +13,17 @@ import dispatch from "lib/tracking/dispatch";
 import withApolloClient from "lib/apollo/withApolloClient";
 import withShop from "containers/shop/withShop";
 import withViewer from "containers/account/withViewer";
-import Layout from "components/Layout";
+import Layout from "custom/iclick/components/Layout";
 import withMobX from "lib/stores/withMobX";
 import rootMobXStores from "lib/stores";
 import getPageContext from "../lib/theme/getPageContext";
 import components from "../custom/componentsContext";
 import componentTheme from "../custom/componentTheme";
 import getAllTags from "../lib/data/getAllTags";
+
+import "static/css/bootstrap.min.css";
+import "static/css/style.min.css";
+import "static/css/custom.css";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -43,7 +47,7 @@ export default class App extends NextApp {
     // we could loop multiple times to get them all
     // We no longer use tags for navigation, so if we can find a resolution
     // to #2, we can move this to only where tags are needed, or inside their own `withTags` container
-    const tags = await getAllTags(ctx.apolloClient);
+    const tags = getAllTags(ctx.apolloClient);
 
     return { pageProps, tags };
   }
@@ -74,7 +78,15 @@ export default class App extends NextApp {
   }
 
   render() {
-    const { Component, pageProps, shop, shop: { defaultNavigationTree: navItems }, tags, viewer, ...rest } = this.props;
+    const {
+      Component,
+      pageProps,
+      shop,
+      shop: { defaultNavigationTree: navItems },
+      tags,
+      viewer,
+      ...rest
+    } = this.props;
     const { route } = this.props.router;
     const { stripe } = this.state;
 
