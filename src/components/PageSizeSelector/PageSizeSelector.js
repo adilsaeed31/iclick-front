@@ -5,6 +5,14 @@ import { PAGE_SIZES } from "lib/utils/pageSizes";
 
 const SELECTOR_OPTIONS = [
   {
+    name: "5 Products",
+    value: PAGE_SIZES._5
+  },
+  {
+    name: "10 Products",
+    value: PAGE_SIZES._10
+  },
+  {
     name: "20 Products",
     value: PAGE_SIZES._20
   },
@@ -22,11 +30,11 @@ class PageSizeSelector extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     pageSize: PropTypes.number.isRequired
-  }
+  };
 
   handleChange = (event) => {
     this.props.onChange(event.target.value);
-  }
+  };
 
   render() {
     const { pageSize } = this.props;

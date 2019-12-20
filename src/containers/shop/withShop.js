@@ -31,11 +31,7 @@ export default function withShop(Component) {
             // as well as passing into the component directly
             return (
               <Provider primaryShopId={shop && shop._id} shop={shop}>
-                <Component
-                  isLoadingShop={loading}
-                  shop={shop}
-                  {...this.props}
-                />
+                <Component isLoadingShop={loading} shop={shop} {...this.props} />
               </Provider>
             );
           }}

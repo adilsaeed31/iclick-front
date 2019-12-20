@@ -23,11 +23,13 @@ export default function withTag(Component) {
       routingStore: PropTypes.shape({
         tagId: PropTypes.string
       }).isRequired
-    }
+    };
 
     render() {
       const {
-        router: { query: { slug: slugFromQueryParam } },
+        router: {
+          query: { slug: slugFromQueryParam }
+        },
         routingStore: { tagId }
       } = this.props;
 
@@ -41,12 +43,7 @@ export default function withTag(Component) {
             }
             const tagData = data || {};
 
-            return (
-              <Component
-                {...this.props}
-                tag={tagData && tagData.tag}
-              />
-            );
+            return <Component {...this.props} tag={tagData && tagData.tag} />;
           }}
         </Query>
       );
