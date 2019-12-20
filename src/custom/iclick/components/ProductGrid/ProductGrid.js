@@ -12,7 +12,7 @@ import { withStyles } from "@material-ui/core/styles";
 import TagPagination from "custom/iclick/components/TagPagination";
 import ProductGridEmptyMessage from "./ProductGridEmptyMessage";
 
-const styles = theme => ({
+const styles = (theme) => ({
   filters: {
     justifyContent: "flex-end",
     marginBottom: theme.spacing.unit * 2
@@ -70,7 +70,7 @@ export default class ProductGrid extends Component {
 
     if (isLoadingCatalogItems) return <PageLoading />;
 
-    const products = (catalogItems || []).map(item => {
+    const products = (catalogItems || []).map((item) => {
       item.node.product.isOnSale = true;
       return item.node.product;
     });
@@ -80,7 +80,6 @@ export default class ProductGrid extends Component {
     return (
       <Fragment>
         <Grid container spacing={24}>
-          {this.renderFilters()}
           <Grid item sm={12}>
             <CatalogGrid
               initialSize={initialSize}
@@ -96,6 +95,11 @@ export default class ProductGrid extends Component {
   }
 
   render() {
-    return <Fragment>{this.renderMainArea()}</Fragment>;
+    return (
+      <Fragment>
+        {this.renderFilters()}
+        {this.renderMainArea()}
+      </Fragment>
+    );
   }
 }
