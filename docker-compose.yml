@@ -25,6 +25,7 @@ services:
     ports:
       - 4000:4000
     volumes:
+      - $HOME/.cache/yarn-offline-mirror:/home/node/.cache/yarn-offline-mirror
       - web-yarn:/home/node/.cache/yarn
       - .:/usr/local/src/app
       # Do not link in node_modules from the host
