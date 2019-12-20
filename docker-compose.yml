@@ -1,3 +1,7 @@
+# This docker-compose file is used to run the Example Storefront in Docker for development.
+# The local files are mounted into the created container.
+# Usage: docker-compose up [-d]
+
 version: '3.4'
 
 networks:
@@ -10,15 +14,9 @@ networks:
 
 services:
   web:
-    build:
-      context: .
-      args:
-        BUILD_ENV: "development"
-    command: "/usr/local/src/reaction-app/bin/start"
+    image: reactioncommerce/node-dev:10.16.3-v2
     env_file:
       - ./.env
-    environment:
-      REACTION_APP_NAME: "reaction-next-starterkit.web"
     networks:
       api:
         aliases:
@@ -27,13 +25,14 @@ services:
     ports:
       - 4000:4000
     volumes:
-#      - $HOME/.cache/yarn-offline-mirror:/home/node/.cache/yarn-offline-mirror
+      - $HOME/.cache/yarn-offline-mirror:/home/node/.cache/yarn-offline-mirror
       - web-yarn:/home/node/.cache/yarn
-      - .:/usr/local/src/reaction-app
-      - empty_node_modules:/usr/local/src/reaction-app/node_modules # do not link node_modules in, and persist it between dc up runs
-      - node_modules:/usr/local/src/node_modules
+      - .:/usr/local/src/app
+      # Do not link in node_modules from the host
+      # This allows IDEs to run lint etc with native add-ons for host OS
+      # Without interfering with native add-ons in container
+      - empty_node_modules:/usr/local/src/app/node_modules
 
 volumes:
   web-yarn:
   empty_node_modules:
-  node_modules:

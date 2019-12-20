@@ -24,25 +24,43 @@ class UIStore {
   @observable isMenuDrawerOpen = false;
 
   /**
+   * Default display language for shop text, when translations are available.
+   *
+   * @type String
+   * @default "en"
+   */
+  @observable language = "en";
+
+  /**
+   * Shop locales info loaded via a json file if needed.
+   *
+   * @type Object
+   * @default {}
+   */
+  @observable locales = {};
+
+  /**
+   * Return orders with these order status values
+   *
+   * @type Array
+   * @default []
+   */
+  @observable orderStatusQuery = [];
+
+  /**
+   * Limit for results of queries for multiple orders
+   *
+   * @type Number
+   * @default 5
+   */
+  @observable orderQueryLimit = 5;
+
+  /**
    * The number of items per page to display on the product grid.
    *
    * @type Number
    */
   @observable pageSize = PAGE_SIZES._20;
-
-  /**
-   * The product grid's sorting order
-   *
-   * @type string
-   */
-  @observable sortBy = "updatedAt-desc";
-
-  /**
-   * The sort by currency code
-   *
-   * @type string
-   */
-  @observable sortByCurrencyCode = "USD";
 
   /**
    * App config data
@@ -64,12 +82,18 @@ class UIStore {
   @observable pdpSelectedVariantId = null;
 
   /**
-   * Shop locales info loaded via a json file if needed.
+   * The product grid's sorting order
    *
-   * @type Object
-   * @default {}
+   * @type string
    */
-  @observable locales = {};
+  @observable sortBy = "updatedAt-desc";
+
+  /**
+   * The sort by currency code
+   *
+   * @type string
+   */
+  @observable sortByCurrencyCode = "USD";
 
   /* ACTIONS */
   /**
@@ -138,6 +162,16 @@ class UIStore {
 
   @action toggleMenuDrawerOpen() {
     this.isMenuDrawerOpen = !this.isMenuDrawerOpen;
+  }
+
+  /**
+   * @name setOrderStatusSelectValue
+   * @summary Sets the order statuses to search for
+   * @param {Array} orderStatus Order statuses to filter by
+   * @returns {undefined} No return
+   */
+  @action setOrderStatusSelectValue(orderStatus) {
+    this.orderStatusQuery = orderStatus;
   }
 
   @action setPageSize = (size) => {

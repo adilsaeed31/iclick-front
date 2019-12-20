@@ -13,14 +13,17 @@ import dispatch from "lib/tracking/dispatch";
 import withApolloClient from "lib/apollo/withApolloClient";
 import withShop from "containers/shop/withShop";
 import withViewer from "containers/account/withViewer";
-import Layout from "components/Layout";
+import Layout from "custom/iclick/components/Layout";
 import withMobX from "lib/stores/withMobX";
 import rootMobXStores from "lib/stores";
 import getPageContext from "../lib/theme/getPageContext";
 import components from "../custom/componentsContext";
 import componentTheme from "../custom/componentTheme";
-import buildNavFromTags from "../lib/data/buildNavFromTags";
 import getAllTags from "../lib/data/getAllTags";
+
+import "static/css/bootstrap.min.css";
+import "static/css/style.min.css";
+import "static/css/custom.css";
 
 const { publicRuntimeConfig } = getConfig();
 
@@ -37,10 +40,16 @@ export default class App extends NextApp {
       pageProps = await Component.getInitialProps(ctx);
     }
 
-    const tags = await getAllTags(ctx.apolloClient);
-    const navItems = buildNavFromTags(tags);
+    // TODO
+    // We retrieve tags here because
+    // 1) they were used for navigtion and needed to be here and
+    // 2) with multiple pages of tags, this was the only place where
+    // we could loop multiple times to get them all
+    // We no longer use tags for navigation, so if we can find a resolution
+    // to #2, we can move this to only where tags are needed, or inside their own `withTags` container
+    const tags = getAllTags(ctx.apolloClient);
 
-    return { navItems, pageProps, tags };
+    return { pageProps, tags };
   }
 
   constructor(props) {
@@ -69,7 +78,15 @@ export default class App extends NextApp {
   }
 
   render() {
-    const { Component, navItems, pageProps, shop, tags, viewer, ...rest } = this.props;
+    const {
+      Component,
+      pageProps,
+      shop,
+      shop: { defaultNavigationTree: navItems },
+      tags,
+      viewer,
+      ...rest
+    } = this.props;
     const { route } = this.props.router;
     const { stripe } = this.state;
 

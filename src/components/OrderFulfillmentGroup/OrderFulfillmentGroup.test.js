@@ -23,11 +23,11 @@ const testFulfillmentGroup = {
         compareAtPrice: {
           displayAmount: "$45.00"
         },
-        currentQuantity: 3,
         imageURLs: {
           small: "//placehold.it/150",
           thumbnail: "//placehold.it/100"
         },
+        inventoryAvailableToSell: 3,
         isLowQuantity: true,
         price: {
           displayAmount: "$20.00"
@@ -40,11 +40,11 @@ const testFulfillmentGroup = {
       {
         _id: "456",
         attributes: [{ label: "Color", value: "Black" }, { label: "Size", value: "10" }],
-        currentQuantity: 500,
         imageURLs: {
           small: "//placehold.it/150",
           thumbnail: "//placehold.it/100"
         },
+        inventoryAvailableToSell: 30,
         isLowQuantity: false,
         price: {
           displayAmount: "$78.00"
@@ -56,9 +56,6 @@ const testFulfillmentGroup = {
       }
     ]
   },
-  payment: {
-    displayName: "Example Payment"
-  },
   selectedFulfillmentOption: {
     fulfillmentMethod: {
       displayName: "Free Shipping",
@@ -67,12 +64,21 @@ const testFulfillmentGroup = {
   }
 };
 
+const testPayments = [{
+  _id: "TEST",
+  amount: {
+    displayAmount: "$10.00"
+  },
+  displayName: "Example Payment"
+}];
+
 test("basic snapshot", () => {
   const component = renderer.create((
     <ComponentsProvider value={components}>
       <MuiThemeProvider theme={theme}>
         <OrderFulfillmentGroup
           fulfillmentGroup={testFulfillmentGroup}
+          payments={testPayments}
         />
       </MuiThemeProvider>
     </ComponentsProvider>
