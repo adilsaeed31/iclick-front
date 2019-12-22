@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
 import Helmet from "react-helmet";
 import withCatalogItems from "containers/catalog/withCatalogItems";
-import ProductGrid from "components/ProductGrid";
+import ProductGrid from "custom/iclick/components/ProductGrid";
 import trackProductListViewed from "lib/tracking/trackProductListViewed";
 import { inPageSizes } from "lib/utils/pageSizes";
 
@@ -59,12 +59,12 @@ class Home extends Component {
   @trackProductListViewed()
   trackEvent() {}
 
-  setPageSize = pageSize => {
+  setPageSize = (pageSize) => {
     this.props.routingStore.setSearch({ limit: pageSize });
     this.props.uiStore.setPageSize(pageSize);
   };
 
-  setSortBy = sortBy => {
+  setSortBy = (sortBy) => {
     this.props.routingStore.setSearch({ sortby: sortBy });
     this.props.uiStore.setSortBy(sortBy);
   };

@@ -15,7 +15,9 @@ export function dispatch(data) {
   const { action } = newData;
   delete newData.action;
 
-  window && window.analytics && window.analytics.track(action, newData);
+  if (process.browser) {
+    window && window.analytics && window.analytics.track(action, newData);
+  }
 }
 
 /**
@@ -23,7 +25,9 @@ export function dispatch(data) {
  * @returns {String} String script to be included in the document head
  */
 export function renderScript() {
-  const { publicRuntimeConfig: { segmentAnalytics } } = getConfig();
+  const {
+    publicRuntimeConfig: { segmentAnalytics }
+  } = getConfig();
 
   const opts = {
     apiKey: segmentAnalytics.writeKey,
