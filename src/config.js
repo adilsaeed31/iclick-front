@@ -27,29 +27,33 @@ if (process.env.IS_BUILDING_NEXTJS) {
    *
    * Be sure to add `{ default: null }` if it should be optional.
    */
-  module.exports = envalid.cleanEnv(process.env, {
-    CANONICAL_URL: url(),
-    ENABLE_SPA_ROUTING: bool({ default: true }), // must explicitly set to false to disable
-    EXTERNAL_GRAPHQL_URL: url(),
-    INTERNAL_GRAPHQL_URL: url(),
-    NODE_ENV: str({ choices: ["development", "test", "jesttest", "production"], default: "production" }),
-    OAUTH2_AUTH_URL: url(),
-    OAUTH2_CLIENT_ID: str(),
-    OAUTH2_CLIENT_SECRET: str(),
-    OAUTH2_IDP_HOST_URL: url(),
-    OAUTH2_REDIRECT_URL: url(),
-    OAUTH2_TOKEN_URL: url(),
-    PORT: port({ default: 4000 }),
-    SEGMENT_ANALYTICS_SKIP_MINIMIZE: bool({ default: false }),
-    SEGMENT_ANALYTICS_WRITE_KEY: str({ default: "" }),
-    SESSION_MAX_AGE_MS: num({ default: 86400000 }), // 24 hours
-    SESSION_SECRET: str(),
-    STRIPE_PUBLIC_API_KEY: str({ default: "" }),
-    SITEMAP_MAX_AGE: num({ default: 43200 }) // 12 hours
-  }, {
-    // disable dotenv processing
-    dotEnvPath: null,
-    // https://www.npmjs.com/package/envalid#strict-mode
-    strict: true
-  });
+  module.exports = envalid.cleanEnv(
+    process.env,
+    {
+      CANONICAL_URL: url(),
+      ENABLE_SPA_ROUTING: bool({ default: true }), // must explicitly set to false to disable
+      EXTERNAL_GRAPHQL_URL: url(),
+      INTERNAL_GRAPHQL_URL: url(),
+      NODE_ENV: str({ choices: ["development", "test", "jesttest", "production"], default: "production" }),
+      OAUTH2_AUTH_URL: url(),
+      OAUTH2_CLIENT_ID: str(),
+      OAUTH2_CLIENT_SECRET: str(),
+      OAUTH2_IDP_HOST_URL: url(),
+      OAUTH2_REDIRECT_URL: url(),
+      OAUTH2_TOKEN_URL: url(),
+      PORT: port({ default: 4000 }),
+      SEGMENT_ANALYTICS_SKIP_MINIMIZE: bool({ default: false }),
+      SEGMENT_ANALYTICS_WRITE_KEY: str({ default: "" }),
+      SESSION_MAX_AGE_MS: num({ default: 86400000 }), // 24 hours
+      SESSION_SECRET: str(),
+      STRIPE_PUBLIC_API_KEY: str({ default: "" }),
+      SITEMAP_MAX_AGE: num({ default: 43200 }) // 12 hours
+    },
+    {
+      // disable dotenv processing
+      dotEnvPath: null,
+      // https://www.npmjs.com/package/envalid#strict-mode
+      strict: true
+    }
+  );
 }

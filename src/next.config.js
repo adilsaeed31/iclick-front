@@ -1,8 +1,16 @@
-const withCSS = require("@zeit/next-css");
-const withFonts = require("next-fonts");
-const appConfig = require("./config");
+import withCSS from "@zeit/next-css";
+import withFonts from "next-fonts";
+import {
+  INTERNAL_GRAPHQL_URL,
+  CANONICAL_URL,
+  EXTERNAL_GRAPHQL_URL,
+  SEGMENT_ANALYTICS_SKIP_MINIMIZE,
+  SEGMENT_ANALYTICS_WRITE_KEY,
+  STRIPE_PUBLIC_API_KEY,
+  ENABLE_SPA_ROUTING
+} from "./config";
 
-module.exports = withCSS(
+export default withCSS(
   withFonts({
     /**
      * `serverRuntimeConfig` is available in browser code, ONLY when run on the server
@@ -11,7 +19,7 @@ module.exports = withCSS(
      * const { serverRuntimeConfig } = getConfig();
      */
     serverRuntimeConfig: {
-      graphqlUrl: appConfig.INTERNAL_GRAPHQL_URL
+      graphqlUrl: INTERNAL_GRAPHQL_URL
     },
     /**
      * `publicRuntimeConfig` is available in browser code, even when run on the server
@@ -20,14 +28,14 @@ module.exports = withCSS(
      * const { publicRuntimeConfig } = getConfig();
      */
     publicRuntimeConfig: {
-      canonicalUrl: appConfig.CANONICAL_URL,
-      graphqlUrl: appConfig.EXTERNAL_GRAPHQL_URL,
+      canonicalUrl: CANONICAL_URL,
+      graphqlUrl: EXTERNAL_GRAPHQL_URL,
       segmentAnalytics: {
-        skipMinimize: appConfig.SEGMENT_ANALYTICS_SKIP_MINIMIZE,
-        writeKey: appConfig.SEGMENT_ANALYTICS_WRITE_KEY
+        skipMinimize: SEGMENT_ANALYTICS_SKIP_MINIMIZE,
+        writeKey: SEGMENT_ANALYTICS_WRITE_KEY
       },
-      stripePublicApiKey: appConfig.STRIPE_PUBLIC_API_KEY,
-      enableSPARouting: appConfig.ENABLE_SPA_ROUTING
+      stripePublicApiKey: STRIPE_PUBLIC_API_KEY,
+      enableSPARouting: ENABLE_SPA_ROUTING
     },
     // NextJS builds to `/src/.next` by default. Change that to `/build/app`
     distDir: "../build/app",

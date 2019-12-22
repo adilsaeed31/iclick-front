@@ -29,7 +29,10 @@
   "eslintConfig": {
     "extends": [
       "@reactioncommerce"
-    ]
+    ],
+    "rules": {
+      "function-paren-newline": ["error", "never"]
+    }
   },
   "dependencies": {
     "@material-ui/core": "~3.9.2",
