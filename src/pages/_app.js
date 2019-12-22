@@ -21,9 +21,9 @@ import components from "../custom/componentsContext";
 import componentTheme from "../custom/componentTheme";
 import getAllTags from "../lib/data/getAllTags";
 
-import "static/css/bootstrap.min.css";
-import "static/css/style.min.css";
-import "static/css/custom.css";
+import "../static/css/bootstrap.min.css";
+import "../static/css/style.min.css";
+import "../static/css/custom.css";
 
 const { publicRuntimeConfig } = getConfig();
 

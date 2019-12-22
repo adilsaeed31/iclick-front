@@ -2,15 +2,15 @@
 # The local files are mounted into the created container.
 # Usage: docker-compose up [-d]
 
-version: '3.4'
+version: "3.4"
 
 networks:
   api:
     external:
-      name: api.reaction.localhost
+      name: super.iclick.ae
   auth.reaction.localhost:
     external:
-      name: auth.reaction.localhost
+      name: hydra.iclick.ae
 
 services:
   web:
