@@ -64,6 +64,9 @@ class HTMLDocument extends Document {
     const links = [
       { rel: "canonical", href: publicRuntimeConfig.canonicalUrl },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" },
+      { rel: "stylesheet", href: "/static/css/bootstrap.min.css" },
+      { rel: "stylesheet", href: "/static/css/style.min.css" },
+      { rel: "stylesheet", href: "/static/css/custom.css" },
       ...favicons
     ];
     const meta = [
@@ -92,27 +95,38 @@ class HTMLDocument extends Document {
       }
     ];
 
-    return <html lang="en" {...htmlAttrs}>
-      <Head>
-        <Helmet htmlAttributes={{ lang: "en", dir: "ltr" }} />
-        {meta.map((tag, index) => <meta key={index} {...tag} />)}
-        {links.map((link, index) => <link key={index} {...link} />)}
-        {helmet.base.toComponent()}
-        {helmet.title.toComponent()}
-        {helmet.meta.toComponent()}
-        {helmet.link.toComponent()}
-        {helmet.style.toComponent()}
-        {helmet.script.toComponent()}
-        {helmet.noscript.toComponent()}
-        {styledComponentsStyleTags}
-      </Head>
-      <body>
-        <Main />
-        <NextScript />
-        {scripts.map((script, index) => (script.innerHTML ? /* eslint-disable-next-line */
-          <script async key={index} type={script.type} dangerouslySetInnerHTML={{ __html: script.innerHTML }} /> : <script async key={index} {...script} />))}
-      </body>
-    </html>;
+    return (
+      <html lang="en" {...htmlAttrs}>
+        <Head>
+          <Helmet htmlAttributes={{ lang: "en", dir: "ltr" }} />
+          {meta.map((tag, index) => (
+            <meta key={index} {...tag} />
+          ))}
+          {links.map((link, index) => (
+            <link key={index} {...link} />
+          ))}
+          {helmet.base.toComponent()}
+          {helmet.title.toComponent()}
+          {helmet.meta.toComponent()}
+          {helmet.link.toComponent()}
+          {helmet.style.toComponent()}
+          {helmet.script.toComponent()}
+          {helmet.noscript.toComponent()}
+          {styledComponentsStyleTags}
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+          {scripts.map((script, index) =>
+            script.innerHTML /* eslint-disable-next-line */ ? (
+              <script async key={index} type={script.type} dangerouslySetInnerHTML={{ __html: script.innerHTML }} />
+            ) : (
+              <script async key={index} {...script} />
+            )
+          )}
+        </body>
+      </html>
+    );
   }
 }
 
