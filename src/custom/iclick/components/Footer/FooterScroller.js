@@ -1,14 +1,7 @@
 import React from "react";
 
 const FooterScroller = () => (
-  <a
-    id="scroll-top"
-    className="fixed"
-    href="#top"
-    title="Top"
-    // eslint-disable-next-line react/jsx-indent-props
-    role="button"
-  >
+  <a id="scroll-top" href="#top" title="Top" role="button">
     <i className="icon-angle-up" />
   </a>
 );

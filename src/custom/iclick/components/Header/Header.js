@@ -20,7 +20,7 @@ class Header extends Component {
     return (
       <header className="header">
         <div className="sticky-wrapper">
-          <div className="header-bottom sticky-header fixed">
+          <div className="header-bottom sticky-header">
             <div className="container wide-header">
               <Logo name={name} />
               <div className="menu-bar">

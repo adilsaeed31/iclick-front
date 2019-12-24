@@ -1,6 +1,5 @@
 .header {
-  margin-bottom: 60px;
-  border-top: 0px;
+  /* border-top: 0px; */
 }
 .header-bottom .logo {
   margin-right: 1rem;
@@ -85,4 +84,13 @@
   .header-bottom {
     display: block;
   }
+}
+
+/**
+ * Custom style changes for style.min.css file 
+ */
+
+.header-bottom .logo,
+.header-bottom .cart-dropdown {
+  display: block;
 }

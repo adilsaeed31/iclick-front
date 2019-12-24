@@ -29,7 +29,16 @@
   "eslintConfig": {
     "extends": [
       "@reactioncommerce"
-    ]
+    ],
+    "rules": {
+      "no-confusing-arrow": [
+        "error",
+        {
+          "allowParens": true
+        }
+      ],
+      "react/no-danger": "off"
+    }
   },
   "dependencies": {
     "@material-ui/core": "~3.9.2",

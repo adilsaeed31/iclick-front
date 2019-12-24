@@ -12,33 +12,14 @@ class Layout extends Component {
     viewer: PropTypes.object
   };
 
-  state = {
-    isMarkerShown: true,
-    isVisible: false
-  };
-
-  handleEnter = () => {
-    this.setState({ isVisible: true });
-  };
-
-  handleLeave = () => {
-    this.setState({ isVisible: false });
-  };
-
   render() {
     const { children, shop, viewer } = this.props;
-    const { isVisible } = this.state;
     return (
       <React.Fragment>
         <div className="page-wrapper">
           <Header shop={shop} viewer={viewer} />
           <main className="main">{children}</main>
-          <Footer
-            isVisible={isVisible}
-            isMarkerShown={true}
-            handleEnter={this.handleEnter}
-            handleLeave={this.handleLeave}
-          />
+          <Footer />
         </div>
       </React.Fragment>
     );

@@ -91,6 +91,70 @@ class HTMLDocument extends Document {
       })),
       {
         type: "text/javascript",
+        src: "/static/js/jquery.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/bootstrap.bundle.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/map.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/nouislider.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/hoverintent.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/jquery.bootstrap-touchspin.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/jquery.countTo.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/jquery.magnific-popup.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/jquery.sticky-kit.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/jquery.waypoints.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/owl.carousel.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/share.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/sticky.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/plugins/superfish.min.js"
+      },
+      {
+        type: "text/javascript",
+        src: "/static/js/main.js"
+      },
+      {
+        type: "text/javascript",
         src: "https://js.stripe.com/v3/"
       }
     ];
@@ -118,7 +182,7 @@ class HTMLDocument extends Document {
           <Main />
           <NextScript />
           {scripts.map((script, index) =>
-            script.innerHTML /* eslint-disable-next-line */ ? (
+            script.innerHTML ? (
               <script async key={index} type={script.type} dangerouslySetInnerHTML={{ __html: script.innerHTML }} />
             ) : (
               <script async key={index} {...script} />
