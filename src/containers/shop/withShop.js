@@ -24,7 +24,7 @@ export default function withShop(Component) {
 
       return (
         <Query errorPolicy="all" query={primaryShopQuery} variables={{ language }}>
-          {({ loading, data: shopData }) => {
+          {({ data: shopData, loading }) => {
             const { primaryShop: shop } = shopData || {};
 
             // Use mobx-provider to pass shop data through context

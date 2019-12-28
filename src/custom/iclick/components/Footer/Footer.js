@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Link from "custom/iclick/components/Link";
 import FooterMaps from "custom/iclick/components/FooterMaps";
 import FooterScroller from "custom/iclick/components/Footer/FooterScroller";
 
 const date = new Date();
 
-const Footer = () => (
+const Footer = ({ newsLetter }) => (
   <footer className="footer">
     <div className="footer-middle">
       <div className="container">
@@ -40,31 +41,31 @@ const Footer = () => (
 
                   <ul className="links">
                     <li>
-                      <Link route="/">Company Portfolio</Link>
+                      <Link route="/about-portfolio">Company Portfolio</Link>
                     </li>
                     <li>
-                      <Link route="/">Privacy Policy</Link>
+                      <Link route="/privacy-policy">Privacy Policy</Link>
                     </li>
                     <li>
-                      <Link route="/">Shipping &amp; Retruns</Link>
+                      <Link route="/shipping-returns">Shipping &amp; Retruns</Link>
                     </li>
                     <li>
-                      <Link route="/">Delivery Information</Link>
+                      <Link route="/delivery-information">Delivery Information</Link>
                     </li>
                     <li>
-                      <Link route="/">Order &amp; Collect FAQs</Link>
+                      <Link route="/faq">Order &amp; Collect FAQs</Link>
                     </li>
                     <li>
-                      <Link route="/">Terms of Use</Link>
+                      <Link route="/terms-of-use">Terms of Use</Link>
                     </li>
                     <li>
-                      <Link route="/">Terms of Service</Link>
+                      <Link route="/terms-of-service">Terms of Service</Link>
                     </li>
                     <li>
-                      <Link route="/">About Us</Link>
+                      <Link route="/about-portfolio">About Us</Link>
                     </li>
                     <li>
-                      <Link route="/">Contact Us</Link>
+                      <Link route="/contact-us">Contact Us</Link>
                     </li>
                   </ul>
                 </div>
@@ -76,16 +77,21 @@ const Footer = () => (
 
                   <ul className="links">
                     <li>
-                      <Link route="my-account.html">My Account</Link>
+                      <Link route="/my-account">My Account</Link>
                     </li>
                     <li>
-                      <Link route="/">Orders History</Link>
+                      <Link route="/order/history">Orders History</Link>
                     </li>
                     <li>
-                      <Link route="/">Advanced Search</Link>
+                      <Link route="/cart">Shopping Basket</Link>
                     </li>
                     <li>
-                      <Link route="/" className="login-link">
+                      <Link route="/checkout" className="login-link">
+                        Checkout
+                      </Link>
+                    </li>
+                    <li>
+                      <Link route="/login" className="login-link">
                         Login
                       </Link>
                     </li>
@@ -99,10 +105,10 @@ const Footer = () => (
 
                   <ul className="links">
                     <li>
-                      <Link route="/">#WeFixIt</Link>
+                      <Link route="/fix-it">#WeFixIt</Link>
                     </li>
                     <li>
-                      <Link route="/">Business</Link>
+                      <Link route="/business">Business</Link>
                     </li>
                   </ul>
                 </div>
@@ -114,25 +120,23 @@ const Footer = () => (
             <div className="widget widget-newsletter">
               <h4 className="widget-title">Follow Us</h4>
               <div className="social-icons">
-                <a href="https://www.facebook.com" className="social-icon" target="_blank">
+                <a href="https://www.facebook.com/iclick-electronics" className="social-icon" target="_blank">
                   <i className="icon-facebook" />
                 </a>
-                <a href="https://www.twitter.com" className="social-icon" target="_blank">
+                <a href="https://www.twitter.com/iclick-electronics" className="social-icon" target="_blank">
                   <i className="icon-twitter" />
                 </a>
-                <a href="https://www.instagram.com" className="social-icon" target="_blank">
+                <a href="https://www.instagram.com/iclick-electronis" className="social-icon" target="_blank">
                   <i className="icon-instagram" />
                 </a>
-                <a href="https://plus.google.com" className="social-icon" target="_blank">
+                <a href="https://plus.google.com/iclick-electronics" className="social-icon" target="_blank">
                   <i className="icon-gplus" />
                 </a>
               </div>
-
               <p className="news-signup">SIGN UP FOR NEWSLETTER!</p>
 
-              <form action="#">
+              <form onSubmit={newsLetter}>
                 <input type="email" className="form-control" placeholder="Email address" required />
-
                 <input type="submit" className="btn" value="Subscribe" />
               </form>
             </div>
@@ -154,5 +158,9 @@ const Footer = () => (
     <FooterScroller />
   </footer>
 );
+
+Footer.propTypes = {
+  newsLetter: PropTypes.func.isRequired
+};
 
 export default Footer;

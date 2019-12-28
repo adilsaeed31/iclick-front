@@ -4,13 +4,13 @@ import { observer, inject } from "mobx-react";
 import Helmet from "react-helmet";
 import withCatalogItems from "containers/catalog/withCatalogItems";
 import withTag from "containers/tags/withTag";
-import Breadcrumbs from "components/Breadcrumbs";
-import ProductGrid from "components/ProductGrid";
-import ProductGridEmptyMessage from "components/ProductGrid/ProductGridEmptyMessage";
-import ProductGridHero from "components/ProductGridHero";
-import ProductGridTitle from "components/ProductGridTitle";
+import ProductGrid from "custom/iclick/components/ProductGrid";
+import TagBanner from "custom/iclick/components/TagBanner";
 import SharedPropTypes from "lib/utils/SharedPropTypes";
 import trackProductListViewed from "lib/tracking/trackProductListViewed";
+import Breadcrumbs from "custom/iclick/components/Breadcrumbs";
+import PageLoading from "components/PageLoading";
+import TagFilters from "custom/iclick/components/TagFilters";
 
 @withTag
 @withCatalogItems
@@ -123,16 +123,13 @@ export default class TagGridPage extends Component {
       tag,
       uiStore
     } = this.props;
-    const pageSize = routingStore.query && routingStore.query.limit ? parseInt(routingStore.query.limit, 10) : uiStore.pageSize;
+
+    const pageSize =
+      routingStore.query && routingStore.query.limit ? parseInt(routingStore.query.limit, 10) : uiStore.pageSize;
     const sortBy = routingStore.query && routingStore.query.sortby ? routingStore.query.sortby : uiStore.sortBy;
 
     if (!tag) {
-      return (
-        <ProductGridEmptyMessage
-          actionMessage="Go Home"
-          resetLink="/"
-        />
-      );
+      return <PageLoading message={"Loading products for you ..."} />;
     }
 
     return (
@@ -140,28 +137,31 @@ export default class TagGridPage extends Component {
         <Helmet
           title={`${tag && tag.name} | ${shop && shop.name}`}
           meta={
-            tag && tag.metafields && tag.metafields.length > 0 ?
-              this.renderHeaderMetatags(tag.metafields)
-              :
-              [{ name: "description", content: shop && shop.description }]
+            tag && tag.metafields && tag.metafields.length > 0
+              ? this.renderHeaderMetatags(tag.metafields)
+              : [{ name: "description", content: shop && shop.description }]
           }
         />
-        <Breadcrumbs isTagGrid tagId={routingStore.tagId} />
-        {
-          tag && tag.displayTitle && <ProductGridTitle displayTitle={tag.displayTitle} />
-        }
-        <ProductGridHero tag={tag} />
-        <ProductGrid
-          catalogItems={catalogItems}
-          currencyCode={shop.currency.code}
-          initialSize={initialGridSize}
-          isLoadingCatalogItems={isLoadingCatalogItems}
-          pageInfo={catalogItemsPageInfo}
-          pageSize={pageSize}
-          setPageSize={this.setPageSize}
-          setSortBy={this.setSortBy}
-          sortBy={sortBy}
-        />
+        <div className="container">
+          <Breadcrumbs isTagGrid tagId={routingStore.tagId} />
+          <div className="row">
+            <TagFilters />
+            <div className="col-lg-9">
+              <TagBanner tag={tag} />
+              <ProductGrid
+                catalogItems={catalogItems}
+                currencyCode={shop.currency.code}
+                initialSize={initialGridSize}
+                isLoadingCatalogItems={isLoadingCatalogItems}
+                pageInfo={catalogItemsPageInfo}
+                pageSize={pageSize}
+                setPageSize={this.setPageSize}
+                setSortBy={this.setSortBy}
+                sortBy={sortBy}
+              />
+            </div>
+          </div>
+        </div>
       </Fragment>
     );
   }

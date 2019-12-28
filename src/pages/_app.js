@@ -21,10 +21,6 @@ import components from "../custom/componentsContext";
 import componentTheme from "../custom/componentTheme";
 import getAllTags from "../lib/data/getAllTags";
 
-// import "../static/css/bootstrap.min.css";
-// import "../static/css/style.min.css";
-// import "../static/css/custom.css";
-
 const { publicRuntimeConfig } = getConfig();
 
 @withApolloClient
@@ -47,8 +43,7 @@ export default class App extends NextApp {
     // we could loop multiple times to get them all
     // We no longer use tags for navigation, so if we can find a resolution
     // to #2, we can move this to only where tags are needed, or inside their own `withTags` container
-    const tags = getAllTags(ctx.apolloClient);
-
+    const tags = await getAllTags(ctx.apolloClient);
     return { pageProps, tags };
   }
 
@@ -106,7 +101,7 @@ export default class App extends NextApp {
                       <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
                     </StripeProvider>
                   ) : (
-                    <Layout shop={shop} viewer={viewer}>
+                    <Layout shop={shop} viewer={viewer} {...rest}>
                       <Component pageContext={this.pageContext} shop={shop} {...rest} {...pageProps} />
                     </Layout>
                   )}

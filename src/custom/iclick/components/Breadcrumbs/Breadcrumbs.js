@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from "react"
-import PropTypes from "prop-types"
-import { inject } from "mobx-react"
-import ChevronRight from "mdi-material-ui/ChevronRight"
-import Link from "components/Link"
-import SharedPropTypes from "lib/utils/SharedPropTypes"
+import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
+import { inject } from "mobx-react";
+import Link from "custom/iclick/components/Link";
+import SharedPropTypes from "lib/utils/SharedPropTypes";
 
 @inject("tags")
 class Breadcrumbs extends Component {
@@ -13,79 +12,72 @@ class Breadcrumbs extends Component {
     product: PropTypes.object,
     tagId: PropTypes.string,
     tags: PropTypes.arrayOf(SharedPropTypes.tag).isRequired
-  }
+  };
 
   renderTagBreadcrumbPiece(tag) {
-    
-    const { tags } = this.props
+    const { tags } = this.props;
 
     // Find first tag that is a parent of this tag, if any are
-    const parentTag = tags.find(node => node.subTagIds.includes(tag._id))
+    const parentTag = tags.find((node) => node.subTagIds.includes(tag._id));
 
     return (
       <Fragment>
         {!!parentTag && this.renderTagBreadcrumbPiece(parentTag)}
         <li className="breadcrumb-item">
-          <Link route={`/tag/${tag.slug}`}>
-            <span>{tag.name}</span>
-          </Link>
+          <Link route={`/tag/${tag.slug}`}>{tag.name}</Link>
         </li>
       </Fragment>
-    )
+    );
   }
 
   renderTagBreadcrumbs() {
-    const { tagId, tags } = this.props
+    const { tagId, tags } = this.props;
 
-    if (!tagId || !Array.isArray(tags) || tags.length === 0) return null // still loading
+    if (!tagId || !Array.isArray(tags) || tags.length === 0) return null; // still loading
 
-    const currentTag = tags.find(tag => tag._id === tagId)
+    const currentTag = tags.find((tag) => tag._id === tagId);
     if (!currentTag) {
-      throw new Error(`Unable to find current tag with ID ${tagId}`)
+      throw new Error(`Unable to find current tag with ID ${tagId}`);
     }
 
-    return this.renderTagBreadcrumbPiece(currentTag)
+    return this.renderTagBreadcrumbPiece(currentTag);
   }
 
   renderProductNameBreadcrumb = () => {
-    const { product, tagId } = this.props
+    const { product, tagId } = this.props;
 
     if (tagId) {
       return (
         <Fragment>
           {this.renderTagBreadcrumbs()}
           <li className="breadcrumb-item">
-            <Link route={`/product/${product.slug}`}>
-              <span>{product.title}</span> {/* changed from tag.name to product.title */}
-            </Link>
+            <Link route={`/product/${product.slug}`}>{product.title}</Link>
           </li>
         </Fragment>
-      )
+      );
     }
 
     return (
       <Fragment>
         <li className="breadcrumb-item">
-          <Link route={`/product/${product.slug}`}>
-            <span>{product.title}</span>
-          </Link>
+          <Link route={`/product/${product.slug}`}>{product.title}</Link>
         </li>
       </Fragment>
-    )
-  }
+    );
+  };
 
   renderBreadcrumbs() {
-    const { isPDP, isTagGrid } = this.props
+    const { isPDP, isTagGrid } = this.props;
 
     if (isTagGrid) {
-      return this.renderTagBreadcrumbs()
+      return this.renderTagBreadcrumbs();
     }
 
     if (isPDP) {
-      return this.renderProductNameBreadcrumb()
+      return this.renderProductNameBreadcrumb();
     }
 
-    return null
+    return null;
   }
 
   render() {
@@ -102,8 +94,8 @@ class Breadcrumbs extends Component {
           </ol>
         </div>
       </nav>
-    )
+    );
   }
 }
 
-export default Breadcrumbs
+export default Breadcrumbs;

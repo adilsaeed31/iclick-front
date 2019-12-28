@@ -20,12 +20,12 @@ import TRACKING from "lib/tracking/constants";
 import trackCartItems from "lib/tracking/trackCartItems";
 
 import ProductCarouselTab from "custom/iclick/components/ProductCarouselTab";
-import ProductDetailContainer from "custom/iclick/components/ProductDetailContainer"
-import ProductDetailSidebar from "custom/iclick/components/ProductDetailSidebar"
-import ProductDetailFooter from "custom/iclick/components/ProductDetailFooter"
-import ProductDetailGallery from "custom/iclick/components/ProductDetailGallery"
+import ProductDetailContainer from "custom/iclick/components/ProductDetailContainer";
+import ProductDetailSidebar from "custom/iclick/components/ProductDetailSidebar";
+import ProductDetailFooter from "custom/iclick/components/ProductDetailFooter";
+import ProductDetailGallery from "custom/iclick/components/ProductDetailGallery";
 
-import $ from "jquery";
+// import $ from "jquery";
 import dynamic from "next/dynamic";
 
 const OwlCarousel = dynamic(() => import("react-owl-carousel"), { ssr: false });
@@ -59,7 +59,7 @@ class ProductDetail extends Component {
     theme: PropTypes.object,
     uiStore: PropTypes.object.isRequired,
     width: PropTypes.string.isRequired
-  }
+  };
 
   componentDidMount() {
     const { product } = this.props;
@@ -68,16 +68,15 @@ class ProductDetail extends Component {
     this.selectVariant(product.variants[0]);
 
     if (process.browser) {
-      window.$ = $;
-      window.jQuery = $;
+      // window.$ = $;
+      // window.jQuery = $;
       this.hasLoaded();
     }
   }
 
   hasLoaded = () => {
     this.setState({ isLoaded: true });
-  }
-
+  };
 
   selectVariant(variant, optionId) {
     const { product, uiStore } = this.props;
@@ -119,7 +118,7 @@ class ProductDetail extends Component {
    */
   handleSelectVariant = (variant) => {
     this.selectVariant(variant);
-  }
+  };
 
   /**
    * @name handleAddToCartClick
@@ -189,7 +188,7 @@ class ProductDetail extends Component {
       // Open the cart, and close after a 3 second delay
       openCartWithTimeout(3000);
     }
-  }
+  };
 
   /**
    * @name handleSelectOption
@@ -206,7 +205,7 @@ class ProductDetail extends Component {
     const variant = product.variants.find((vnt) => vnt._id === uiStore.pdpSelectedVariantId);
 
     this.selectVariant(variant, option._id);
-  }
+  };
 
   /**
    * @name determineProductPrice
@@ -311,90 +310,102 @@ class ProductDetail extends Component {
     }
 
     return (
-      <Fragment>  
+      <Fragment>
         <ProductDetailContainer>
           <Grid item xs={12}>
             <Breadcrumbs isPDP tagId={routingStore.tagId} product={product} />
           </Grid>
           <ProductDetailTitle pageTitle={product.pageTitle} title={product.title} />
-            <div className="row">
-              <div className="col-lg-9">
-                <div className="product-single-container product-single-default">
-                  <div className="row">
-                    <ProductDetailGallery/>
-                    
-                    <div className="col-lg-5 col-md-6">
-                      <div className="product-single-details">
-                        <h1 className="product-title">{product.title}</h1>
-                        <div className="ratings-container">
-                          <div className="product-ratings">
-                            <span className="ratings" style={{width: '60%'}} />
-                          </div>
-                          <a href="#" className="rating-link">( 6 Reviews )</a>
+          <div className="row">
+            <div className="col-lg-9">
+              <div className="product-single-container product-single-default">
+                <div className="row">
+                  <ProductDetailGallery />
+
+                  <div className="col-lg-5 col-md-6">
+                    <div className="product-single-details">
+                      <h1 className="product-title">{product.title}</h1>
+                      <div className="ratings-container">
+                        <div className="product-ratings">
+                          <span className="ratings" style={{ width: "60%" }} />
                         </div>
-                        <div className="price-box">
-                          <span className="old-price">{compareAtDisplayPrice}</span>
-                          <span className="product-price">{productPrice.displayPrice}</span>
+                        <a href="/" className="rating-link">
+                          ( 6 Reviews )
+                        </a>
+                      </div>
+                      <div className="price-box">
+                        <span className="old-price">{compareAtDisplayPrice}</span>
+                        <span className="product-price">{productPrice.displayPrice}</span>
+                      </div>
+                      <div className="product-desc">
+                        <p>{product.description}</p>
+                      </div>
+                      <div className="product-filters-container">
+                        <div className="product-single-filter">
+                          <label>Colors:</label>
+                          <ul className="config-swatch-list">
+                            <li className="active">
+                              <a href="#" style={{ backgroundColor: "#6085a5" }} />
+                            </li>
+                            <li>
+                              <a href="#" style={{ backgroundColor: "#ab6e6e" }} />
+                            </li>
+                            <li>
+                              <a href="#" style={{ backgroundColor: "#b19970" }} />
+                            </li>
+                            <li>
+                              <a href="#" style={{ backgroundColor: "#11426b" }} />
+                            </li>
+                          </ul>
                         </div>
-                        <div className="product-desc">
-                          <p>{product.description}</p>
+                      </div>
+                      <div className="product-action product-all-icons">
+                        <div className="product-single-qty">
+                          <div className="input-group bootstrap-touchspin bootstrap-touchspin-injected">
+                            <span className="input-group-btn input-group-prepend">
+                              <button
+                                className="btn btn-outline btn-down-icon bootstrap-touchspin-down"
+                                type="button"
+                              />
+                            </span>
+                            <input className="horizontal-quantity form-control" type="text" />
+                            <span className="input-group-btn input-group-append">
+                              <button className="btn btn-outline btn-up-icon bootstrap-touchspin-up" type="button" />
+                            </span>
+                          </div>
+                          <a href="cart.html" className="paction add-cart" title="Add to Cart">
+                            <span>Add to Cart</span>
+                          </a>
+                          <a href="#" className="paction add-wishlist" title="Add to Wishlist">
+                            <span>Add to Wishlist</span>
+                          </a>
+                          <a href="#" className="paction add-compare" title="Add to Compare">
+                            <span>Add to Compare</span>
+                          </a>
                         </div>
-                        <div className="product-filters-container">
-                          <div className="product-single-filter">
-                            <label>Colors:</label>
-                            <ul className="config-swatch-list">
-                              <li className="active">
-                                <a href="#" style={{backgroundColor: '#6085a5'}} />
-                              </li>
-                              <li>
-                                <a href="#" style={{backgroundColor: '#ab6e6e'}} />
-                              </li>
-                              <li>
-                                <a href="#" style={{backgroundColor: '#b19970'}} />
-                              </li>
-                              <li>
-                                <a href="#" style={{backgroundColor: '#11426b'}} />
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="product-action product-all-icons">
-                          <div className="product-single-qty">
-                            <div className="input-group bootstrap-touchspin bootstrap-touchspin-injected"><span className="input-group-btn input-group-prepend"><button className="btn btn-outline btn-down-icon bootstrap-touchspin-down" type="button" /></span><input className="horizontal-quantity form-control" type="text" /><span className="input-group-btn input-group-append"><button className="btn btn-outline btn-up-icon bootstrap-touchspin-up" type="button" /></span></div>
-                            <a href="cart.html" className="paction add-cart" title="Add to Cart">
-                              <span>Add to Cart</span>
-                            </a>
-                            <a href="#" className="paction add-wishlist" title="Add to Wishlist">
-                              <span>Add to Wishlist</span>
-                            </a>
-                            <a href="#" className="paction add-compare" title="Add to Compare">
-                              <span>Add to Compare</span>
-                            </a>
-                          </div>
-                          <div className="product-single-share">
-                            <label>Share:</label>
-                            {/* www.addthis.com share plugin*/}
-                            <div className="addthis_inline_share_toolbox" />
-                          </div>
+                        <div className="product-single-share">
+                          <label>Share:</label>
+                          {/* www.addthis.com share plugin*/}
+                          <div className="addthis_inline_share_toolbox" />
                         </div>
                       </div>
                     </div>
-                  
                   </div>
-                  <ProductDetailFooter/>
                 </div>
+                <ProductDetailFooter />
               </div>
-              <ProductDetailSidebar/>
             </div>
+            <ProductDetailSidebar />
+          </div>
           <ProductCarouselTab title="Featured Products" style={{ borderBottom: "none" }} />
         </ProductDetailContainer>
         {/* <Grid container>
-            <Grid item xs={12} sm={6}> 
-        </Grid> 
+            <Grid item xs={12} sm={6}>
+        </Grid>
         <Grid item xs={12}>
           <Breadcrumbs isPDP tagId={routingStore.tagId} product={product} />
         </Grid>
-          
+
         <Grid item xs={12} sm={6}>
           <div>
             <MediaGallery mediaItems={pdpMediaItems} />
@@ -417,16 +428,15 @@ class ProductDetail extends Component {
             selectedVariantId={pdpSelectedVariantId}
             currencyCode={currencyCode}
             variants={product.variants}
-          /> 
+          />
             <ProductDetailAddToCart
             onClick={this.handleAddToCartClick}
             selectedOptionId={pdpSelectedOptionId}
             selectedVariantId={pdpSelectedVariantId}
             variants={product.variants}
-          /> 
-        </Grid> 
+          />
+        </Grid>
         </Grid> */}
-      
       </Fragment>
     );
   }

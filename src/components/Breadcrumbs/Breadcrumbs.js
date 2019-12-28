@@ -40,10 +40,13 @@ class Breadcrumbs extends Component {
     product: PropTypes.object,
     tagId: PropTypes.string,
     tags: PropTypes.arrayOf(SharedPropTypes.tag).isRequired
-  }
+  };
 
   renderTagBreadcrumbPiece(tag) {
-    const { classes: { breadcrumbIcon, breadcrumbLink }, tags } = this.props;
+    const {
+      classes: { breadcrumbIcon, breadcrumbLink },
+      tags
+    } = this.props;
 
     // Find first tag that is a parent of this tag, if any are
     const parentTag = tags.find((node) => node.subTagIds.includes(tag._id));
@@ -52,7 +55,9 @@ class Breadcrumbs extends Component {
       <Fragment>
         {!!parentTag && this.renderTagBreadcrumbPiece(parentTag)}
         <ChevronRight className={breadcrumbIcon} />
-        <Link route={`/tag/${tag.slug}`}><span className={breadcrumbLink}>{tag.name}</span></Link>
+        <Link route={`/tag/${tag.slug}`}>
+          <span className={breadcrumbLink}>{tag.name}</span>
+        </Link>
       </Fragment>
     );
   }
@@ -71,14 +76,20 @@ class Breadcrumbs extends Component {
   }
 
   renderProductNameBreadcrumb = () => {
-    const { classes: { breadcrumbIcon, breadcrumbLink }, product, tagId } = this.props;
+    const {
+      classes: { breadcrumbIcon, breadcrumbLink },
+      product,
+      tagId
+    } = this.props;
 
     if (tagId) {
       return (
         <Fragment>
           {this.renderTagBreadcrumbs()}
           <ChevronRight className={breadcrumbIcon} />
-          <Link route={`/product/${product.slug}`}><span className={breadcrumbLink}>{product.title}</span></Link>
+          <Link route={`/product/${product.slug}`}>
+            <span className={breadcrumbLink}>{product.title}</span>
+          </Link>
         </Fragment>
       );
     }
@@ -86,10 +97,12 @@ class Breadcrumbs extends Component {
     return (
       <Fragment>
         <ChevronRight className={breadcrumbIcon} />
-        <Link route={`/product/${product.slug}`}><span className={breadcrumbLink}>{product.title}</span></Link>
+        <Link route={`/product/${product.slug}`}>
+          <span className={breadcrumbLink}>{product.title}</span>
+        </Link>
       </Fragment>
     );
-  }
+  };
 
   renderBreadcrumbs() {
     const { isPDP, isTagGrid } = this.props;
@@ -106,11 +119,15 @@ class Breadcrumbs extends Component {
   }
 
   render() {
-    const { classes: { container, breadcrumbLink } } = this.props;
+    const {
+      classes: { container, breadcrumbLink }
+    } = this.props;
 
     return (
       <div className={container}>
-        <Link route="/"><span className={breadcrumbLink}>Home</span></Link>
+        <Link route="/">
+          <span className={breadcrumbLink}>Home</span>
+        </Link>
         {this.renderBreadcrumbs()}
       </div>
     );

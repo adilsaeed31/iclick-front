@@ -43,7 +43,9 @@ const create = (initialState, options) => {
     if (graphQLErrors) {
       graphQLErrors.forEach(({ message, locations, path }) => {
         // eslint-disable-next-line no-console
-        console.error(`[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(locations)}, Path: ${JSON.stringify(path)}`);
+        console.error(
+          `[GraphQL error]: Message: ${message}, Location: ${JSON.stringify(locations)}, Path: ${JSON.stringify(path)}`
+        );
       });
     }
 
@@ -68,7 +70,9 @@ const create = (initialState, options) => {
 
         return;
       }
-      logger.error(`Unable to access the GraphQL API. Is it running and accessible at ${graphqlUrl} from the Storefront UI server?`);
+      logger.error(
+        `Unable to access the GraphQL API. Is it running and accessible at ${graphqlUrl} from the Storefront UI server?`
+      );
     }
   });
 

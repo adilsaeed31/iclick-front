@@ -90,10 +90,10 @@ const styles = (theme) => ({
   },
   // login view styles
   backLink: {
-    "color": theme.palette.reaction.black80,
-    "cursor": "pointer",
-    "fontFamily": theme.typography.fontFamily,
-    "fontSize": 14,
+    color: theme.palette.reaction.black80,
+    cursor: "pointer",
+    fontFamily: theme.typography.fontFamily,
+    fontSize: 14,
     "&:hover": {
       color: theme.palette.reaction.reactionBlue400
     }
@@ -137,9 +137,11 @@ const hasIdentityCheck = (cart) => !!((cart && cart.account !== null) || (cart &
 @withStyles(styles, { withTheme: true })
 class Checkout extends Component {
   static propTypes = {
-    availablePaymentMethods: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string.isRequired
-    })),
+    availablePaymentMethods: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string.isRequired
+      })
+    ),
     cart: PropTypes.shape({
       account: PropTypes.object,
       checkout: PropTypes.object,
@@ -275,7 +277,10 @@ class Checkout extends Component {
   }
 
   renderCheckoutContent() {
-    const { cart, router: { asPath } } = this.props;
+    const {
+      cart,
+      router: { asPath }
+    } = this.props;
     // sanity check that "tries" to render the correct /cart view if SSR doesn't provide the `cart`
     if (!cart) return asPath === "/cart/checkout" ? this.renderCheckoutActions() : this.renderCheckoutLogin();
     return this.hasIdentity ? this.renderCheckoutActions() : this.renderCheckoutLogin();
@@ -319,12 +324,14 @@ class Checkout extends Component {
     }
 
     const hasAccount = !!cart.account;
-    const orderEmailAddress = (hasAccount && Array.isArray(cart.account.emailRecords) && cart.account.emailRecords[0].address) || cart.email;
+    const orderEmailAddress =
+      (hasAccount && Array.isArray(cart.account.emailRecords) && cart.account.emailRecords[0].address) || cart.email;
 
     // Filter the hard-coded definedPaymentMethods list from the client to remove any
     // payment methods that were not returned from the API as currently available.
-    const paymentMethods = definedPaymentMethods.filter((method) =>
-      !!availablePaymentMethods.find((availableMethod) => availableMethod.name === method.name));
+    const paymentMethods = definedPaymentMethods.filter(
+      (method) => !!availablePaymentMethods.find((availableMethod) => availableMethod.name === method.name)
+    );
 
     return (
       <div className={classes.checkoutContentContainer}>
@@ -367,10 +374,7 @@ class Checkout extends Component {
   }
 
   render() {
-    const {
-      isLoadingCart,
-      isLoadingAvailablePaymentMethods
-    } = this.props;
+    const { isLoadingCart, isLoadingAvailablePaymentMethods } = this.props;
 
     if (isLoadingCart || isLoadingAvailablePaymentMethods) {
       return <PageLoading delay={0} />;

@@ -17,7 +17,6 @@ async function getTags(client, variables) {
     const remainingTags = await getTags(client, { ...variables, cursor: pageInfo.endCursor });
     return [...tagList, ...remainingTags];
   }
-
   return tagList;
 }
 
@@ -27,7 +26,9 @@ async function getTags(client, variables) {
  * @returns {Object[]} Array of all tags
  */
 export default async function getAllTags(client) {
-  const { data: { primaryShop: shop } } = await client.query({ query: primaryShopQuery });
+  const {
+    data: { primaryShop: shop }
+  } = await client.query({ query: primaryShopQuery });
 
   if (!shop._id) {
     throw new Error("primaryShopId query result was null");

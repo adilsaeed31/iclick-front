@@ -51,15 +51,19 @@ export default class Error extends Component {
       <div className={classes.root}>
         <Helmet title={`${subtitle} | ${shop && shop.name}`} />
         {statusCode ? (
-          <Typography variant="h5">{statusCode}</Typography>
+          <div className="container">
+            <Typography variant="h5">{statusCode}</Typography>
+          </div>
         ) : (
           <Fragment>
-            <Typography className={classes.errorMessage} paragraph>
-              Sorry! We couldn't find what you're looking for.
-            </Typography>
-            <Typography className={classes.errorLink}>
-              <Link route="/">Home</Link>
-            </Typography>
+            <div className="container">
+              <Typography className={classes.errorMessage} paragraph>
+                Sorry! We couldn't find what you're looking for.
+              </Typography>
+              <Typography className={classes.errorLink}>
+                <Link route="/">Home</Link>
+              </Typography>
+            </div>
           </Fragment>
         )}
       </div>

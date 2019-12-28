@@ -10,7 +10,7 @@ import CartSummary from "@reactioncommerce/components/CartSummary/v1";
 import withCart from "containers/cart/withCart";
 import CartItems from "components/CartItems";
 import CheckoutButtons from "components/CheckoutButtons";
-import Link from "components/Link";
+import Link from "custom/iclick/components/Link";
 import { Router } from "routes";
 import PageLoading from "components/PageLoading";
 import track from "lib/tracking/track";
@@ -97,12 +97,17 @@ class CartPage extends Component {
   trackAction() {}
 
   handleRemoveItem = async (itemId) => {
-    const { cart: { items }, onRemoveCartItems } = this.props;
+    const {
+      cart: { items },
+      onRemoveCartItems
+    } = this.props;
 
     const { data, error } = await onRemoveCartItems(itemId);
 
     if (data && !error) {
-      const { cart: { _id } } = data.removeCartItems;
+      const {
+        cart: { _id }
+      } = data.removeCartItems;
       const removedItem = { cart_id: _id, ...variantById(items, itemId) }; // eslint-disable-line camelcase
 
       // Track removed item
@@ -174,26 +179,17 @@ class CartPage extends Component {
           title={`Cart | ${shop && shop.name}`}
           meta={[{ name: "description", content: shop && shop.description }]}
         />
-        <section>
-          <Typography className={classes.title} variant="h6" align="center">
-            Shopping Cart
-          </Typography>
-          <Grid container spacing={24}>
-            {this.renderCartItems()}
-            {this.renderCartSummary()}
-            <Grid className={classes.customerSupportCopy} item>
-              <Typography paragraph variant="caption">
-                Have questions? call <span className={classes.phoneNumber}>1.800.555.5555</span>
-              </Typography>
-              <Typography paragraph variant="caption">
-                <Link href="#">Shipping information</Link>
-              </Typography>
-              <Typography paragraph variant="caption">
-                <Link href="#">Return policy</Link>
-              </Typography>
+        <div className="container">
+          <section>
+            <Typography className={classes.title} variant="h6" align="center">
+              Shopping Cart
+            </Typography>
+            <Grid container spacing={24}>
+              {this.renderCartItems()}
+              {this.renderCartSummary()}
             </Grid>
-          </Grid>
-        </section>
+          </section>
+        </div>
       </Fragment>
     );
   }

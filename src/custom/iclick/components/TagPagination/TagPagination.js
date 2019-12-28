@@ -1,22 +1,22 @@
-import React, {Component} from "react";
-import PageSizeSelector from "custom/iclick/components/PageSizeSelector"
-import PageStepper from "custom/iclick/components/PageStepper"
+import React, { Component } from "react";
+import PageSizeSelector from "custom/iclick/components/PageSizeSelector";
+import PageStepper from "custom/iclick/components/PageStepper";
 
-class TagPagination extends Component{
-  render(){
-    const { pageInfo, pageSize, setPageSize} = this.props;
-    return(
+class TagPagination extends Component {
+  render() {
+    const { pageInfo, pageSize, setPageSize } = this.props;
+    return (
       <nav className="toolbox toolbox-pagination">
-        <PageSizeSelector 
+        <PageSizeSelector
           pageSize={pageSize}
-          onChange={setPageSize} 
+          onChange={setPageSize}
           labelValue={"Show:"}
           classes={"toolbox-item toolbox-show"}
           selectorName={"count"}
         />
-        {pageInfo && <PageStepper pageInfo={pageInfo}/>}
-      </nav> 
-    )
+        {pageInfo && <PageStepper pageInfo={pageInfo} />}
+      </nav>
+    );
   }
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable quote-props */
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
@@ -61,19 +62,19 @@ class ProductDetailPage extends Component {
     const productJSON = {
       "@context": "http://schema.org/",
       "@type": "Product",
-      "brand": product.vendor,
-      "description": product.description,
-      "image": images,
-      "name": product.title,
-      "sku": product.sku,
-      "offers": {
+      brand: product.vendor,
+      description: product.description,
+      image: images,
+      name: product.title,
+      sku: product.sku,
+      offers: {
         "@type": "Offer",
-        "priceCurrency": currencyCode,
-        "price": priceData.minPrice,
-        "availability": productAvailability,
-        "seller": {
+        priceCurrency: currencyCode,
+        price: priceData.minPrice,
+        availability: productAvailability,
+        seller: {
           "@type": "Organization",
-          "name": shop.name
+          name: shop.name
         }
       }
     };
@@ -89,14 +90,7 @@ class ProductDetailPage extends Component {
 
     if (!product) return <ErrorPage shop={shop} subtitle="Not Found" />;
 
-    return (
-      <ProductDetail
-        addItemsToCart={addItemsToCart}
-        currencyCode={currencyCode}
-        product={product}
-        shop={shop}
-      />
-    );
+    return <ProductDetail addItemsToCart={addItemsToCart} currencyCode={currencyCode} product={product} shop={shop} />;
   }
 
   render() {
@@ -109,7 +103,7 @@ class ProductDetailPage extends Component {
           meta={[{ name: "description", content: product && product.description }]}
           script={[{ type: "application/ld+json", innerHTML: this.buildJSONLd() }]}
         />
-        {this.renderMainArea()}
+        <div className="container">{this.renderMainArea()}</div>
       </Fragment>
     );
   }
