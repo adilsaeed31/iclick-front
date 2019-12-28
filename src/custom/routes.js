@@ -19,8 +19,18 @@ function defineRoutes(routes) {
     .add("profileOrders", "/profile/orders", "profileOrders")
 
     // Adding static pages to bottom
-
-    .add("AboutPortfolio", "/about-portfolio", "AboutPortfolio");
+    .add("aboutPortfolio", "/about-portfolio", "aboutPortfolio")
+    .add("privacyPolicy", "/privacy-policy", "privacyPolicy")
+    .add("shippingReturns", "/shipping-returns", "shippingReturns")
+    .add("deliveryInformation", "/delivery-information", "deliveryInformation")
+    .add("faq", "/faq", "faq")
+    .add("termsOfUse", "/terms-of-use", "termsOfUse")
+    .add("termsOfService", "/terms-of-service", "termsOfService")
+    .add("contactUs", "/contact-us", "contactUs")
+    .add("profileDashboard", "/profile/dashboard", "dashboard")
+    .add("fixit", "/fix-it", "fixit")
+    .add("business", "/business", "business")
+    .add("orderHistory", "/order/history", "profileOrders");
 }
 
 module.exports = defineRoutes;

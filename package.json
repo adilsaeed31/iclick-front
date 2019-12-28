@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@material-ui/core": "~3.9.2",
+    "@material-ui/icons": "^4.5.1",
     "@reactioncommerce/components": "~0.67.2",
     "@reactioncommerce/components-context": "~1.2.0",
     "@segment/snippet": "~4.4.0",

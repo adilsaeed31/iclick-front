@@ -87,10 +87,29 @@
 }
 
 /**
- * Custom style changes for style.min.css file 
+ * Custom style changes for style.min.css file
  */
 
 .header-bottom .logo,
 .header-bottom .cart-dropdown {
   display: block;
+}
+
+.fullwidth {
+  min-width: 100%;
+}
+
+.ol-list {
+  list-style: disc;
+  margin-left: 40px;
+}
+
+.ol-list li {
+  margin-bottom: 20px;
+  line-height: 2;
+}
+
+.pp-text {
+  line-height: 2;
+  margin-bottom: 20px;
 }

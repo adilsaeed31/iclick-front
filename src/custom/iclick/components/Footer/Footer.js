@@ -77,7 +77,7 @@ const Footer = ({ newsLetter }) => (
 
                   <ul className="links">
                     <li>
-                      <Link route="/my-account">My Account</Link>
+                      <Link route="/profile/dashboard">My Account</Link>
                     </li>
                     <li>
                       <Link route="/order/history">Orders History</Link>
@@ -86,14 +86,10 @@ const Footer = ({ newsLetter }) => (
                       <Link route="/cart">Shopping Basket</Link>
                     </li>
                     <li>
-                      <Link route="/checkout" className="login-link">
-                        Checkout
-                      </Link>
+                      <Link route="/checkout">Checkout</Link>
                     </li>
                     <li>
-                      <Link route="/login" className="login-link">
-                        Login
-                      </Link>
+                      <Link route="/login">Login</Link>
                     </li>
                   </ul>
                 </div>

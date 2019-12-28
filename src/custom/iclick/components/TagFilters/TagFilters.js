@@ -171,12 +171,6 @@ class TagFilters extends Component {
                 </div>
               </div>
             </div>
-
-            <div className="widget widget-block">
-              <h3 className="widget-title">Custom HTML Block</h3>
-              <h5>This is a custom sub-title.</h5>
-              <p>Lorem ipsum dolor sit amet, consectetur elitad adipiscing Cras non placerat mi. </p>
-            </div>
           </div>
         </aside>
       </Fragment>

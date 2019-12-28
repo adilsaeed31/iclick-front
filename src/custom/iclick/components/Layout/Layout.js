@@ -39,7 +39,7 @@ class Layout extends Component {
           <Header shop={shop} viewer={viewer} />
           <main className="main">{children}</main>
           <Footer newsLetter={this.newsLetter} />
-          <AlertDialogBox open={open} handleClose={this.handleClose} />
+          <AlertDialogBox isOpen={open} handleClose={this.handleClose} />
         </div>
       </React.Fragment>
     );

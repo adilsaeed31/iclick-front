@@ -8,7 +8,9 @@ import SharedPropTypes from "lib/utils/SharedPropTypes";
 class Breadcrumbs extends Component {
   static propTypes = {
     isPDP: PropTypes.bool,
+    isPage: PropTypes.bool,
     isTagGrid: PropTypes.bool,
+    pageName: PropTypes.string,
     product: PropTypes.object,
     tagId: PropTypes.string,
     tags: PropTypes.arrayOf(SharedPropTypes.tag).isRequired
@@ -43,6 +45,19 @@ class Breadcrumbs extends Component {
     return this.renderTagBreadcrumbPiece(currentTag);
   }
 
+  renderPageNameBreadcrumb = () => {
+    const { pageName } = this.props;
+    if (!pageName) {
+      return "Loading ...";
+    }
+
+    return (
+      <Fragment>
+        <li className="breadcrumb-item">{pageName}</li>
+      </Fragment>
+    );
+  };
+
   renderProductNameBreadcrumb = () => {
     const { product, tagId } = this.props;
 
@@ -67,7 +82,7 @@ class Breadcrumbs extends Component {
   };
 
   renderBreadcrumbs() {
-    const { isPDP, isTagGrid } = this.props;
+    const { isPDP, isTagGrid, isPage } = this.props;
 
     if (isTagGrid) {
       return this.renderTagBreadcrumbs();
@@ -75,6 +90,10 @@ class Breadcrumbs extends Component {
 
     if (isPDP) {
       return this.renderProductNameBreadcrumb();
+    }
+
+    if (isPage) {
+      return this.renderPageNameBreadcrumb();
     }
 
     return null;

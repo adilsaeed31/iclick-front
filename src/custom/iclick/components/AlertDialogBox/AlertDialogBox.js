@@ -12,20 +12,18 @@ import Slide from "@material-ui/core/Slide";
 
 const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
 
-const AlertDialogBox = ({ open, handleClose }) => (
+const AlertDialogBox = ({ isOpen, handleClose, title, desc }) => (
   <Dialog
-    open={open}
+    open={isOpen}
     onClose={handleClose}
     TransitionComponent={Transition}
     keepMounted
     aria-labelledby="alert-dialog-title"
     aria-describedby="alert-dialog-description"
   >
-    <DialogTitle id="alert-dialog-title">{"NewsLetter Subscription!"}</DialogTitle>
+    <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
     <DialogContent>
-      <DialogContentText id="alert-dialog-description">
-        Please be patient, I am creating your subscription for newsletter.
-      </DialogContentText>
+      <DialogContentText id="alert-dialog-description">{desc} </DialogContentText>
     </DialogContent>
     <DialogActions>
       <Button onClick={handleClose} color="primary">
@@ -40,9 +38,15 @@ AlertDialogBox.defaultProps = {
 };
 
 AlertDialogBox.propTypes = {
+  desc: PropTypes.string,
   handleClose: PropTypes.func,
-  // eslint-disable-next-line react/boolean-prop-naming
-  open: PropTypes.bool
+  isOpen: PropTypes.bool,
+  title: PropTypes.string
+};
+
+AlertDialogBox.defaultProps = {
+  title: "NewsLetter Subscription!",
+  desc: "Thank you for subscribing us. Please be patient, I am creating your subscription for newsletter."
 };
 
 export default AlertDialogBox;
