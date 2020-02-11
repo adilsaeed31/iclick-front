@@ -17,12 +17,11 @@
 .menu > li > a {
   color: #7f7e83;
   font-weight: normal;
-  /* text-transform: capitalize; */
   font-size: 1.4rem;
   letter-spacing: 0.2rem;
 }
 .menu .megamenu .banner img {
-  height: auto;
+  height: 300px;
   position: inherit;
 }
 .header-bottom .cart-dropdown {
@@ -112,4 +111,9 @@
 .pp-text {
   line-height: 2;
   margin-bottom: 20px;
+}
+
+.color-box {
+  width: 20px;
+  height: 20px;
 }

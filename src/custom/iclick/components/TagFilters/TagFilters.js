@@ -144,28 +144,44 @@ class TagFilters extends Component {
                 <div className="widget-body">
                   <ul className="config-swatch-list">
                     <li>
-                      <Link route="/" style={{ backgroundColor: "#4090d5" }} />
+                      <Link route="/">
+                        <div style={{ backgroundColor: "#4090d5" }} className="color-box" />
+                      </Link>
                     </li>
                     <li className="active">
-                      <Link route="/" style={{ backgroundColor: "#f5494a" }} />
+                      <Link route="/">
+                        <div style={{ backgroundColor: "#f5494a" }} className="color-box" />
+                      </Link>
                     </li>
                     <li>
-                      <Link route="/" style={{ backgroundColor: "#fca309" }} />
+                      <Link route="/">
+                        <div style={{ backgroundColor: "#fca309" }} className="color-box" />
+                      </Link>
                     </li>
                     <li>
-                      <Link route="/" style={{ backgroundColor: "#11426b" }} />
+                      <Link route="/">
+                        <div style={{ backgroundColor: "#11426b" }} className="color-box" />
+                      </Link>
                     </li>
                     <li>
-                      <Link route="/" style={{ backgroundColor: "#f0f0f0" }} />
+                      <Link route="/">
+                        <div style={{ backgroundColor: "#f0f0f0" }} className="color-box" />
+                      </Link>
                     </li>
                     <li>
-                      <Link route="/" style={{ backgroundColor: "#3fd5c9" }} />
+                      <Link route="/">
+                        <div style={{ backgroundColor: "#3fd5c9" }} className="color-box" />
+                      </Link>
                     </li>
                     <li>
-                      <Link route="/" style={{ backgroundColor: "#979c1c" }} />
+                      <Link route="/">
+                        <div style={{ backgroundColor: "#979c1c" }} className="color-box" />
+                      </Link>
                     </li>
                     <li>
-                      <Link route="/" style={{ backgroundColor: "#7d5a3c" }} />
+                      <Link route="/">
+                        <div style={{ backgroundColor: "#7d5a3c" }} className="color-box" />
+                      </Link>
                     </li>
                   </ul>
                 </div>
