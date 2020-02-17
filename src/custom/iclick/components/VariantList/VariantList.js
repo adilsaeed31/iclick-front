@@ -24,7 +24,7 @@ export default class VariantList extends Component {
     const active = selectedVariantId === variant._id;
 
     return (
-      <div key={variant._id}>
+      <Fragment>
         <VariantItem
           currencyCode={currencyCode}
           handleClick={() => {
@@ -34,7 +34,7 @@ export default class VariantList extends Component {
           variant={variant}
         />
         {this.renderBadges(variant)}
-      </div>
+      </Fragment>
     );
   }
 
@@ -68,13 +68,13 @@ export default class VariantList extends Component {
 
       if (options) {
         const selectedOption = options.find((option) => option._id === selectedOptionId);
-        return <InventoryStatus product={selectedOption} />;
+        return <InventoryStatus product={selectedOption || {}} />;
       }
     }
 
     // If we don't have an option, use the variant for inventory status information
     if (selectedVariantId) {
-      return <InventoryStatus product={selectedVariant} />;
+      return <InventoryStatus product={selectedVariant || {}} />;
     }
 
     // We should always have a selected option or variant, so we should never get this far
@@ -95,7 +95,9 @@ export default class VariantList extends Component {
 
     return (
       <Fragment>
-        <Divider label="Available Options" />
+        <h3 className="text-center my-5">
+          <span className="badge badge-pill badge-secondary">Available options</span>
+        </h3>
         <ProductDetailOptionsList
           productSlug={product.slug}
           onSelectOption={onSelectOption}
@@ -109,8 +111,10 @@ export default class VariantList extends Component {
   render() {
     const { variants } = this.props;
     return (
-      <div>
-        {variants.map(this.renderVariant)}
+      <div className="w-100">
+        <div className="d-flex flex-wrap justify-content-center">
+          {variants.map(this.renderVariant)}
+        </div>
         {this.renderOptionsList()}
         <div>{this.renderInventoryStatusText()}</div>
       </div>

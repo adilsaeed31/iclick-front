@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import { observer } from "mobx-react";
@@ -39,14 +39,14 @@ export default class OptionsList extends Component {
     if (!Array.isArray(options)) return null;
 
     return (
-      <Grid container>
+      <div className="d-flex flex-wrap">
         {options.map((option) => (
-          <Grid item key={option._id}>
+          <Fragment>
             <ProductDetailOption isActive={selectedOptionId === option._id} onClick={onSelectOption} option={option} />
             {this.renderBadges(option)}
-          </Grid>
+          </Fragment>
         ))}
-      </Grid>
+      </div>
     );
   }
 }

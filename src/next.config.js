@@ -1,5 +1,7 @@
 // const withCSS = require("@zeit/next-css");
 // const withFonts = require("next-fonts");
+const webpack = require("webpack");
+
 const appConfig = require("./config");
 
 module.exports = {
@@ -37,7 +39,11 @@ module.exports = {
       exclude: ["/node_modules/", "/.next/"],
       enforce: "pre"
     });
-
+    webpackConfig.plugins.push(new webpack.ProvidePlugin({
+      "$": "jquery",
+      "jQuery": "jquery",
+      "window.jQuery": "jquery"
+    }));
     webpackConfig.module.rules.push({
       test: /\.mjs$/,
       type: "javascript/auto"

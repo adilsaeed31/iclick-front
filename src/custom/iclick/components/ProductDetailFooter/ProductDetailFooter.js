@@ -1,50 +1,85 @@
-import React, {Component} from "react";
-import ProductDetailReview from "custom/iclick/components/ProductDetailReview"
+import React from "react";
+import { Tab, Tabs, NavItem, Nav } from "react-bootstrap";
 
-class ProductDetailFooter extends Component{
-  render(){
-    return(
-      <div className="product-single-tabs">
-        <ul className="nav nav-tabs" role="tablist">
-          <li className="nav-item">
-            <a className="nav-link active" id="product-tab-desc" data-toggle="tab" href="#product-desc-content" role="tab" aria-controls="product-desc-content" aria-selected="true">Description</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" id="product-tab-tags" data-toggle="tab" href="#product-tags-content" role="tab" aria-controls="product-tags-content" aria-selected="false">Tags</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" id="product-tab-reviews" data-toggle="tab" href="#product-reviews-content" role="tab" aria-controls="product-reviews-content" aria-selected="false">Reviews</a>
-          </li>
-        </ul>
-        <div className="tab-content">
-          <div className="tab-pane fade show active" id="product-desc-content" role="tabpanel" aria-labelledby="product-tab-desc">
-            <div className="product-desc-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
+const ProductDescription = (props) => (
+  <div className="product-single-tabs">
+    <Tab.Container id="left-tabs-example" defaultActiveKey="product-tab-desc">
+
+      <Nav variant="tabs">
+        <Nav.Item>
+          <Nav.Link eventKey="product-tab-desc">Description</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="product-tab-tags">Tags</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="product-tab-reviews">Reviews</Nav.Link>
+        </Nav.Item>
+      </Nav>
+
+      <Tab.Content>
+        <Tab.Pane eventKey="product-tab-desc">
+          <div className="product-desc-content">
+            {props.description}
+          </div>
+        </Tab.Pane>
+        <Tab.Pane eventKey="product-tab-tags">
+          <div className="product-tags-content">
+            <form action="#">
+              <h4>Add Your Tags:</h4>
+              <div className="form-group">
+                <input type="text" className="form-control form-control-sm" required="" />
+                <input type="submit" className="btn btn-primary" value="Add Tags" />
+              </div>
+            </form>
+            <p className="note">Use spaces to separate tags. Use single quotes for phrases.</p>
+          </div>
+        </Tab.Pane>
+        <Tab.Pane eventKey="product-tab-reviews">
+          <div className="product-reviews-content">
+            <div className="collateral-box">
               <ul>
-                <li><i className="icon-ok" />Any Product types that You want - Simple, Configurable</li>
-                <li><i className="icon-ok" />Downloadable/Digital Products, Virtual Products</li>
-                <li><i className="icon-ok" />Inventory Management with Backordered items</li>
+                <li>Be the first to review this product</li>
               </ul>
-              <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <br />quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-            </div>
-          </div>
-          <div className="tab-pane fade" id="product-tags-content" role="tabpanel" aria-labelledby="product-tab-tags">
-            <div className="product-tags-content">
+            </div>{/* End .collateral-box */}
+            <div className="add-product-review">
+              <h3 className="text-uppercase heading-text-color font-weight-semibold">WRITE YOUR OWN REVIEW</h3>
+              <p>How do you rate this product? *</p>
               <form action="#">
-                <h4>Add Your Tags:</h4>
+                <table className="ratings-table">
+                  <thead>
+                    <tr>
+                      <th>&nbsp;</th>
+                      <th>1 star</th>
+                      <th>2 stars</th>
+                      <th>3 stars</th>
+                      <th>4 stars</th>
+                      <th>5 stars</th>
+                    </tr>
+                  </thead>
+                  <tbody />
+                </table>
                 <div className="form-group">
+                  <label>Nickname <span className="required">*</span></label>
                   <input type="text" className="form-control form-control-sm" required />
-                  <input type="submit" className="btn btn-primary" defaultValue="Add Tags" />
-                </div>
+                </div>{/* End .form-group */}
+                <div className="form-group">
+                  <label>Summary of Your Review <span className="required">*</span></label>
+                  <input type="text" className="form-control form-control-sm" required />
+                </div>{/* End .form-group */}
+                <div className="form-group mb-2">
+                  <label>Review <span className="required">*</span></label>
+                  <textarea cols={5} rows={6} className="form-control form-control-sm" />
+                </div>{/* End .form-group */}
+                <input type="submit" className="btn btn-primary" defaultValue="Submit Review" />
               </form>
-              <p className="note">Use spaces to separate tags. Use single quotes (') for phrases.</p>
-            </div>
+            </div>{/* End .add-product-review */}
           </div>
-          <ProductDetailReview/>
-        </div>
-      </div>
-    )
-  }
-}
+        </Tab.Pane>
+      </Tab.Content>
 
-export default ProductDetailFooter;
+    </Tab.Container>
+  </div>
+);
+
+export default ProductDescription;

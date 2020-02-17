@@ -1,47 +1,67 @@
-import React, {Component} from "react";
+import React, { Fragment } from "react";
+// import OwlCarousel from "react-owl-carousel";
 
-class ProductDetailGallery extends Component{
-  render(){
-    return(
-      <div className="col-lg-7 col-md-6 product-single-gallery">
+import PropTypes from "prop-types";
+import dynamic from "next/dynamic";
+
+const OwlCarousel = dynamic(() => import("react-owl-carousel"), { ssr: false });
+class ProductCarousel extends React.Component {
+  static propTypes = {
+    mediaItems: PropTypes.arrayOf(PropTypes.object)
+  }
+
+  componentDidMount() {
+    $(this.thumbnails).children(".owl-dot").eq(0).addClass("active");
+  }
+
+  owl;
+  onDotClick = (el) => {
+    if (process.browser) {
+      this.owl.to($(el.currentTarget).index());
+    }
+  }
+  render() {
+    if (process.browser) {
+      return (<Fragment>
         <div className="product-slider-container product-item">
-          <div className="product-single-carousel owl-carousel owl-theme">
-            <div className="product-item">
-              <img className="product-single-image" src="../../static/images/products/zoom/product-1.jpg" data-zoom-image="../../static/images/products/zoom/product-1-big.jpg" />
-            </div>
-            <div className="product-item">
-              <img className="product-single-image" src="../../static/images/products/zoom/product-2.jpg" data-zoom-image="../../static/images/products/zoom/product-2-big.jpg" />
-            </div>
-            <div className="product-item">
-              <img className="product-single-image" src="../../static/images/products/zoom/product-3.jpg" data-zoom-image="../../static/images/products/zoom/product-3-big.jpg" />
-            </div>
-            <div className="product-item">
-              <img className="product-single-image" src="../../static/images/products/zoom/product-4.jpg" data-zoom-image="../../static/images/products/zoom/product-4-big.jpg" />
-            </div>
-          </div>
-          
-          <span className="prod-full-screen">
+          <OwlCarousel
+            className="product-single-carousel owl-theme"
+            nav
+            navText={['<i class="icon-angle-left" />', '<i class="icon-angle-right" />']}
+            items={1}
+            onInitialized={(el) => { this.owl = el.relatedTarget; }}
+            onChanged = {(el) => {
+              const $dots = $(this.thumbnails).children(".owl-dot");
+              $dots.removeClass("active");
+              $dots.eq(+el.item.index).addClass("active");
+            }}
+          >
+            {this.props.mediaItems.map((media) =>
+              <div className="product-item">
+                <img
+                  alt={media.URLs.medium}
+                  className="product-single-image"
+                  src={media.URLs.medium}
+                  data-zoom-image={media.URLs.large}
+                />
+              </div>)}
+          </OwlCarousel>
+
+          {/* <span className="prod-full-screen">
             <i className="icon-plus" />
-          </span>
+          </span> */}
         </div>
-        <div className="prod-thumbnail row owl-dots" id="carousel-custom-dots">
-          <div className="col-3 owl-dot">
-            <img src="../../static/images/products/zoom/product-1.jpg" />
-          </div>
-          <div className="col-3 owl-dot">
-            <img src="../../static/images/products/zoom/product-2.jpg" />
-          </div>
-          <div className="col-3 owl-dot">
-            <img src="../../static/images/products/zoom/product-3.jpg" />
-          </div>
-          <div className="col-3 owl-dot">
-            <img src="../../static/images/products/zoom/product-4.jpg" />
-          </div>
+        <div className="prod-thumbnail row owl-dots" id="carousel-custom-dots" ref={(el) => { this.thumbnails = el; }}>
+          {this.props.mediaItems.map((media) =>
+            <div className="col-3 owl-dot" onClick={this.onDotClick} role="link" tabIndex={0}>
+              <img alt="" src={media.URLs.thumbnail} />
+            </div>)}
+
         </div>
-      </div>
-                    
-    )
+      </Fragment>);
+    }
+    return null;
   }
 }
 
-export default ProductDetailGallery;
+export default ProductCarousel;

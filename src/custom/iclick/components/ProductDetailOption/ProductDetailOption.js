@@ -10,19 +10,22 @@ export default class ProductDetailOption extends Component {
     option: PropTypes.object
   }
 
-  handleOnClick = () => {
+  handleOnClick = (e) => {
+    e.preventDefault();
     this.props.onClick && this.props.onClick(this.props.option);
   }
 
   render() {
-    const { option } = this.props;
-
+    const { option, isActive } = this.props;
     return (
-      <ButtonBase disableRipple onClick={this.handleOnClick}>
-        <Typography component="div" variant="title" align="center">
-          {option.optionTitle}
-        </Typography>
-      </ButtonBase>
+      <button onClick={this.handleOnClick} className={`btn btn-sm my-1 mx-1 ${isActive ? "btn-primary" : "btn-outline-primary"}`}>
+        <span>{option.optionTitle}</span>
+      </button>
+      // <ButtonBase disableRipple onClick={this.handleOnClick}>
+      //   <Typography component="div" variant="title" align="center">
+      //     {option.optionTitle}
+      //   </Typography>
+      // </ButtonBase>
     );
   }
 }

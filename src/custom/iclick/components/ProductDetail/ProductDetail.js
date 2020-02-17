@@ -28,7 +28,6 @@ import ProductDetailGallery from "custom/iclick/components/ProductDetailGallery"
 // import $ from "jquery";
 import dynamic from "next/dynamic";
 
-const OwlCarousel = dynamic(() => import("react-owl-carousel"), { ssr: false });
 
 const { CART_VIEWED, PRODUCT_ADDED, PRODUCT_VIEWED } = TRACKING;
 
@@ -60,13 +59,16 @@ class ProductDetail extends Component {
     uiStore: PropTypes.object.isRequired,
     width: PropTypes.string.isRequired
   };
-
+  state = {
+    isLoaded: false
+  }
   componentDidMount() {
     const { product } = this.props;
 
     // Select first variant by default
     this.selectVariant(product.variants[0]);
 
+    console.log(this.props);
     if (process.browser) {
       // window.$ = $;
       // window.jQuery = $;
@@ -317,24 +319,18 @@ class ProductDetail extends Component {
           </Grid>
           <ProductDetailTitle pageTitle={product.pageTitle} title={product.title} />
           <div className="row">
-            <div className="col-lg-9">
+            <div className="col-lg-12">
               <div className="product-single-container product-single-default">
                 <div className="row">
-                  <ProductDetailGallery />
-
+                  <div className="col-lg-7 col-md-6 product-single-gallery">
+                    <ProductDetailGallery mediaItems={pdpMediaItems} />
+                  </div>
                   <div className="col-lg-5 col-md-6">
                     <div className="product-single-details">
                       <h1 className="product-title">{product.title}</h1>
-                      <div className="ratings-container">
-                        <div className="product-ratings">
-                          <span className="ratings" style={{ width: "60%" }} />
-                        </div>
-                        <a href="/" className="rating-link">
-                          ( 6 Reviews )
-                        </a>
-                      </div>
+
                       <div className="price-box">
-                        <span className="old-price">{compareAtDisplayPrice}</span>
+                        <span className="old-price span-unicode">{compareAtDisplayPrice}</span>
                         <span className="product-price">{productPrice.displayPrice}</span>
                       </div>
                       <div className="product-desc">
@@ -342,60 +338,33 @@ class ProductDetail extends Component {
                       </div>
                       <div className="product-filters-container">
                         <div className="product-single-filter">
-                          <label>Colors:</label>
-                          <ul className="config-swatch-list">
-                            <li className="active">
-                              <a href="#" style={{ backgroundColor: "#6085a5" }} />
-                            </li>
-                            <li>
-                              <a href="#" style={{ backgroundColor: "#ab6e6e" }} />
-                            </li>
-                            <li>
-                              <a href="#" style={{ backgroundColor: "#b19970" }} />
-                            </li>
-                            <li>
-                              <a href="#" style={{ backgroundColor: "#11426b" }} />
-                            </li>
-                          </ul>
+                          {/* <label>Variations</label> */}
+                          <VariantList
+                            onSelectOption={this.handleSelectOption}
+                            onSelectVariant={this.handleSelectVariant}
+                            product={product}
+                            selectedOptionId={pdpSelectedOptionId}
+                            selectedVariantId={pdpSelectedVariantId}
+                            currencyCode={currencyCode}
+                            variants={product.variants}
+                          />
                         </div>
                       </div>
                       <div className="product-action product-all-icons">
-                        <div className="product-single-qty">
-                          <div className="input-group bootstrap-touchspin bootstrap-touchspin-injected">
-                            <span className="input-group-btn input-group-prepend">
-                              <button
-                                className="btn btn-outline btn-down-icon bootstrap-touchspin-down"
-                                type="button"
-                              />
-                            </span>
-                            <input className="horizontal-quantity form-control" type="text" />
-                            <span className="input-group-btn input-group-append">
-                              <button className="btn btn-outline btn-up-icon bootstrap-touchspin-up" type="button" />
-                            </span>
-                          </div>
-                          <a href="cart.html" className="paction add-cart" title="Add to Cart">
-                            <span>Add to Cart</span>
-                          </a>
-                          <a href="#" className="paction add-wishlist" title="Add to Wishlist">
-                            <span>Add to Wishlist</span>
-                          </a>
-                          <a href="#" className="paction add-compare" title="Add to Compare">
-                            <span>Add to Compare</span>
-                          </a>
-                        </div>
-                        <div className="product-single-share">
-                          <label>Share:</label>
-                          {/* www.addthis.com share plugin*/}
-                          <div className="addthis_inline_share_toolbox" />
-                        </div>
+                        <ProductDetailAddToCart
+                          onClick={this.handleAddToCartClick}
+                          selectedOptionId={pdpSelectedOptionId}
+                          selectedVariantId={pdpSelectedVariantId}
+                          variants={product.variants}
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
-                <ProductDetailFooter />
+                <ProductDetailFooter description={product.description} />
               </div>
             </div>
-            <ProductDetailSidebar />
+            {/* <ProductDetailSidebar /> */}
           </div>
           <ProductCarouselTab title="Featured Products" style={{ borderBottom: "none" }} />
         </ProductDetailContainer>

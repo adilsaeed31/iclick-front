@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import withCart from "containers/cart/withCart";
 import withCatalogItemProduct from "containers/catalog/withCatalogItemProduct";
-import ProductDetail from "components/ProductDetail";
+import ProductDetail from "custom/iclick/components/ProductDetail";
 import PageLoading from "components/PageLoading";
 import ErrorPage from "./_error";
 

@@ -12,25 +12,30 @@ class VariantItem extends Component {
     variant: PropTypes.object.isRequired
   }
 
-  onClick = () => {
+  onClick = (e) => {
+    e.preventDefault();
     this.props.handleClick(this.props.variant);
   }
 
   render() {
-    const { currencyCode, variant } = this.props;
+    const { currencyCode, variant, isActive } = this.props;
     const { pricing, title } = variant;
 
     const variantPrice = priceByCurrencyCode(currencyCode, pricing);
 
     return (
-      <ButtonBase disableRipple onClick={this.onClick}>
-        <Typography component="span" variant="body1">
-          {title}
-        </Typography>
-        <Typography component="span" variant="body1">
-          {variantPrice.displayPrice}
-        </Typography>
-      </ButtonBase>
+      <button onClick={this.onClick} className={`btn btn-md my-1 mx-1 flex-fill ${isActive ? "btn-primary" : "btn-outline-primary"}`}>
+        <div className="text-truncate">{title}</div>
+        <div>{variantPrice.displayPrice}</div>
+      </button>
+      // <ButtonBase disableRipple onClick={this.onClick}>
+      //   <Typography component="span" variant="body1">
+      //     {title}
+      //   </Typography>
+      //   <Typography component="span" variant="body1">
+      //     {variantPrice.displayPrice}
+      //   </Typography>
+      // </ButtonBase>
     );
   }
 }

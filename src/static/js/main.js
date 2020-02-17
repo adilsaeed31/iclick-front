@@ -22,7 +22,7 @@
       this.mMenuToggle();
       this.mobileMenu();
       this.scrollToTop();
-      this.quantityInputs();
+      // this.quantityInputs();
       this.tooltip();
       this.popover();
       this.changePassToggle();
