@@ -28,8 +28,8 @@ export default function withTag(Component) {
     render() {
       const {
         router: {
-          query: { slug: slugFromQueryParam }
-        },
+          query: { slug: slugFromQueryParam } = {}
+        } = {},
         routingStore: { tagId }
       } = this.props;
 

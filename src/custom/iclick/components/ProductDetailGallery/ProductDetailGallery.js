@@ -29,6 +29,7 @@ class ProductCarousel extends React.Component {
             nav
             navText={['<i class="icon-angle-left" />', '<i class="icon-angle-right" />']}
             items={1}
+            dots={false}
             onInitialized={(el) => { this.owl = el.relatedTarget; }}
             onChanged = {(el) => {
               const $dots = $(this.thumbnails).children(".owl-dot");

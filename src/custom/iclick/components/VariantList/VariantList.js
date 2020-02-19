@@ -4,6 +4,8 @@ import BadgeOverlay from "@reactioncommerce/components/BadgeOverlay/v1";
 import { badgeStatus, BADGE_LABELS } from "@reactioncommerce/components/BadgeOverlay/v1/utils";
 import InventoryStatus from "@reactioncommerce/components/InventoryStatus/v1";
 import VariantItem from "custom/iclick/components/VariantItem";
+import SizeItem from "custom/iclick/components/SizeItem";
+import ColorOption from "custom/iclick/components/ColorOption";
 import ProductDetailOptionsList from "custom/iclick/components/ProductDetailOptionsList";
 import Divider from "custom/iclick/components/Divider";
 
@@ -54,6 +56,40 @@ export default class VariantList extends Component {
       </div>
     );
   }
+  renderSize(variants = []) {
+    const { currencyCode, onSelectVariant, selectedVariantId } = this.props;
+
+    return (
+      <Fragment>
+        <label htmlFor="config-size-list">Sizes:</label>
+        <ul className="config-size-list">
+          {variants.map((variant) =>
+            <SizeItem
+              currencyCode={currencyCode}
+              handleClick={() => {
+                onSelectVariant(variant);
+              }}
+              isActive={selectedVariantId === variant._id}
+              variant={variant}
+            />)}
+        </ul>
+      </Fragment>
+    );
+  }
+
+  renderColors(variants = []) {
+
+    const { currencyCode, onSelectVariant, selectedVariantId } = this.props;
+    return (
+      <Fragment>
+        <label htmlFor="config-swatch-list">Colors:</label>
+        <ul className="config-swatch-list">
+          {variants.map((variant) =>
+            <ColorOption isActive={selectedVariantId === variant._id} onClick={onSelectVariant} option={variant} />)}
+        </ul>
+      </Fragment>
+    );
+  }
 
   renderInventoryStatusText() {
     const { selectedOptionId, selectedVariantId, variants } = this.props;
@@ -95,27 +131,57 @@ export default class VariantList extends Component {
 
     return (
       <Fragment>
-        <h3 className="text-center my-5">
-          <span className="badge badge-pill badge-secondary">Available options</span>
-        </h3>
-        <ProductDetailOptionsList
-          productSlug={product.slug}
-          onSelectOption={onSelectOption}
-          options={options}
-          selectedOptionId={selectedOptionId}
-        />
+        <div className="product-single-filter">
+          <ProductDetailOptionsList
+            productSlug={product.slug}
+            onSelectOption={onSelectOption}
+            options={options}
+            selectedOptionId={selectedOptionId}
+          />
+        </div>
       </Fragment>
     );
   }
 
   render() {
     const { variants } = this.props;
+
+    const formattedVariants = variants.reduce((acc, option) => {
+      if (!acc[option.attributeLabel.toLowerCase()]) {
+        acc[option.attributeLabel.toLowerCase()] = [];
+      }
+
+      acc[option.attributeLabel.toLowerCase()].push(option);
+
+      return acc;
+    }, {});
+
+    const list = [];
+
+    for (const key in formattedVariants) {
+      if (key === "size" || key === "sizes") {
+        list.push(this.renderSize(formattedVariants[key]));
+      } else if (key === "color" || key === "colors") {
+        list.push(this.renderColors(formattedVariants[key]));
+      } else {
+        list.push(<div className="d-flex flex-wrap">
+          <Fragment>
+            <div className="d-flex flex-wrap justify-content-center">
+              {formattedVariants[key].map(this.renderVariant)}
+            </div>
+          </Fragment>
+        </div>);
+      }
+    }
+
     return (
       <div className="w-100">
-        <div className="d-flex flex-wrap justify-content-center">
-          {variants.map(this.renderVariant)}
+        <div className="product-single-filter">
+          {list}
         </div>
+
         {this.renderOptionsList()}
+
         <div>{this.renderInventoryStatusText()}</div>
       </div>
     );

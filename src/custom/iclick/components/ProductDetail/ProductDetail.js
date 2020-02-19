@@ -67,12 +67,19 @@ class ProductDetail extends Component {
 
     // Select first variant by default
     this.selectVariant(product.variants[0]);
-
-    console.log(this.props);
+    // console.log("mounted");
+    // console.log(this.props.routingStore.query.slugOrId);
     if (process.browser) {
       // window.$ = $;
       // window.jQuery = $;
       this.hasLoaded();
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.product.slug !== this.props.product.slug) {
+      // console.log(newProps.product.slug, "old", this.props.product.slug);
+      // this.selectVariant(newProps.product.variants[0]);
     }
   }
 
@@ -317,9 +324,9 @@ class ProductDetail extends Component {
           <Grid item xs={12}>
             <Breadcrumbs isPDP tagId={routingStore.tagId} product={product} />
           </Grid>
-          <ProductDetailTitle pageTitle={product.pageTitle} title={product.title} />
+          {/* <ProductDetailTitle pageTitle={product.pageTitle} title={product.title} /> */}
           <div className="row">
-            <div className="col-lg-12">
+            <div className="col-lg-9">
               <div className="product-single-container product-single-default">
                 <div className="row">
                   <div className="col-lg-7 col-md-6 product-single-gallery">
@@ -333,22 +340,24 @@ class ProductDetail extends Component {
                         <span className="old-price span-unicode">{compareAtDisplayPrice}</span>
                         <span className="product-price">{productPrice.displayPrice}</span>
                       </div>
-                      <div className="product-desc">
-                        <p>{product.description}</p>
+                      <div className="product-desc text-justify">
+                        <p>{product.description
+                          .replace(/<[^>]*>/g, "")
+                          .replace(/&nbsp;/g, "")
+                          .substr(0, 482)
+                          .concat("...")}</p>
                       </div>
                       <div className="product-filters-container">
-                        <div className="product-single-filter">
-                          {/* <label>Variations</label> */}
-                          <VariantList
-                            onSelectOption={this.handleSelectOption}
-                            onSelectVariant={this.handleSelectVariant}
-                            product={product}
-                            selectedOptionId={pdpSelectedOptionId}
-                            selectedVariantId={pdpSelectedVariantId}
-                            currencyCode={currencyCode}
-                            variants={product.variants}
-                          />
-                        </div>
+                        {/* <label>Variations</label> */}
+                        <VariantList
+                          onSelectOption={this.handleSelectOption}
+                          onSelectVariant={this.handleSelectVariant}
+                          product={product}
+                          selectedOptionId={pdpSelectedOptionId}
+                          selectedVariantId={pdpSelectedVariantId}
+                          currencyCode={currencyCode}
+                          variants={product.variants}
+                        />
                       </div>
                       <div className="product-action product-all-icons">
                         <ProductDetailAddToCart
@@ -361,10 +370,10 @@ class ProductDetail extends Component {
                     </div>
                   </div>
                 </div>
-                <ProductDetailFooter description={product.description} />
+                <ProductDetailFooter description={product.description} tags={(product.tags || {}).nodes} />
               </div>
             </div>
-            {/* <ProductDetailSidebar /> */}
+            <ProductDetailSidebar />
           </div>
           <ProductCarouselTab title="Featured Products" style={{ borderBottom: "none" }} />
         </ProductDetailContainer>

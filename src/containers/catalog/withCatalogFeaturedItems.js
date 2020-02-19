@@ -5,7 +5,7 @@ import { Query } from "react-apollo";
 import hoistNonReactStatic from "hoist-non-react-statics";
 import { pagination, paginationVariablesFromUrlParams } from "lib/utils/pagination";
 import withTag from "containers/tags/withTag";
-import catalogItemsQuery from "./catalogItems.gql";
+import catalogFeaturedItemsQuery from "./catalogFeaturedItems.gql";
 
 /**
  * withCatalogItems higher order query component for fetching primaryShopId and catalog data
@@ -17,7 +17,7 @@ export default function withCatalogItems(Component) {
   @withTag
   @inject("primaryShopId", "routingStore", "uiStore")
   @observer
-  class CatalogItems extends React.Component {
+  class CatalogFeaturedItems extends React.Component {
     static propTypes = {
       primaryShopId: PropTypes.string.isRequired,
       routingStore: PropTypes.object.isRequired,
@@ -41,7 +41,7 @@ export default function withCatalogItems(Component) {
       };
 
       return (
-        <Query errorPolicy="all" query={catalogItemsQuery} variables={variables}>
+        <Query errorPolicy="all" query={catalogFeaturedItemsQuery} variables={variables}>
           {({ data, fetchMore, loading }) => {
             const { catalogItems } = data || {};
             return (
@@ -64,7 +64,7 @@ export default function withCatalogItems(Component) {
     }
   }
 
-  hoistNonReactStatic(CatalogItems, Component);
+  hoistNonReactStatic(CatalogFeaturedItems, Component);
 
-  return CatalogItems;
+  return CatalogFeaturedItems;
 }

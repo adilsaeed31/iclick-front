@@ -153,3 +153,9 @@
 .span-unicode {
   unicode-bidi: embed;
 }
+
+.product-image img {
+  margin: auto;
+  width: 203px;
+  height: 203px;
+}

@@ -5,6 +5,8 @@ import { observer } from "mobx-react";
 import BadgeOverlay from "@reactioncommerce/components/BadgeOverlay/v1";
 import { BADGE_LABELS, BADGE_TYPES, badgeStatus } from "@reactioncommerce/components/BadgeOverlay/v1/utils";
 import ProductDetailOption from "custom/iclick/components/ProductDetailOption";
+import ColorOption from "custom/iclick/components/ColorOption";
+import SizeItem from "custom/iclick/components/SizeItem";
 
 @observer
 export default class OptionsList extends Component {
@@ -33,20 +35,80 @@ export default class OptionsList extends Component {
     );
   }
 
+  renderColors(options = []) {
+    // const type = option.attributeLabel;
+    // console.log(type);
+    // if (!status) return null;
+    const { onSelectOption, selectedOptionId } = this.props;
+    return (
+      <Fragment>
+        <label htmlFor="config-swatch-list">Colors:</label>
+        <ul className="config-swatch-list">
+          {options.map((option) =>
+            <ColorOption isActive={selectedOptionId === option._id} onClick={onSelectOption} option={option} />)}
+        </ul>
+      </Fragment>
+    );
+  }
+
+  renderSize(options = []) {
+    const { onSelectOption, selectedOptionId } = this.props;
+
+    return (
+      <Fragment>
+        <label htmlFor="config-size-list">Sizes:</label>
+        <ul className="config-size-list">
+          {options.map((option) =>
+            <SizeItem
+              currencyCode={""}
+              handleClick={() => {
+                onSelectOption(option);
+              }}
+              isActive={selectedOptionId === option._id}
+              variant={option}
+            />)}
+        </ul>
+      </Fragment>
+    );
+  }
+
   render() {
     const { onSelectOption, options, selectedOptionId, theme } = this.props;
 
     if (!Array.isArray(options)) return null;
 
+    const formattedOptions = options.reduce((acc, option) => {
+      if (!acc[option.attributeLabel.toLowerCase()]) {
+        acc[option.attributeLabel.toLowerCase()] = [];
+      }
+
+      acc[option.attributeLabel.toLowerCase()].push(option);
+
+      return acc;
+    }, {});
+
+    const list = [];
+
+    for (const key in formattedOptions) {
+      if (key === "color" || key === "colors") {
+        list.push(this.renderColors(formattedOptions[key]));
+      } else if (key === "size" || key === "sizes") {
+        list.push(this.renderSize(formattedOptions[key]));
+      } else {
+        list.push(<div className="d-flex flex-wrap">
+          {formattedOptions[key].map((option) => (
+            <Fragment>
+              <ProductDetailOption isActive={selectedOptionId === option._id} onClick={onSelectOption} option={option} />
+              {this.renderBadges(option)}
+            </Fragment>
+          ))}
+        </div>);
+      }
+    }
     return (
-      <div className="d-flex flex-wrap">
-        {options.map((option) => (
-          <Fragment>
-            <ProductDetailOption isActive={selectedOptionId === option._id} onClick={onSelectOption} option={option} />
-            {this.renderBadges(option)}
-          </Fragment>
-        ))}
-      </div>
+      <Fragment>
+        {list}
+      </Fragment>
     );
   }
 }

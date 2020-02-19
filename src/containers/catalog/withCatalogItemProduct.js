@@ -17,7 +17,7 @@ export default function withCatalogItemProduct(Component) {
     }
 
     render() {
-      const { router: { query } } = this.props;
+      const { router: { query = {} } = {} } = this.props;
 
       return (
         <Query errorPolicy="all" query={catalogItemProductQuery} variables={{ slugOrId: query.slugOrId }}>

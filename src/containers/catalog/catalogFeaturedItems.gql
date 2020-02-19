@@ -1,0 +1,70 @@
+query catalogItemsQuery($shopId: ID!, $tagIds: [ID] $first: ConnectionLimitInt, $last:  ConnectionLimitInt, $before: ConnectionCursor, $after: ConnectionCursor, $sortBy: CatalogItemSortByField, $sortByPriceCurrencyCode: String, $sortOrder: SortOrder) {
+  catalogItems(shopIds: [$shopId], tagIds: $tagIds, first: $first, last: $last, before: $before, after: $after, sortBy: $sortBy, sortByPriceCurrencyCode: $sortByPriceCurrencyCode, sortOrder: $sortOrder) {
+    totalCount
+    pageInfo {
+      endCursor
+      startCursor
+      hasNextPage
+      hasPreviousPage
+    }
+    edges {
+      cursor
+      node {
+        _id
+        ... on CatalogItemProduct {
+          product {
+            _id
+            title
+            slug
+            isLowQuantity
+            isSoldOut
+            isBackorder
+            shop {
+              currency {
+                code
+              }
+            }
+            pricing {
+              displayPrice
+            }
+            variants {
+              _id
+              variantId
+              pricing {
+                price
+                currency {
+                  code
+                }
+              }
+              canBackorder
+              inventoryAvailableToSell
+              isBackorder
+              isSoldOut
+              isLowQuantity
+              options {
+                _id
+                variantId
+                pricing {
+                  price
+                  currency {
+                    code
+                  }
+                }
+                canBackorder
+                inventoryAvailableToSell
+                isBackorder
+                isSoldOut
+                isLowQuantity
+              }
+            }
+            primaryImage {
+              URLs {
+                medium
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
