@@ -79,7 +79,8 @@ class ProductDetail extends Component {
   componentWillReceiveProps(newProps) {
     if (newProps.product.slug !== this.props.product.slug) {
       // console.log(newProps.product.slug, "old", this.props.product.slug);
-      // this.selectVariant(newProps.product.variants[0]);
+      this.props = newProps;
+      this.selectVariant.call(this, newProps.product.variants[0]);
     }
   }
 
@@ -89,7 +90,6 @@ class ProductDetail extends Component {
 
   selectVariant(variant, optionId) {
     const { product, uiStore } = this.props;
-
     // Select the variant, and if it has options, the first option
     const variantId = variant._id;
     let selectOptionId = optionId;

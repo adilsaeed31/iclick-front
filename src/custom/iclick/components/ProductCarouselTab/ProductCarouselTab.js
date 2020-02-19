@@ -8,7 +8,7 @@ import withCatalogFeaturedItems from "containers/catalog/withCatalogFeaturedItem
 class ProductCarouselTab extends React.Component {
   render() {
     const { title, style, catalogItems: products = [] } = this.props;
-    // console.log(this.props);
+    //console.log(this.props);
     return (
       <div className="home-product-tabs">
         <div className="container">
