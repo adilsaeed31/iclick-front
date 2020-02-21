@@ -8,7 +8,7 @@ import withCatalogFeaturedItems from "containers/catalog/withCatalogFeaturedItem
 class ProductCarouselTab extends React.Component {
   render() {
     const { title, style, catalogItems: products = [] } = this.props;
-    //console.log(this.props);
+    // console.log(this.props);
     return (
       <div className="home-product-tabs">
         <div className="container">
@@ -36,12 +36,18 @@ class ProductCarouselTab extends React.Component {
             aria-labelledby="featured-products-tab"
           >
             <div className="container">
-              <MyCarousel className="tab-products-carousel owl-theme" loop items={5} margin={30}>
+              <MyCarousel
+                className="tab-products-carousel owl-theme"
+                loop
+                items={5}
+                margin={30}
+                key={`carousel_${Math.random() * 100}`}
+              >
                 {products.map(({ node: { product } = {} }) =>
                   <ProductItem
                     productName={product.title}
                     imagePath={product.primaryImage.URLs.medium}
-                    price={product.pricing[0].displayPrice}
+                    price={product.pricing[0].minPrice}
                     isOnSale={product.isOnSale}
                     productUrl={`/product/${product.slug}`}
                     product={product}

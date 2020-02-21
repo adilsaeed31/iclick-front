@@ -45,7 +45,7 @@ export default class OptionsList extends Component {
         <label htmlFor="config-swatch-list">Colors:</label>
         <ul className="config-swatch-list">
           {options.map((option) =>
-            <ColorOption isActive={selectedOptionId === option._id} onClick={onSelectOption} option={option} />)}
+            <ColorOption key={option._id} isActive={selectedOptionId === option._id} onClick={onSelectOption} option={option} />)}
         </ul>
       </Fragment>
     );
@@ -64,6 +64,7 @@ export default class OptionsList extends Component {
               handleClick={() => {
                 onSelectOption(option);
               }}
+              key={option._id}
               isActive={selectedOptionId === option._id}
               variant={option}
             />)}
@@ -98,7 +99,7 @@ export default class OptionsList extends Component {
         list.push(<div className="d-flex flex-wrap">
           {formattedOptions[key].map((option) => (
             <Fragment>
-              <ProductDetailOption isActive={selectedOptionId === option._id} onClick={onSelectOption} option={option} />
+              <ProductDetailOption key={option._id} isActive={selectedOptionId === option._id} onClick={onSelectOption} option={option} />
               {this.renderBadges(option)}
             </Fragment>
           ))}

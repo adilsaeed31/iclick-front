@@ -5,7 +5,7 @@ import { Query } from "react-apollo";
 import hoistNonReactStatic from "hoist-non-react-statics";
 import { pagination, paginationVariablesFromUrlParams } from "lib/utils/pagination";
 import withTag from "containers/tags/withTag";
-import catalogItemsQuery from "./catalogItems.gql";
+import catalogItemsOffsetQuery from "./catalogItemsOffset.gql";
 
 /**
  * withCatalogItems higher order query component for fetching primaryShopId and catalog data
@@ -13,11 +13,11 @@ import catalogItemsQuery from "./catalogItems.gql";
  * @param {React.Component} Component to decorate and apply
  * @returns {React.Component} - component decorated with primaryShopId and catalog as props
  */
-export default function withCatalogItems(Component) {
+export default function withCatalogItemsOffset(Component) {
   @withTag
   @inject("primaryShopId", "routingStore", "uiStore")
   @observer
-  class CatalogItems extends React.Component {
+  class CatalogItemsOffset extends React.Component {
     static propTypes = {
       primaryShopId: PropTypes.string.isRequired,
       routingStore: PropTypes.object.isRequired,
@@ -40,12 +40,14 @@ export default function withCatalogItems(Component) {
         sortOrder
       };
 
+      // variables.offset = variables.offset ? variables.offset : 0;
+
       return (
-        <Query errorPolicy="all" query={catalogItemsQuery} variables={variables}>
+        <Query errorPolicy="all" query={catalogItemsOffsetQuery} variables={variables}>
           {({ data, fetchMore, loading }) => {
             const { catalogItems } = data || {};
             const { totalCount } = catalogItems || {};
-            // console.log(data);
+
             return (
               <Component
                 {...this.props}
@@ -67,7 +69,7 @@ export default function withCatalogItems(Component) {
     }
   }
 
-  hoistNonReactStatic(CatalogItems, Component);
+  hoistNonReactStatic(CatalogItemsOffset, Component);
 
-  return CatalogItems;
+  return CatalogItemsOffset;
 }

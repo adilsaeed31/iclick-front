@@ -20,12 +20,13 @@ class Select extends Component {
   }
 
   render() {
-    const { selectorName } = this.props
+    const { selectorName, value } = this.props
     return (
       <select 
         name = {selectorName} 
         className="form-control"
         onChange={this.handleChange}
+        value={value}
         >
           {this.renderOptions()}
       </select>

@@ -39,8 +39,8 @@ class PageSizeSelector extends Component {
   render() {
     const { pageSize,labelValue,classes,selectorName } = this.props;
 
+    console.log(pageSize);
     return (
-      
       <div className={classes}>
         <label>{labelValue}</label>
         <div className="select-custom">
@@ -55,7 +55,7 @@ class PageSizeSelector extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <a href="#" className="sorter-btn" title="Set Ascending Direction"><span className="sr-only">Set Ascending Direction</span></a>
+        {/* <a href="#" className="sorter-btn" title="Set Ascending Direction"><span className="sr-only">Set Ascending Direction</span></a> */}
       </div>
     );
   }

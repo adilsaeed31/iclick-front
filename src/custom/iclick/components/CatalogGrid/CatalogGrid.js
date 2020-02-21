@@ -13,7 +13,7 @@ class CatalogGrid extends Component {
             <ProductItem
               productName={product.title}
               imagePath={product.primaryImage.URLs.medium}
-              price={product.pricing[0].displayPrice}
+              price={product.pricing[0].minPrice}
               isOnSale={product.isOnSale}
               productUrl={`/product/${product.slug}`}
               product={product}

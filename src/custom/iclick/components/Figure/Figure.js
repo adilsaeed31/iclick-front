@@ -19,7 +19,7 @@ const Figure = ({
     {isOnSale && <span className="product-label label-sale">Sale</span>}
     {/* {!!saleValue && <span className="product-label label-sale">-{saleValue}%</span>} */}
     {isNew && <span className="product-label label-hot">Hot</span>}
-    {!isSmallSize && <Link to="#" className="btn-quickview">Quick View</Link>}
+    {/* {!isSmallSize && <Link to="#" className="btn-quickview">Quick View</Link>} */}
     {isActionsOnImage && !isSmallSize && <Action />}
   </figure>
 );

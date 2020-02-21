@@ -48,6 +48,7 @@ class Home extends Component {
   componentDidMount() {
     const { routingStore } = this.props;
     routingStore.setTagId(null);
+    routingStore.setSearch({ limit: null });
   }
 
   componentDidUpdate(prevProps) {
@@ -77,13 +78,13 @@ class Home extends Component {
       isLoadingCatalogItems,
       routingStore: { query },
       shop,
-      uiStore
+      uiStore,
+      totalCount
     } = this.props;
 
     const pageSize = query && inPageSizes(query.limit) ? parseInt(query.limit, 10) : uiStore.pageSize;
     const sortBy = query && query.sortby ? query.sortby : uiStore.sortBy;
     const pageTitle = shop && shop.description ? `${shop.name} | ${shop.description}` : shop.name;
-
     return (
       <Fragment>
         <Helmet title={pageTitle} meta={[{ name: "description", content: shop && shop.description }]} />
@@ -101,6 +102,7 @@ class Home extends Component {
             setPageSize={this.setPageSize}
             setSortBy={this.setSortBy}
             sortBy={sortBy}
+            totalCount={totalCount}
           />
         </div>
       </Fragment>

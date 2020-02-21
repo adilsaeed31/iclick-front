@@ -9,16 +9,8 @@ class ProductCarousel extends React.Component {
   static propTypes = {
     mediaItems: PropTypes.arrayOf(PropTypes.object)
   }
-
   componentDidMount() {
     $(this.thumbnails).children(".owl-dot").eq(0).addClass("active");
-  }
-
-  componentWillReceiveProps(newProps) {
-    if (this.owl) {
-      this.owl.refresh();
-      // console.log(this.owl);
-    }
   }
 
   owl;
@@ -30,18 +22,21 @@ class ProductCarousel extends React.Component {
   render() {
     return (<Fragment>
       <div className="product-slider-container product-item">
+        
         <OwlCarousel
           className="product-single-carousel owl-theme"
           nav
           navText={['<i class="icon-angle-left" />', '<i class="icon-angle-right" />']}
           items={1}
           dots={false}
+          ref={(el) => { this.slider = el; }}
           onInitialized={(el) => { this.owl = el.relatedTarget; }}
           onChanged = {(el) => {
             const $dots = $(this.thumbnails).children(".owl-dot");
             $dots.removeClass("active");
             $dots.eq(+el.item.index).addClass("active");
           }}
+          key={`carousel_${(this.props.mediaItems || [])[0].productId || "-"}`}
         >
           {this.props.mediaItems.map((media) =>
             <div className="product-item">
@@ -53,6 +48,7 @@ class ProductCarousel extends React.Component {
               />
             </div>)}
         </OwlCarousel>
+
 
         {/* <span className="prod-full-screen">
             <i className="icon-plus" />

@@ -26,6 +26,7 @@ query catalogItemsQuery($shopId: ID!, $tagIds: [ID] $first: ConnectionLimitInt, 
             }
             pricing {
               displayPrice
+              minPrice
             }
             variants {
               _id

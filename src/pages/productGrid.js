@@ -2,12 +2,12 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
 import Helmet from "react-helmet";
-import withCatalogItems from "containers/catalog/withCatalogItems";
+import withCatalogItemsOffset from "containers/catalog/withCatalogItemsOffset";
 import ProductGrid from "components/ProductGrid";
 import trackProductListViewed from "lib/tracking/trackProductListViewed";
 import { inPageSizes } from "lib/utils/pageSizes";
 
-@withCatalogItems
+@withCatalogItemsOffset
 @inject("routingStore", "uiStore")
 @observer
 class ProductGridPage extends Component {
@@ -73,7 +73,8 @@ class ProductGridPage extends Component {
       isLoadingCatalogItems,
       routingStore: { query },
       shop,
-      uiStore
+      uiStore,
+      totalCount
     } = this.props;
     const pageSize = query && inPageSizes(query.limit) ? parseInt(query.limit, 10) : uiStore.pageSize;
     const sortBy = query && query.sortby ? query.sortby : uiStore.sortBy;
@@ -95,6 +96,7 @@ class ProductGridPage extends Component {
           setPageSize={this.setPageSize}
           setSortBy={this.setSortBy}
           sortBy={sortBy}
+          totalCount={totalCount}
         />
       </Fragment>
     );

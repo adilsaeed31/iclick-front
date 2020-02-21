@@ -4,8 +4,8 @@ import Link from "custom/iclick/components/Link";
 import Action from "custom/iclick/components/Action";
 
 const Detail = ({
-  actionsOnImage,
-  smallSize,
+  isActionsOnImage,
+  isSmallSize,
   productName,
   productUrl,
   priceUnit,
@@ -21,27 +21,27 @@ const Detail = ({
       {!!saleValue && <span className="old-price">{saleValue} {priceUnit}</span>}
       <span className="product-price">{price} {priceUnit}</span>
     </div>
-    {!actionsOnImage && !smallSize && <Action {...rest}/>}
+    {!isActionsOnImage && !isSmallSize && <Action {...rest}/>}
   </div>
 );
 Detail.propTypes = {
   actionsOnImage: PropTypes.bool,
-  price: PropTypes.number,
+  price: PropTypes.string,
   priceUnit: PropTypes.string,
   productName: PropTypes.string,
   productUrl: PropTypes.string,
   rating: PropTypes.number,
   saleValue: PropTypes.number,
-  smallSize: PropTypes.bool
+  isSmallSize: PropTypes.bool
 };
 Detail.defaultProps = {
   actionsOnImage: false,
-  smallSize: false,
+  isSmallSize: false,
   productName: "-",
   productUrl: "#",
   priceUnit: "AED",
   rating: 0,
-  price: 0,
+  price: "0",
   saleValue: 0
 };
 export default Detail;

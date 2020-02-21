@@ -1,0 +1,55 @@
+query catalogItemsOffsetQuery($shopId: ID!, $tagIds: [ID] $first: ConnectionLimitInt, $offset:  Int, $sortBy: CatalogItemSortByField, $sortByPriceCurrencyCode: String, $sortOrder: SortOrder) {
+  catalogItems(shopIds: [$shopId], tagIds: $tagIds, first: $first, offset: $offset, sortBy: $sortBy, sortByPriceCurrencyCode: $sortByPriceCurrencyCode, sortOrder: $sortOrder) {
+    totalCount
+    edges {
+      cursor
+      node {
+        _id
+        ... on CatalogItemProduct {
+          product {
+            _id
+            title
+            slug
+            description
+            vendor
+            isLowQuantity
+            isSoldOut
+            isBackorder
+            metafields {
+              description
+              key
+              namespace
+              scope
+              value
+              valueType
+            }
+            shop {
+              currency {
+                code
+              }
+            }
+            pricing {
+              compareAtPrice {
+                displayAmount
+              }
+              currency {
+                code
+              }
+              displayPrice
+              minPrice
+              maxPrice
+            }
+            primaryImage {
+              URLs {
+                thumbnail
+                small
+                medium
+                large
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

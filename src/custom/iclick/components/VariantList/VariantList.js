@@ -26,7 +26,7 @@ export default class VariantList extends Component {
     const active = selectedVariantId === variant._id;
 
     return (
-      <Fragment>
+      <Fragment key={variant._id}>
         <VariantItem
           currencyCode={currencyCode}
           handleClick={() => {
@@ -65,6 +65,7 @@ export default class VariantList extends Component {
         <ul className="config-size-list">
           {variants.map((variant) =>
             <SizeItem
+              key={variant._id}
               currencyCode={currencyCode}
               handleClick={() => {
                 onSelectVariant(variant);
@@ -85,7 +86,7 @@ export default class VariantList extends Component {
         <label htmlFor="config-swatch-list">Colors:</label>
         <ul className="config-swatch-list">
           {variants.map((variant) =>
-            <ColorOption isActive={selectedVariantId === variant._id} onClick={onSelectVariant} option={variant} />)}
+            <ColorOption key={variant._id} isActive={selectedVariantId === variant._id} onClick={onSelectVariant} option={variant} />)}
         </ul>
       </Fragment>
     );

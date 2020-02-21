@@ -2,6 +2,7 @@
 
 query tagsQuery($shopId: ID!, $cursor: ConnectionCursor) {
   tags(shopId: $shopId, first: 200, after: $cursor, sortBy: createdAt) {
+    totalCount
     pageInfo {
       endCursor
       startCursor

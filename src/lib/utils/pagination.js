@@ -39,6 +39,36 @@ export const loadNextPage = ({ queryName, data, limit, fetchMore, routingStore }
   });
 };
 
+export const loadPageWithOffset = ({ queryName, limit, fetchMore, routingStore }) => (page) => {
+  if (!queryName) throw new Error("queryName is required");
+
+  const _page = page || 1;
+
+  // Set URL search params to allow for link sharing
+  if (routingStore) {
+    routingStore.setSearch({ limit, page: _page });
+  }
+
+  fetchMore({
+    variables: {
+      first: limit,
+      offset: (_page - 1) * limit
+    },
+    updateQuery: (previousResult, { fetchMoreResult }) => {
+      const { [queryName]: items } = fetchMoreResult;
+
+      // Return with additional results
+      if (items.edges.length) {
+        return fetchMoreResult;
+      }
+
+      // Send the previous result if the new result contains no additional data
+      return previousResult;
+    }
+  });
+};
+
+
 /**
  * Load previous page of content for a Apollo GraphQL query
  * @name loadPreviousPage
@@ -96,11 +126,12 @@ export const pagination = (args) => {
   if (!queryName) throw new Error("queryName is required");
 
   const pageInfo = (data && data[queryName] && data[queryName].pageInfo) || {};
-
+  // console.log(data);
   return {
     ...pageInfo,
     loadNextPage: loadNextPage(args),
-    loadPreviousPage: loadPreviousPage(args)
+    loadPreviousPage: loadPreviousPage(args),
+    loadPageWithOffset: loadPageWithOffset(args)
   };
 };
 
@@ -116,7 +147,7 @@ export const pagination = (args) => {
  * @returns {Object} Object of variables for GraphQL query
  */
 export const paginationVariablesFromUrlParams = (params, options) => {
-  const { limit, before, after } = params || {};
+  const { limit, before, after, page } = params || {};
   const { defaultPageLimit } = options || {};
   const variables = {};
 
@@ -134,6 +165,8 @@ export const paginationVariablesFromUrlParams = (params, options) => {
     variables.after = after;
   } else if (before) {
     variables.before = before;
+  } else if (page) {
+    variables.offset = (page - 1) * variables.first;
   }
 
   return variables;

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
 import Helmet from "react-helmet";
-import withCatalogItems from "containers/catalog/withCatalogItems";
+import withCatalogItemsOffset from "containers/catalog/withCatalogItemsOffset";
 import withTag from "containers/tags/withTag";
 import ProductGrid from "custom/iclick/components/ProductGrid";
 import TagBanner from "custom/iclick/components/TagBanner";
@@ -13,7 +13,7 @@ import PageLoading from "components/PageLoading";
 import TagFilters from "custom/iclick/components/TagFilters";
 
 @withTag
-@withCatalogItems
+@withCatalogItemsOffset
 @inject("routingStore", "uiStore")
 @observer
 export default class TagGridPage extends Component {
@@ -80,12 +80,12 @@ export default class TagGridPage extends Component {
   trackEvent() {}
 
   setPageSize = (pageSize) => {
-    this.props.routingStore.setSearch({ limit: pageSize });
+    this.props.routingStore.setSearch({ limit: pageSize, page: null });
     this.props.uiStore.setPageSize(pageSize);
   };
 
   setSortBy = (sortBy) => {
-    this.props.routingStore.setSearch({ sortby: sortBy });
+    this.props.routingStore.setSearch({ sortby: sortBy, page: null });
     this.props.uiStore.setSortBy(sortBy);
   };
 
@@ -121,12 +121,15 @@ export default class TagGridPage extends Component {
       routingStore,
       shop,
       tag,
-      uiStore
+      uiStore,
+      totalCount
     } = this.props;
 
     const pageSize =
       routingStore.query && routingStore.query.limit ? parseInt(routingStore.query.limit, 10) : uiStore.pageSize;
     const sortBy = routingStore.query && routingStore.query.sortby ? routingStore.query.sortby : uiStore.sortBy;
+
+    catalogItemsPageInfo.page = routingStore.query && routingStore.query.page ? parseInt(routingStore.query.page, 10) : 1;
 
     if (!tag) {
       return <PageLoading message={"Loading products for you ..."} />;
@@ -158,6 +161,7 @@ export default class TagGridPage extends Component {
                 setPageSize={this.setPageSize}
                 setSortBy={this.setSortBy}
                 sortBy={sortBy}
+                totalCount={totalCount}
               />
             </div>
           </div>
