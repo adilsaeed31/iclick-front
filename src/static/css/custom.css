@@ -163,3 +163,21 @@
 .w-15 {
   width: 15%;
 }
+
+li.next > .page-link, li.next > .page-link:hover, li.prev > .page-link, li.prev > .page-link:hover  {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border: 0.1rem solid #7aa93c;
+  padding: 0;
+  color: #fff;
+  background-color: #7aa93c;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+li.next > .page-link:hover, li.prev > .page-link:hover {
+  opacity: .85;
+}

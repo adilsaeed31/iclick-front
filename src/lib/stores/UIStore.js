@@ -89,6 +89,14 @@ class UIStore {
   @observable sortBy = "updatedAt-desc";
 
   /**
+   * The product grid's sorting order
+   *
+   * @type string
+   */
+  @observable layoutMode = "grid";
+
+
+  /**
    * The sort by currency code
    *
    * @type string
@@ -180,13 +188,21 @@ class UIStore {
     this.orderStatusQuery = orderStatus;
   }
 
-  @action setPageSize = (size) => {
+  @action setPageSize = (size, skipInPageSize) => {
     // Validate page size
-    this.pageSize = inPageSizes(size) ? size : PAGE_SIZES._20;
+    if (skipInPageSize) {
+      this.pageSize = size;
+    } else {
+      this.pageSize = inPageSizes(size) ? size : PAGE_SIZES._20;
+    }
   };
 
   @action setSortBy = (sortBy) => {
     this.sortBy = sortBy;
+  };
+
+  @action setLayoutMode = (mode) => {
+    this.layoutMode = mode !== this.layoutMode ? mode : this.layoutMode;
   };
 }
 

@@ -42,7 +42,8 @@ export default class TagGridPage extends Component {
       pageSize: PropTypes.number.isRequired,
       setPageSize: PropTypes.func.isRequired,
       setSortBy: PropTypes.func.isRequired,
-      sortBy: PropTypes.string.isRequired
+      sortBy: PropTypes.string.isRequired,
+      setLayoutMode: PropTypes.string
     })
   };
 
@@ -87,6 +88,10 @@ export default class TagGridPage extends Component {
   setSortBy = (sortBy) => {
     this.props.routingStore.setSearch({ sortby: sortBy, page: null });
     this.props.uiStore.setSortBy(sortBy);
+  };
+
+  setLayoutMode = (mode) => {
+    this.props.uiStore.setLayoutMode(mode);
   };
 
   renderHeaderMetatags(metafields) {
@@ -162,6 +167,8 @@ export default class TagGridPage extends Component {
                 setSortBy={this.setSortBy}
                 sortBy={sortBy}
                 totalCount={totalCount}
+                layout={uiStore.layoutMode}
+                setLayout={this.setLayoutMode}
               />
             </div>
           </div>

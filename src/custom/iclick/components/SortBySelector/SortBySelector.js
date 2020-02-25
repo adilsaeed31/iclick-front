@@ -50,6 +50,9 @@ class SortBySelector extends Component {
 
   handleDirection = (e) => {
     e.preventDefault();
+    if (this.state.sortBy === "minPrice-asc" || this.state.sortBy === "minPrice-desc") {
+      return;
+    }
     this.setState({
       direction: this.state.direction === "desc" ? "asc" : "desc"
     }, () => {

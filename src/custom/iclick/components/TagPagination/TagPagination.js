@@ -14,18 +14,30 @@ const Paginating = (props) => {
   const items = [];
 
   const onItemClick = (e) => {
+    if (typeof window !== "undefined" && typeof window.scrollTo === "function") {
+      window.scrollTo({ top: 400, behavior: "smooth" });
+    }
+
     const value = e.currentTarget.innerHTML;
     if (Number.isNaN(value)) { return; }
     setActive(parseInt(value, 10));
   };
 
   const onNextClick = () => {
+    if (typeof window !== "undefined" && typeof window.scrollTo === "function") {
+      window.scrollTo({ top: 400, behavior: "smooth" });
+    }
+
     if (active < totalPages) {
       setActive(active + 1);
     }
   };
 
   const onPrevClick = () => {
+    if (typeof window !== "undefined" && typeof window.scrollTo === "function") {
+      window.scrollTo({ top: 400, behavior: "smooth" });
+    }
+
     if (active > 1) {
       setActive(active - 1);
     }
@@ -101,9 +113,9 @@ const Paginating = (props) => {
         selectorName={"count"}
       />
       <Pagination>
-        <Pagination.Prev className="page-link-btn" onClick={onPrevClick} disabled={!!((active === 1 || !totalPages))} />
+        <Pagination.Prev className="prev" onClick={onPrevClick} disabled={!!((active === 1 || !totalPages))} />
         {items}
-        <Pagination.Next onClick={onNextClick} disabled={!!((active === totalPages || !totalPages))} />
+        <Pagination.Next className="next" onClick={onNextClick} disabled={!!((active === totalPages || !totalPages))} />
       </Pagination>
     </nav>
   );

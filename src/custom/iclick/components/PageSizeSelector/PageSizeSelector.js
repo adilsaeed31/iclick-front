@@ -39,7 +39,6 @@ class PageSizeSelector extends Component {
   render() {
     const { pageSize,labelValue,classes,selectorName } = this.props;
 
-    console.log(pageSize);
     return (
       <div className={classes}>
         <label>{labelValue}</label>

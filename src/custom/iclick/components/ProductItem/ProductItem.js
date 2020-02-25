@@ -11,7 +11,9 @@ class Product extends React.Component {
   render() {
     const { props } = this;
     return (
-      <div className={`product ${props.isActionsOnImage && "product-overlay"} ${props.isSmallSize && "product-sm"}`}>
+      <div
+        className={`product ${props.isActionsOnImage && "product-overlay"} ${props.isSmallSize && "product-sm"} ${props.layout === "list" && "product-list"}`}
+      >
         <Figure {...props} />
         <Detail {...props} />
       </div>
@@ -27,6 +29,7 @@ Product.propTypes = {
   isOnSale: PropTypes.bool,
   isSmallSize: PropTypes.bool,
   isSoldOut: PropTypes.bool,
+  layout: PropTypes.string,
   price: PropTypes.string,
   priceUnit: PropTypes.string,
   product: PropTypes.object,
@@ -43,6 +46,7 @@ Product.defaultProps = {
   priceUnit: "د.إ.",
   imagePath: "/static/images/placeholder.gif",
   isNew: false,
+  layout: "grid",
   price: "0",
   saleValue: 0,
   isLowQuantity: false,

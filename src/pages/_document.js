@@ -103,10 +103,6 @@ class HTMLDocument extends Document {
       },
       {
         type: "text/javascript",
-        src: "/static/js/nouislider.min.js"
-      },
-      {
-        type: "text/javascript",
         src: "/static/js/plugins.min.js"
       },
       {

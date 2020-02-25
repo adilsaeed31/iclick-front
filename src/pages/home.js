@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { observer, inject } from "mobx-react";
 import Helmet from "react-helmet";
 import withCatalogItems from "containers/catalog/withCatalogItems";
-import ProductGrid from "custom/iclick/components/ProductGrid";
+import HomeGrid from "custom/iclick/components/HomeGrid";
 import trackProductListViewed from "lib/tracking/trackProductListViewed";
-import { inPageSizes } from "lib/utils/pageSizes";
+// import { inPageSizes } from "lib/utils/pageSizes";
 
 import BigBanner from "custom/iclick/components/BigBanner";
 import AfterBanner from "custom/iclick/components/AfterBanner";
@@ -46,9 +46,12 @@ class Home extends Component {
 
   @trackProductListViewed()
   componentDidMount() {
-    const { routingStore } = this.props;
+    const { routingStore, uiStore } = this.props;
+    const HOME_PAGE_SIZE = 4;
     routingStore.setTagId(null);
-    routingStore.setSearch({ limit: null });
+    uiStore.setPageSize(HOME_PAGE_SIZE, true);
+    uiStore.setSortBy("updatedAt-desc");
+    routingStore.setSearch({ limit: HOME_PAGE_SIZE, skipInPageSize: true, skipQueryString: true });
   }
 
   componentDidUpdate(prevProps) {
@@ -60,30 +63,15 @@ class Home extends Component {
   @trackProductListViewed()
   trackEvent() {}
 
-  setPageSize = (pageSize) => {
-    this.props.routingStore.setSearch({ limit: pageSize });
-    this.props.uiStore.setPageSize(pageSize);
-  };
-
-  setSortBy = (sortBy) => {
-    this.props.routingStore.setSearch({ sortby: sortBy });
-    this.props.uiStore.setSortBy(sortBy);
-  };
-
   render() {
     const {
       catalogItems,
       catalogItemsPageInfo,
       initialGridSize,
       isLoadingCatalogItems,
-      routingStore: { query },
-      shop,
-      uiStore,
-      totalCount
+      shop
     } = this.props;
 
-    const pageSize = query && inPageSizes(query.limit) ? parseInt(query.limit, 10) : uiStore.pageSize;
-    const sortBy = query && query.sortby ? query.sortby : uiStore.sortBy;
     const pageTitle = shop && shop.description ? `${shop.name} | ${shop.description}` : shop.name;
     return (
       <Fragment>
@@ -92,17 +80,12 @@ class Home extends Component {
         <AfterBanner />
         <TwoCol />
         <div className="container">
-          <ProductGrid
+          <HomeGrid
             catalogItems={catalogItems}
             currencyCode={shop.currency.code}
             initialSize={initialGridSize}
             isLoadingCatalogItems={isLoadingCatalogItems}
             pageInfo={catalogItemsPageInfo}
-            pageSize={pageSize}
-            setPageSize={this.setPageSize}
-            setSortBy={this.setSortBy}
-            sortBy={sortBy}
-            totalCount={totalCount}
           />
         </div>
       </Fragment>

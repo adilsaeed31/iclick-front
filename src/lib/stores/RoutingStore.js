@@ -103,7 +103,7 @@ export default class RoutingStore {
    */
   @action
   setSearch(search) {
-    const _query = { ...toJS(this.query), ...search };
+    const { skipInPageSize, skipQueryString, ..._query } = { ...toJS(this.query), ...search };
     const _slug = _query.slug;
     const _limit = parseInt(_query.limit, 10);
     delete _query.slug;
@@ -116,10 +116,14 @@ export default class RoutingStore {
     }
 
     // Validate limit
-    _query.limit = inPageSizes(_limit) ? _limit : PAGE_SIZES._20;
+    if (skipInPageSize) {
+      _query.limit = isNaN(_limit) ? null : _limit;
+    } else {
+      _query.limit = inPageSizes(_limit) ? _limit : PAGE_SIZES._20;
+    }
     let urlQueryString = "";
     Object.keys(_query).forEach((key, index, arr) => {
-      urlQueryString += `${key}=${_query[key]}`;
+      if (_query[key]) { urlQueryString += `${key}=${_query[key]}`; }
 
       if (index < arr.length - 1) {
         urlQueryString += "&";
@@ -141,7 +145,7 @@ export default class RoutingStore {
     }
 
     // Router is only available for the client (browser)
-    if (process.browser) {
+    if (process.browser && !skipQueryString) {
       Router.pushRoute(path, path, { shallow: true, replace: true });
     }
 

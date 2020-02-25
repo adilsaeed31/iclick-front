@@ -76,11 +76,18 @@ class ProductDetail extends Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.product.slug !== this.props.product.slug) {
-      // console.log(newProps.product.slug, "old", this.props.product.slug);
-      this.props = newProps;
-      this.selectVariant.call(this, newProps.product.variants[0]);
+  // componentWillReceiveProps(newProps) {
+  //   if (newProps.product.slug !== this.props.product.slug) {
+  //     // console.log(newProps.product.slug, "old", this.props.product.slug);
+  //     this.props = newProps;
+  //     this.selectVariant.call(this, newProps.product.variants[0]);
+  //   }
+  // }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.product.slug !== this.props.product.slug) {
+      // console.log(prevProps.product.slug, "old", this.props.product.slug);
+      this.selectVariant(this.props.product.variants[0]);
     }
   }
 

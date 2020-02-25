@@ -11,12 +11,17 @@ const Detail = ({
   priceUnit,
   price,
   saleValue,
+  layout,
+  description,
   ...rest
 }) => (
   <div className="product-details">
     <h2 className="product-title text-truncate">
       <Link route={productUrl}>{productName}</Link>
     </h2>
+    {layout === "list" && <div className="product-desc">
+      <p>{description}</p>
+    </div>}
     <div className="price-box">
       {!!saleValue && <span className="old-price">{saleValue} {priceUnit}</span>}
       <span className="product-price">{price} {priceUnit}</span>
@@ -25,18 +30,20 @@ const Detail = ({
   </div>
 );
 Detail.propTypes = {
-  actionsOnImage: PropTypes.bool,
+  isActionsOnImage: PropTypes.bool,
+  isSmallSize: PropTypes.bool,
+  layout: PropTypes.string,
   price: PropTypes.string,
   priceUnit: PropTypes.string,
   productName: PropTypes.string,
   productUrl: PropTypes.string,
   rating: PropTypes.number,
-  saleValue: PropTypes.number,
-  isSmallSize: PropTypes.bool
+  saleValue: PropTypes.number
 };
 Detail.defaultProps = {
-  actionsOnImage: false,
+  isActionsOnImage: false,
   isSmallSize: false,
+  layout: "grid",
   productName: "-",
   productUrl: "#",
   priceUnit: "AED",

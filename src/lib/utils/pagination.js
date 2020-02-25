@@ -27,7 +27,6 @@ export const loadNextPage = ({ queryName, data, limit, fetchMore, routingStore }
     },
     updateQuery: (previousResult, { fetchMoreResult }) => {
       const { [queryName]: items } = fetchMoreResult;
-
       // Return with additional results
       if (items.edges.length) {
         return fetchMoreResult;
@@ -38,6 +37,48 @@ export const loadNextPage = ({ queryName, data, limit, fetchMore, routingStore }
     }
   });
 };
+
+/**
+ * Load next page of content for a Apollo GraphQL query
+ * @name loadNextPage
+ * @param {Object} args Args for pagination
+ * @param {String} args.queryName Name of the GraphQL whose result will be used to paginate
+ * @param {Object} args.data Full result from GraphQl
+ * @param {Object} args.limit Limit
+ * @param {Object} args.fetchMore fetchMore function
+ * @returns {Function} load next page function
+ */
+export const loadNextPageAndAppend = ({ queryName, data, limit, fetchMore, routingStore }) => () => {
+  if (!queryName) throw new Error("queryName is required");
+
+  const cursor = data[queryName].pageInfo.endCursor;
+
+  // Set URL search params to allow for link sharing
+  if (routingStore) {
+    routingStore.setSearch({ limit, after: cursor, skipInPageSize: true, skipQueryString: true });
+  }
+
+  fetchMore({
+    variables: {
+      first: limit,
+      after: cursor,
+      last: null,
+      before: null
+    },
+    updateQuery: (previousResult, { fetchMoreResult }) => {
+      const { [queryName]: items } = fetchMoreResult;
+      // Return with additional results
+      if (items.edges.length) {
+        fetchMoreResult[queryName].edges = [...previousResult[queryName].edges, ...fetchMoreResult[queryName].edges];
+        return fetchMoreResult;
+      }
+
+      // Send the previous result if the new result contains no additional data
+      return previousResult;
+    }
+  });
+};
+
 
 export const loadPageWithOffset = ({ queryName, limit, fetchMore, routingStore }) => (page) => {
   if (!queryName) throw new Error("queryName is required");
@@ -131,7 +172,8 @@ export const pagination = (args) => {
     ...pageInfo,
     loadNextPage: loadNextPage(args),
     loadPreviousPage: loadPreviousPage(args),
-    loadPageWithOffset: loadPageWithOffset(args)
+    loadPageWithOffset: loadPageWithOffset(args),
+    loadNextPageAndAppend: loadNextPageAndAppend(args)
   };
 };
 
