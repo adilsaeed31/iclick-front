@@ -24,90 +24,105 @@ const styles = (theme) => ({
 @withStyles(styles, { name: "SkProductGrid" })
 @track()
 export default class ProductGrid extends Component {
-	static propTypes = {
-	  catalogItems: PropTypes.arrayOf(PropTypes.object),
-	  currencyCode: PropTypes.string.isRequired,
-	  initialSize: PropTypes.object,
-	  isLoadingCatalogItems: PropTypes.bool,
-	  pageInfo: PropTypes.shape({
-	    startCursor: PropTypes.string,
-	    endCursor: PropTypes.string,
-	    hasNextPage: PropTypes.bool,
-	    hasPreviousPage: PropTypes.bool,
-	    loadNextPage: PropTypes.func,
-	    loadPreviousPage: PropTypes.func
-	  }),
-	  pageSize: PropTypes.number.isRequired,
-	  setPageSize: PropTypes.func.isRequired,
-	  setSortBy: PropTypes.func.isRequired,
-	  sortBy: PropTypes.string.isRequired,
-	  setLayout: PropTypes.func
-	};
-	renderFilters() {
-	  const { pageSize, setPageSize, setSortBy, sortBy, layout, setLayout } = this.props;
-	  return (
-	    <nav className="toolbox">
-	      <SortBySelector
-  sortBy={sortBy}
-  onChange={setSortBy}
-  labelValue={"Sort By:"}
-  classes={"toolbox-item toolbox-sort"}
-  selectorName={"orderby"}
-	      />
-	      <PageSizeSelector
-  pageSize={pageSize}
-  onChange={setPageSize}
-  labelValue={"Show:"}
-  classes={"toolbox-item toolbox-show"}
-  selectorName={"count"}
-	      />
-			<LayoutModes layout={layout} setLayout={setLayout} />
-	    </nav>
-	  );
-	}
+  static propTypes = {
+    catalogItems: PropTypes.arrayOf(PropTypes.object),
+    currencyCode: PropTypes.string.isRequired,
+    initialSize: PropTypes.object,
+    isLoadingCatalogItems: PropTypes.bool,
+    pageInfo: PropTypes.shape({
+      startCursor: PropTypes.string,
+      endCursor: PropTypes.string,
+      hasNextPage: PropTypes.bool,
+      hasPreviousPage: PropTypes.bool,
+      loadNextPage: PropTypes.func,
+      loadPreviousPage: PropTypes.func
+    }),
+    pageSize: PropTypes.number.isRequired,
+    setLayout: PropTypes.func,
+    setPageSize: PropTypes.func.isRequired,
+    setSortBy: PropTypes.func.isRequired,
+    sortBy: PropTypes.string.isRequired
+  };
+  renderFilters() {
+    const {
+      pageSize,
+      setPageSize,
+      setSortBy,
+      sortBy,
+      layout,
+      setLayout
+    } = this.props;
+    return (
+      <nav className="toolbox">
+        <SortBySelector
+          sortBy={sortBy}
+          onChange={setSortBy}
+          labelValue={"Sort By:"}
+          classes={"toolbox-item toolbox-sort"}
+          selectorName={"orderby"}
+        />
+        <PageSizeSelector
+          pageSize={pageSize}
+          onChange={setPageSize}
+          labelValue={"Show:"}
+          classes={"toolbox-item toolbox-show"}
+          selectorName={"count"}
+        />
+        <LayoutModes layout={layout} setLayout={setLayout} />
+      </nav>
+    );
+  }
 
-	@trackProductClicked()
-	renderMainArea() {
-	  const { catalogItems, initialSize, isLoadingCatalogItems, pageInfo, pageSize, setPageSize, totalCount } = this.props;
-	  if (isLoadingCatalogItems) return <PageLoading />;
+  @trackProductClicked()
+  renderMainArea() {
+    const {
+      catalogItems,
+      initialSize,
+      isLoadingCatalogItems,
+      pageInfo,
+      pageSize,
+      setPageSize,
+      totalCount
+    } = this.props;
+    if (isLoadingCatalogItems) return <PageLoading />;
 
-	  const products = (catalogItems || []).map((item) => {
-	    item.node.product.isOnSale = true;
-	    return item.node.product;
-	  });
+    const products = (catalogItems || []).map((item) => {
+      item.node.product.isOnSale = true;
+      return item.node.product;
+    });
 
-	  if (products.length === 0) return <ProductGridEmptyMessage />;
+    if (products.length === 0) return <ProductGridEmptyMessage />;
 
-	  return (
-	    <Fragment>
-	      <Grid container spacing={24}>
-	        <Grid item sm={12}>
-	          <CatalogGrid
-	            initialSize={initialSize}
-  products={products}
-  placeholderImageURL="/static/images/placeholder.gif"
-  {...this.props}
-	          />
-	        </Grid>
-	      </Grid>
-	      <TagPagination
-  itemsPerPage={pageSize}
-  pageInfo={pageInfo}
-  totalRecords={totalCount}
-  active={pageInfo.page}
-	setActive={pageInfo.loadPageWithOffset}
-	setPageSize={setPageSize}
-	      />
-	    </Fragment>
-	  );
-	}
+    return (
+      <Fragment>
+        <Grid container spacing={24}>
+          <Grid item sm={12}>
+            <CatalogGrid
+              initialSize={initialSize}
+              products={products}
+              placeholderImageURL="/static/images/placeholder.gif"
+              {...this.props}
+            />
+          </Grid>
+        </Grid>
+        <TagPagination
+          itemsPerPage={pageSize}
+          pageInfo={pageInfo}
+          totalRecords={totalCount}
+          active={pageInfo.page}
+          setActive={pageInfo.loadPageWithOffset}
+          setPageSize={setPageSize}
+        />
+      </Fragment>
+    );
+  }
 
-	render() {
-	  return (
-	    <Fragment>
-	      {this.renderFilters()}
-	      {this.renderMainArea()}
-	    </Fragment>
-	  );
-	}
+  render() {
+    return (
+      <Fragment>
+        {this.renderFilters()}
+        {this.renderMainArea()}
+      </Fragment>
+    );
+  }
 }

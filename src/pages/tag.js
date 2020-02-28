@@ -153,7 +153,7 @@ export default class TagGridPage extends Component {
         <div className="container">
           <Breadcrumbs isTagGrid tagId={routingStore.tagId} />
           <div className="row">
-            <TagFilters />
+            <TagFilters shop={shop} />
             <div className="col-lg-9">
               <TagBanner tag={tag} />
               <ProductGrid

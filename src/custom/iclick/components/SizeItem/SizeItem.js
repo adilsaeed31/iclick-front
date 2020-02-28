@@ -19,7 +19,7 @@ class SizeItem extends Component {
     const { currencyCode, variant, isActive } = this.props;
     const { pricing, title } = variant;
 
-    const variantPrice = priceByCurrencyCode(currencyCode, pricing);
+    // const variantPrice = priceByCurrencyCode(currencyCode, pricing);
 
     const initials = variant.optionTitle.split(" ").map((st) => (st).toUpperCase().charAt()).join("");
 

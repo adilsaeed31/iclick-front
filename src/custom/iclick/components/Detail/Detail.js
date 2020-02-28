@@ -26,7 +26,7 @@ const Detail = ({
       {!!saleValue && <span className="old-price">{saleValue} {priceUnit}</span>}
       <span className="product-price">{price} {priceUnit}</span>
     </div>
-    {!isActionsOnImage && !isSmallSize && <Action {...rest}/>}
+    {!isActionsOnImage && !isSmallSize && <Action {...rest} productUrl={productUrl}/>}
   </div>
 );
 Detail.propTypes = {

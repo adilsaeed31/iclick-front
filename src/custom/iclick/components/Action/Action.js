@@ -24,9 +24,9 @@ const ProductAction = (props) => {
       {/* <Link to="#" className="paction add-wishlist" title="Add to Wishlist">
         <span>Add to Wishlist</span>
       </Link> */}
-      <button className="paction add-cart" title="Add to Cart" onClick={handleAddToCart}>
+      <Link route={props.productUrl} className="paction add-cart" title="Add to Cart">
         <span>Add to Cart</span>
-      </button>
+      </Link>
       {/* <a href="#" className="paction add-compare" title="Add to Compare">
         <span>Add to Compare</span>
       </a> */}

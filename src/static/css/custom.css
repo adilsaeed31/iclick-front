@@ -181,3 +181,10 @@ li.next > .page-link, li.next > .page-link:hover, li.prev > .page-link, li.prev 
 li.next > .page-link:hover, li.prev > .page-link:hover {
   opacity: .85;
 }
+
+.btn-xs {
+  font-size: 1.1rem;
+  padding: .5rem 1rem;
+  letter-spacing: 1px;
+  min-width: 70px;
+}
