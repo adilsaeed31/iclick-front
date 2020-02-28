@@ -1,0 +1,34 @@
+query catalogItemsQuery($shopId: ID!, $tagIds: [ID]) {
+  catalogItems(shopIds: [$shopId], tagIds: $tagIds) {
+    edges {
+      node {
+        _id
+        ... on CatalogItemProduct {
+          product {
+            _id
+            title
+            slug
+            vendor
+            isLowQuantity
+            isSoldOut
+            isBackorder
+            pricing {
+              minPrice
+              maxPrice
+            }
+            variants {
+              optionTitle
+              attributeLabel
+              options {
+                variantId
+                title
+                attributeLabel
+                optionTitle
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
