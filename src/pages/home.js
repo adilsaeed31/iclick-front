@@ -47,7 +47,7 @@ class Home extends Component {
   @trackProductListViewed()
   componentDidMount() {
     const { routingStore, uiStore } = this.props;
-    const HOME_PAGE_SIZE = 4;
+    const HOME_PAGE_SIZE = 10;
     routingStore.setTagId(null);
     uiStore.setPageSize(HOME_PAGE_SIZE, true);
     uiStore.setSortBy("updatedAt-desc");
